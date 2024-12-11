@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Pagination.module.css";
 
-export function Pagination({ totalItems, itemsPerPage, onPageChange }) {
+export function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange }) {
   // 총 페이지 수 계산
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  // 현재 페이지 상태
-  const [currentPage, setCurrentPage] = useState(1);
 
   // 한 번에 표시할 페이지 번호 수 (그룹 크기)
   const pagesPerGroup = 5;
@@ -24,9 +21,6 @@ export function Pagination({ totalItems, itemsPerPage, onPageChange }) {
   function handlePageChange(page) {
     // 페이지 번호가 유효하지 않으면 아무 동작도 하지 않음
     if (page < 1 || page > totalPages) return;
-
-    // 현재 페이지 상태 업데이트
-    setCurrentPage(page);
 
     // 부모 컴포넌트로 변경된 페이지 번호 전달
     if (onPageChange) onPageChange(page);
