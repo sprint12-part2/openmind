@@ -1,0 +1,36 @@
+.paginationContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-8); /* 0.8rem 간격 */
+  width: 28rem; /* 280px */
+  height: 4rem; /* 40px */
+}
+
+.arrowButton {
+  font-size: var(--font-size-xl); /* 1.8rem */
+  color: var(--color-primary-400); /* 화살표 기본 색상 */
+  cursor: pointer;
+}
+
+.arrowButton:disabled {
+  color: var(--color-gray-300);
+  cursor: not-allowed;
+}
+
+.pageButton {
+  font-size: var(--font-size-xl); /* 1.6rem */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-400); /* 기본 숫자 색상 */
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer;
+}
+
+.pageButton:hover {
+  color: var(--color-primary-300); /* 호버 시 숫자 색상 변경 */
+}
+
+.pageButton.active {
+  color: var(--color-primary-400); /* 활성화된 숫자 색상 */
+  font-weight: var(--font-weight-bold); /* 활성화된 숫자 강조 */
+}
