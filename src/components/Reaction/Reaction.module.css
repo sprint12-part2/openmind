@@ -1,0 +1,89 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  height: 2.4rem;
+  border-radius: var(--border-radius-md);
+  color: var(--color-gray-400);
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + 1em);
+  height: calc(100% + 0.3em);
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: var(--border-radius-md);
+  background: var(--color-gray-200);
+  opacity: 0;
+  transition: transform ease-in-out 0.1s;
+}
+
+.button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.button:not(:disabled):hover:after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.icon {
+  position: relative;
+  z-index: 1;
+  transform-origin: center bottom;
+}
+
+.button:not(:disabled):hover .icon {
+  animation: shake 0.6s ease;
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.active,
+.active.like {
+  color: var(--color-blue);
+}
+
+.active.dislike {
+  color: var(--color-black);
+}
+
+.button:disabled,
+.button.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  color: var(--color-gray-400);
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  40% {
+    transform: rotate(15deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
