@@ -1,9 +1,26 @@
 import { Icon } from "@components/Icon";
+import { Reaction } from "@components/Reaction";
 import styles from "./ChankiSample.module.css";
 
 export default function ChankiSample() {
   return (
     <div>
+      <div className={styles.flex}>
+        <Reaction type="like" count={0} />
+        <Reaction type="dislike" count={0} />
+      </div>
+      <div className={styles.flex}>
+        <Reaction type="like" count={16} />
+        <Reaction type="dislike" count={0} />
+      </div>
+      <div className={styles.flex}>
+        <Reaction type="like" count={0} />
+        <Reaction type="dislike" count={6} />
+      </div>
+      <div className={styles.flex}>
+        <Reaction type="like" count={0} disabled />
+        <Reaction type="dislike" count={6} disabled />
+      </div>
       <div className={styles.flex}>
         <Icon />
         <Icon name="arrowDown" />
