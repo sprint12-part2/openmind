@@ -5,6 +5,7 @@ import MainPage from "./pages/main/MainPage";
 import PostDetailPage from "./pages/post/PostDetailPage";
 import PostListPage from "./pages/post/PostListPage";
 import PostAnswerPage from "./pages/post/PostAnswerPage";
+import SamplePage from "./pages/sample/SamplePage";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             element: <PostAnswerPage />,
           },
         ],
+      },
+      {
+        path: "/sample",
+        element: <SamplePage />,
       },
     ],
   },
