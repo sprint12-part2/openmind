@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  padding: 12px 0px 12px 40px;
+  border: 1px solid var(--color-gray-400);
+  border-radius: 8px;
+  background: url("./images/PersonIcon.svg") no-repeat;
+  background-size: 20px 20px;
+  background-position: 10px center;
+  color: var(--color-black);
+  font-size: var(--font-size-md);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-gray-400);
+  font-size: var(--font-size-md);
+  line-height: 22px;
+}
+
+.input:focus {
+  border: 1px solid var(--color-primary-400);
+}
