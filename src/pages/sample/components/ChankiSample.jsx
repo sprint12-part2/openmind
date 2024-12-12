@@ -1,11 +1,31 @@
+import { useState } from "react";
+import styles from "./ChankiSample.module.css";
 import { Icon } from "@components/Icon";
 import { Reaction } from "@components/Reaction";
-import styles from "./ChankiSample.module.css";
 import { Avatar } from "@components/Avatar/Avatar";
+import { MoreMenu, Select } from "@components/Dropdown";
 
 export default function ChankiSample() {
+  const [seletValue, setSelectValue] = useState("");
   return (
     <div>
+      <div className={styles.flex}>
+        <MoreMenu>
+          <MoreMenu.Item onClick={() => alert("hi")} icon="edit">
+            수정하기
+          </MoreMenu.Item>
+          <MoreMenu.Item icon="close">삭제하기</MoreMenu.Item>
+        </MoreMenu>
+
+        <Select value={seletValue} onChange={(value) => setSelectValue(value)}>
+          <Select.Option value="">선택</Select.Option>
+          <Select.Option value="name">이름순</Select.Option>
+          <Select.Option value="date">최신순</Select.Option>
+          <Select.Option value="" disabled>
+            불가능
+          </Select.Option>
+        </Select>
+      </div>
       <div className={styles.flex}>
         <Avatar
           src="https://fastly.picsum.photos/id/502/200/200.jpg?hmac=c6mcZ5mcmjadIeDKaJClpvPz9R9-X9q6c0Un-n73Kv4"
@@ -33,7 +53,6 @@ export default function ChankiSample() {
         <Reaction type="dislike" count={6} disabled />
       </div>
       <div className={styles.flex}>
-        <Icon />
         <Icon name="arrowDown" />
         <Icon name="arrowDown" color="#fc0" />
         <Icon name="arrowDown" color="red" />
