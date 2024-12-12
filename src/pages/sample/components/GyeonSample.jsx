@@ -1,7 +1,7 @@
 import styles from "./GyeonSample.module.css";
 import { InputField } from "@components/Input/InputField";
 import { InputTextarea } from "@components/Input/InputTextarea";
-import { UserCard } from "@components/UserCard/UserCard";
+import { UserCard } from "@components/UserCard/index";
 
 export default function GyeonSample() {
   return (
