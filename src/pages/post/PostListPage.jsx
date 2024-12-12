@@ -1,3 +1,9 @@
+import PostList from "./components/PostList";
+
 export default function PostListPage() {
-  return <div>PostListPage</div>;
+  return (
+    <div>
+      <PostList />
+    </div>
+  );
 }

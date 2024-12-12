@@ -6,6 +6,8 @@ import PostDetailPage from "./pages/post/PostDetailPage";
 import PostListPage from "./pages/post/PostListPage";
 import PostAnswerPage from "./pages/post/PostAnswerPage";
 import SamplePage from "./pages/sample/SamplePage";
+import PostDetailLayout from "./pages/post/components/PostDetailLayout";
+import PostListLayout from "./pages/post/components/PostListLayout";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +21,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/list",
-        element: <PostListPage />,
+        element: <PostListLayout />,
+        children: [{ index: true, element: <PostListPage /> }],
       },
       {
         path: "/post",
+        element: <PostDetailLayout />,
         children: [
           {
             path: ":id",
