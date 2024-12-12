@@ -32,7 +32,7 @@ export function Select({ value, onChange, className, children, ...props }) {
       <Dropdown.Trigger className={styles.trigger}>
         {({ isOpen }) => (
           <div className={clsx(styles.button, isOpen && styles.open)}>
-            {selectedLabel}
+            <span className={styles.label}>{selectedLabel}</span>
             {isOpen ? (
               <Icon name="arrowUp" color="black" size={14} />
             ) : (
