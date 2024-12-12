@@ -5,7 +5,7 @@ export function InputTextarea({
   onChange,
   placeholder = "이름을 입력하세요",
   rows = 6, // 텍스트 줄 수
-  maxLength = 500, // 최대 글자 수
+  maxLength = 500, // 최대 글자 수 입니다.
 }) {
   return (
     <textarea
