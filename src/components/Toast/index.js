@@ -1,2 +1,1 @@
-export { Toast } from "./Toast";
-export * from "./ToastUtils";
+export { Toast, Notify } from "./Toast";

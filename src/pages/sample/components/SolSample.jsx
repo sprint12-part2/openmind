@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Badge } from "@components/Badge";
 import { Modal } from "@components/Modal";
 import usePreventScroll from "@components/Modal/usePreventScroll";
-import { Toast, notify } from "@components/Toast";
+import { Toast, Notify } from "@components/Toast";
 
 export default function SolSample() {
   /**
@@ -35,7 +35,11 @@ export default function SolSample() {
    * 토스트
    */
   const handleClick = () => {
-    notify("URL이 복사되었습니다");
+    const notifyData = {
+      type: "info",
+      message: "URL이 복사되었습니다",
+    };
+    Notify(notifyData);
   };
 
   return (
