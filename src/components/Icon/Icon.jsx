@@ -20,14 +20,14 @@ import { iconData } from "./iconData.jsx";
  * <Icon name="arrowUp" color="primary" />
  */
 
-export function Icon({ name, size = 24, color = "#000", ...props }) {
+export function Icon({ name, size = 24, color, ...props }) {
   const icon = iconData[name];
   if (!icon) {
     console.warn(`${name}은 없는 아이콘입니다.`);
     return null;
   }
 
-  const targetColor = colorMap[color] || color;
+  const targetColor = color ? colorMap[color] || color : "currentColor";
 
   return (
     <svg
