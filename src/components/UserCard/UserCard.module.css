@@ -1,4 +1,4 @@
-.card-container {
+.card {
   max-width: 22rem;
   width: 100%;
   display: flex;
@@ -9,7 +9,7 @@
   border-radius: var(--border-radius-lg);
 }
 
-.card-container:hover {
+.card:hover {
   cursor: pointer;
   border: 0.1rem solid var(--color-primary-400);
   animation: vibration 0.1s 2;
@@ -24,13 +24,13 @@
   }
 }
 
-.card-user-content {
+.header {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
 }
 
-.card-user-avatar {
+.avatar {
   width: 6rem;
 
   @media (max-width: 767px) {
@@ -38,7 +38,7 @@
   }
 }
 
-.user-name {
+.name {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-xl);
   color: var(--color-black);
@@ -48,12 +48,12 @@
   }
 }
 
-.card-question-content {
+.meta {
   display: flex;
   justify-content: space-between;
 }
 
-.question-label {
+.label {
   display: flex;
   gap: var(--spacing-4);
 }
@@ -67,8 +67,8 @@
   }
 }
 
-.question-label p,
-.question-count {
+.label p,
+.count {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-md);
   color: var(--color-gray-400);

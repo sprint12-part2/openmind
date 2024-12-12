@@ -8,19 +8,19 @@ export function UserCard({
   questionCount = "undefined",
 }) {
   return (
-    <div className={styles["card-container"]}>
-      <div className={styles["card-user-content"]}>
-        <div className={styles["card-user-avatar"]}>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.avatar}>
           <Avatar src={imageSource} alt={name + "님의 프로필 이미지"} />
         </div>
-        <div className={styles["user-name"]}>{name}</div>
+        <div className={styles.name}>{name}</div>
       </div>
-      <div className={styles["card-question-content"]}>
-        <div className={styles["question-label"]}>
+      <div className={styles.meta}>
+        <div className={styles.label}>
           <Icon name="message" color="gray-400" className={styles["question-icon"]} />
           <p>받은 질문</p>
         </div>
-        <p className={styles["question-count"]}>{questionCount}개</p>
+        <p className={styles.count}>{questionCount}개</p>
       </div>
     </div>
   );
