@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-24);
+}
+
+.question {
+  margin-bottom: var(--spacing-32);
+}
+
+.question .meta {
+  margin-bottom: var(--spacing-6);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+}
+
+.question .title {
+  font-size: var(--font-size-lg);
+  color: var(--color-black);
+  line-height: 1.2;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
