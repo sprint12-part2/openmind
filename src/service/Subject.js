@@ -20,12 +20,12 @@ export async function createSubject(subjectData) {
 
 // 특정 질문 대상 조회
 export async function fetchSubjectById(subjectId) {
-  const response = await axiosInstance.get(`/subjects/${subjectId}`);
+  const response = await axiosInstance.get(`/subjects/${subjectId}/`);
   return response.data;
 }
 
 // 질문 대상 삭제
 export async function deleteSubject(subjectId) {
-  const response = await axiosInstance.delete(`/subjects/${subjectId}`);
+  const response = await axiosInstance.delete(`/subjects/${subjectId}/`);
   return response.data;
 }
