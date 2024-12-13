@@ -9,9 +9,11 @@ export default function MainPage() {
     <div className={styles.container}>
       <div className={styles.header}>
         {/* 버튼 컴포넌트 완성되기전까지 임시 */}
-        <Link to="/list">
-          <div className={styles.link}>답변하러 가기</div>
-        </Link>
+        <div className={styles.link}>
+          <Link to="/list">
+            <div className={styles.btn}>답변하러 가기</div>
+          </Link>
+        </div>
       </div>
       <MainLogo />
       {/* <div>

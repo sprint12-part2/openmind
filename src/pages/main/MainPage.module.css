@@ -4,17 +4,24 @@
 }
 
 .header {
+  height: 16rem;
   display: flex;
   justify-content: flex-end;
+  @media (max-width: 787px) {
+    order: 1;
+  }
 }
 
 .link {
+  margin: 4.5rem;
+}
+
+.btn {
   width: 10rem;
   height: 2.5rem;
-  margin: 4.5rem 13rem;
   background-color: aqua;
 }
 
-.link:hover {
+.btn:hover {
   cursor: pointer;
 }
