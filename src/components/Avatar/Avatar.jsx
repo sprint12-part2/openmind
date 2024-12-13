@@ -31,9 +31,11 @@ export function Avatar({ src, alt = "", size }) {
     e.target.src = defaultAvatar;
   }
 
+  const imgSrc = src || defaultAvatar;
+
   return (
     <figure className={styles.cover} style={coverStyle}>
-      <img className={styles.img} src={src} alt={alt} onError={handleError} />
+      <img className={styles.img} src={imgSrc} alt={alt} onError={handleError} />
     </figure>
   );
 }
