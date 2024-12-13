@@ -1,0 +1,17 @@
+.logo {
+  width: 45.6rem;
+  height: 18rem;
+  margin: 16rem auto;
+
+  @media (max-width: 787px) {
+    width: 24.8rem;
+    height: 9.8rem;
+    margin: 8rem auto 2.4rem;
+  }
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
