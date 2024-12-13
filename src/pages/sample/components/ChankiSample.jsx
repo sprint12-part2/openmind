@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styles from "./ChankiSample.module.css";
-import { Icon } from "@components/Icon";
-import { Reaction } from "@components/Reaction";
-import { Avatar } from "@components/Avatar/Avatar";
-import { MoreMenu, Select } from "@components/Dropdown";
+import { MoreMenu, Select, Avatar, Reaction, Icon } from "@components/ui";
+// import { Icon } from "@components/Icon";
+// import { Reaction } from "@components/Reaction";
+// import { Avatar } from "@components/Avatar/Avatar";
+// import { MoreMenu, Select } from "@components/Dropdown";
 
 export default function ChankiSample() {
   const [formData, setFormData] = useState({
