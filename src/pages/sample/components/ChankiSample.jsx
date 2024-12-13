@@ -1,10 +1,31 @@
 import { useState } from "react";
 import styles from "./ChankiSample.module.css";
 import { MoreMenu, Select, Avatar, Reaction, Icon } from "@components/ui";
-// import { Icon } from "@components/Icon";
-// import { Reaction } from "@components/Reaction";
-// import { Avatar } from "@components/Avatar/Avatar";
-// import { MoreMenu, Select } from "@components/Dropdown";
+import { FeedCard } from "@components/FeedCard";
+
+const fakeQuestion = {
+  id: 15382,
+  subjectId: 9281,
+  content: "히히히호호호",
+  like: 2,
+  dislike: 2,
+  createdAt: "2024-12-12T14:00:03.343827Z",
+  answer: {
+    id: 6976,
+    questionId: 15382,
+    content: "웃기냐고",
+    isRejected: false,
+    createdAt: "2024-12-12T14:00:17.802338Z",
+  },
+};
+const fakeUser = {
+  id: 9281,
+  name: "test",
+  imageSource:
+    "https://fastly.picsum.photos/id/502/200/200.jpg?hmac=c6mcZ5mcmjadIeDKaJClpvPz9R9-X9q6c0Un-n73Kv4",
+  questionCount: 14,
+  createdAt: "2024-12-09T12:56:20.283029Z",
+};
 
 export default function ChankiSample() {
   const [formData, setFormData] = useState({
@@ -12,8 +33,22 @@ export default function ChankiSample() {
     region: "seoul",
     content: "",
   });
+
   return (
     <div>
+      <div className={styles.feedCards}>
+        <FeedCard
+          question={fakeQuestion}
+          feedOwner={fakeUser}
+          mode="answer"
+          onUpdate={() => alert("답변을 수정한다!!!")}
+          onCreate={() => alert("답변을 작성한다!!!")}
+          onDelete={() => alert("답변을 지운다!!!")}
+          onReject={() => alert("거절한닷!!!")}
+          onLike={() => alert("좋아욧!!!")}
+          onDislike={() => alert("싫어욧!!!")}
+        />
+      </div>
       <div className={styles.flex}>
         <MoreMenu>
           <MoreMenu.Item onClick={() => alert("hi")} icon="edit">
