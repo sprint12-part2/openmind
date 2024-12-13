@@ -3,7 +3,7 @@ import styles from "./ChankiSample.module.css";
 import { MoreMenu, Select, Avatar, Reaction, Icon } from "@components/ui";
 import { FeedCard } from "@components/FeedCard";
 
-const fakeQuestion = {
+const fakeQuestion1 = {
   id: 15382,
   subjectId: 9281,
   content: "히히히호호호",
@@ -18,6 +18,16 @@ const fakeQuestion = {
     createdAt: "2024-12-12T14:00:17.802338Z",
   },
 };
+
+const fakeQuestion2 = {
+  id: 15382,
+  subjectId: 9281,
+  content: "히히히호호호",
+  like: 2,
+  dislike: 2,
+  createdAt: "2024-12-12T14:00:03.343827Z",
+};
+
 const fakeUser = {
   id: 9281,
   name: "test",
@@ -38,7 +48,42 @@ export default function ChankiSample() {
     <div>
       <div className={styles.feedCards}>
         <FeedCard
-          question={fakeQuestion}
+          question={fakeQuestion1}
+          feedOwner={fakeUser}
+          mode="view"
+          onUpdate={() => alert("답변을 수정한다!!!")}
+          onCreate={() => alert("답변을 작성한다!!!")}
+          onDelete={() => alert("답변을 지운다!!!")}
+          onReject={() => alert("거절한닷!!!")}
+          onLike={() => alert("좋아욧!!!")}
+          onDislike={() => alert("싫어욧!!!")}
+        />
+        <FeedCard
+          question={fakeQuestion2}
+          feedOwner={fakeUser}
+          mode="view"
+          onUpdate={() => alert("답변을 수정한다!!!")}
+          onCreate={() => alert("답변을 작성한다!!!")}
+          onDelete={() => alert("답변을 지운다!!!")}
+          onReject={() => alert("거절한닷!!!")}
+          onLike={() => alert("좋아욧!!!")}
+          onDislike={() => alert("싫어욧!!!")}
+        />
+      </div>
+      <div className={styles.feedCards}>
+        <FeedCard
+          question={fakeQuestion1}
+          feedOwner={fakeUser}
+          mode="answer"
+          onUpdate={() => alert("답변을 수정한다!!!")}
+          onCreate={() => alert("답변을 작성한다!!!")}
+          onDelete={() => alert("답변을 지운다!!!")}
+          onReject={() => alert("거절한닷!!!")}
+          onLike={() => alert("좋아욧!!!")}
+          onDislike={() => alert("싫어욧!!!")}
+        />
+        <FeedCard
+          question={fakeQuestion2}
           feedOwner={fakeUser}
           mode="answer"
           onUpdate={() => alert("답변을 수정한다!!!")}
