@@ -8,6 +8,7 @@ import PostAnswerPage from "./pages/post/PostAnswerPage";
 import SamplePage from "./pages/sample/SamplePage";
 import PostDetailLayout from "./pages/post/components/PostDetailLayout";
 import PostListLayout from "./pages/post/components/PostListLayout";
+import { loader as PostDetailLoader } from "./pages/post/loader/PostDetailLoader";
 
 export const router = createBrowserRouter([
   {
@@ -25,8 +26,12 @@ export const router = createBrowserRouter([
         children: [{ index: true, element: <PostListPage /> }],
       },
       {
+        id: "post",
         path: "/post",
         element: <PostDetailLayout />,
+        loader: PostDetailLoader,
+        //TODO : fallback ui 작업
+        hydrateFallbackElement: <div>피드 정보를 가져오는 중입니다...</div>,
         children: [
           {
             path: ":id",
