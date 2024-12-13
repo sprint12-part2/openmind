@@ -4,7 +4,6 @@ import GyeonSample from "./components/GyeonSample";
 import RinaSample from "./components/RinaSample";
 import SolSample from "./components/SolSample";
 import styles from "./SamplePage.module.css";
-import { Button } from "../../components/Button/LinkButton";
 
 export default function SamplePage() {
   return (

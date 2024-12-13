@@ -1,6 +1,5 @@
-// import { Icon } from "@components/Icon";
-import styles from "./LinkButton.module.css";
-export function LinkButton({
+import styles from "./FloatingButton.module.css";
+export function FloatingButton({
   onClick,
   children,
   size = "md",
@@ -16,7 +15,6 @@ export function LinkButton({
       disabled={disabled}
     >
       {children}
-      {/* <Icon name="arrowRight" size={18}></Icon> */}
     </button>
   );
 }

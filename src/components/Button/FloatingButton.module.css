@@ -1,0 +1,28 @@
+.button {
+  padding: 12px 24px;
+  font-size: var(--font-size-md);
+  border-radius: var(--board-radius-xl);
+  color: var(--color-white);
+  background-color: var(--color-primary-400);
+  border: none;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* size */
+.sm {
+  padding: 8px 12px;
+  font-size: var(--font-size-sm);
+}
+.md {
+  padding: 12px 24px;
+  font-size: var(--font-size-md);
+}
+/* button state */
+.button:hover {
+}
+.button:active {
+  background-color: var(--color-primary-500);
+}
