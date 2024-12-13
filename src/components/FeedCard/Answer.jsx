@@ -3,7 +3,7 @@ import { Avatar } from "@components/Avatar";
 import { fromNow } from "@util/format";
 import styles from "./Answer.module.css";
 
-export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCancel }) {
+export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCancel, isPending }) {
   const { createdAt, isRejected, content } = answer || {};
   const { name, imageSource } = user;
   const isEditMode = mode === "answer" && isEdit;
@@ -12,12 +12,16 @@ export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCance
     return null;
   }
 
-  let answerContent;
-  if (isEditMode) {
-    answerContent = <AnswerForm initialValue={content} onSubmit={onUpdate} onCancel={onCancel} />;
-  } else {
-    answerContent = content ? content : <AnswerForm onSubmit={onCreate} />;
-  }
+  const answerContent = isEditMode ? (
+    <AnswerForm
+      initialValue={content}
+      onSubmit={onUpdate}
+      onCancel={onCancel}
+      isPending={isPending}
+    />
+  ) : (
+    content || <AnswerForm onSubmit={onCreate} onCancel={onCancel} isPending={isPending} />
+  );
 
   return (
     <div className={styles.answer}>
@@ -30,7 +34,11 @@ export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCance
           {createdAt && <span className={styles.date}>{fromNow(createdAt)}</span>}
         </div>
         <div className={styles.content}>
-          {isRejected ? <div className={styles.reject}>답변 거절</div> : answerContent}
+          {isRejected && !isEditMode ? (
+            <div className={styles.reject}>답변 거절</div>
+          ) : (
+            answerContent
+          )}
         </div>
       </div>
     </div>

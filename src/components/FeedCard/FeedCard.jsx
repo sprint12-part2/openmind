@@ -3,6 +3,7 @@ import { MoreMenu, Reaction } from "@components/ui";
 import { Question, Answer, Reactions, FeedCardWrapper } from "@components/FeedCard";
 
 export function FeedCard({
+  isPending,
   question,
   mode,
   feedOwner,
@@ -13,8 +14,13 @@ export function FeedCard({
   onLike,
   onDislike,
 }) {
-  const { content, like, dislike, createAt, answer } = question;
+  const { content, like, dislike, createdAt, answer } = question;
   const [isEdit, setIsEdit] = useState(false);
+
+  function handleReject() {
+    setIsEdit(false);
+    onReject();
+  }
 
   function handleModify() {
     setIsEdit(true);
@@ -26,10 +32,10 @@ export function FeedCard({
 
   return (
     <FeedCardWrapper>
-      <Question status={!!answer} createAt={createAt} content={content}>
+      <Question status={!!answer} createdAt={createdAt} content={content}>
         {mode === "answer" && (
           <MoreMenu>
-            <MoreMenu.Item icon="reject" onClick={onReject}>
+            <MoreMenu.Item icon="reject" onClick={handleReject}>
               거절하기
             </MoreMenu.Item>
             <MoreMenu.Item icon="edit" onClick={handleModify}>
@@ -42,6 +48,7 @@ export function FeedCard({
         )}
       </Question>
       <Answer
+        isPending={isPending}
         answer={answer}
         user={feedOwner}
         mode={mode}
