@@ -8,7 +8,7 @@ export default function PostList() {
   const [subjects, setSubjects] = useState([]); // 질문자 목록 상태
   const [totalItems, setTotalItems] = useState(0); // 전체 항목 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage()); // 화면 크기에 맞춰 itemsPerPage값 가져오기
+  const [itemsPerPage, setItemsPerPage] = useState(() => getItemsPerPage()); //게으른 초기화 방식
   const [sort, setSort] = useState("name"); // 정렬 기준 상태 (기본값: 이름순)
 
   // 화면 크기 변화 감지 및 itemsPerPage 업데이트
