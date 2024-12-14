@@ -1,4 +1,4 @@
-import { useParams, useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import {
   FeedCard,
   FeedCardList,
@@ -9,12 +9,16 @@ import {
 } from "@components/FeedCard";
 import useLike from "./useLike";
 import useAnswer from "./useAnswer";
+import { useFeed } from "@context/FeedContext";
+import { Notify } from "@components/Toast";
 
 export default function Questions({ count, data, mode = "view" }) {
   const userInfo = useRouteLoaderData("post");
   const { id: subjectId } = useParams();
-  const { create, update, remove, reject, removeFeed, isPending } = useAnswer();
+  const { create, update, remove, reject, isPending } = useAnswer();
   const { mutate: reaction } = useLike();
+  const { removeFeed } = useFeed();
+  const navigate = useNavigate();
 
   function handleCreate({ questionId, content }) {
     create({ questionId, content, isRejected: "false" });
@@ -45,8 +49,15 @@ export default function Questions({ count, data, mode = "view" }) {
     reaction({ questionId, type });
   }
 
-  function handleDeleteFeed() {
-    removeFeed({ subjectId });
+  async function handleDeleteFeed() {
+    try {
+      await removeFeed(subjectId);
+      Notify({ type: "success", message: "피드를 삭제했습니다." });
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: "문제가 생겨 삭제를 실패했습니다." });
+    }
   }
 
   return (
