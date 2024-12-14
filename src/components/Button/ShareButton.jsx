@@ -4,6 +4,7 @@ import styles from "./ShareButton.module.css";
 export function ShareButton({
   onClick,
   children,
+  className,
   icon = "",
   color = "",
   type = "button",
@@ -14,7 +15,7 @@ export function ShareButton({
   };
   return (
     <button
-      className={clsx(styles.button, disabled && styles.disabled)}
+      className={clsx(styles.button, disabled && styles.disabled, className)}
       style={buttonStyle}
       type={type}
       onClick={onClick}

@@ -4,13 +4,14 @@ import styles from "./LinkButton.module.css";
 export function LinkButton({
   onClick,
   children,
+  className,
   color = "primary",
   disabled = false,
   type = "button",
 }) {
   return (
     <button
-      className={clsx(styles.button, styles[color], disabled && styles.disabled)}
+      className={clsx(styles.button, styles[color], disabled && styles.disabled, className)}
       type={type}
       onClick={onClick}
       disabled={disabled}

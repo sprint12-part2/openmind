@@ -1,5 +1,6 @@
 .button {
   display: flex;
+  justify-content: space-between;
   padding: 12px 24px;
   font-size: var(--font-size-md);
   border-radius: var(--border-radius-md);
