@@ -2,12 +2,13 @@ import { useState } from "react";
 import { InputTextarea } from "@components/Input";
 import styles from "./AnswerForm.module.css";
 
-export function AnswerForm({ initialValue = "", onSubmit, onCancel }) {
+export function AnswerForm({ initialValue = "", onSubmit, onCancel, isPending }) {
   const [value, setValue] = useState(initialValue);
 
   async function handleSubmit(e) {
     e.preventDefault();
     onSubmit(value);
+    onCancel();
   }
 
   function handleReset() {
@@ -22,7 +23,7 @@ export function AnswerForm({ initialValue = "", onSubmit, onCancel }) {
         onChange={(e) => setValue(e.target.value)}
         placeholder="답변을 입력해주세요"
       />
-      <button type="submit" className={styles.button} disabled={!value}>
+      <button type="submit" className={styles.button} disabled={!value || isPending}>
         {initialValue ? "수정" : "작성"}
       </button>
       <button type="button" onClick={handleReset} className={styles.reset}>
