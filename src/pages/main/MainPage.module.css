@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 16rem;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 767px) {
+    order: 1;
+    height: auto;
+  }
+}
+
+.link {
+  margin: 4.5rem 13rem 0 0;
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    margin: 4.5rem 5rem 0 0;
+  }
+
+  @media (max-width: 767px) {
+    margin: 2.4rem auto;
+  }
+}
+
+/* 임시 */
+.btn {
+  width: 10rem;
+  background-color: aqua;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

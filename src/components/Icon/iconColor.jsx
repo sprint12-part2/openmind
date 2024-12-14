@@ -1,0 +1,17 @@
+export const colorMap = {
+  "primary-500": "var(--color-primary-500: )",
+  "primary-400": "var(--color-primary-400)",
+  "primary-300": "var(--color-primary-300)",
+  "primary-200": "var(--color-primary-200)",
+  "primary-100": "var(--color-primary-100)",
+  primary: "var(--color-primary-400)",
+  "gray-500": "var(--color-gray-500)",
+  "gray-400": "var(--color-gray-400)",
+  "gray-300": "var(--color-gray-300)",
+  "gray-200": "var(--color-gray-200)",
+  black: "var(--color-black)",
+  white: "var(--color-white)",
+  blue: "var(--color-blue)",
+  yellow: "var(--color-yellow)",
+  red: "var(--color-red)",
+};

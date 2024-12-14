@@ -1,0 +1,22 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4.6rem;
+  border-radius: var(--border-radius-md);
+  background: var(--color-primary-400);
+  color: var(--color-white);
+}
+
+.button:disabled {
+  background: var(--color-primary-300);
+}
+
+.reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 4.6rem;
+}
