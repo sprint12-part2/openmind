@@ -1,13 +1,14 @@
 import styles from "./PostList.module.css";
 import React, { useState, useEffect } from "react";
 import { fetchSubjects } from "@service/Subject";
-import { UserCard, Pagination } from "@components/ui"; //Pagination 추가
+import { UserCard, Pagination, Select } from "@components/ui"; //Pagination 추가
 
 export default function PostList() {
   const [subjects, setSubjects] = useState([]); // 질문자 목록 상태
   const [totalItems, setTotalItems] = useState(0); // 전체 항목 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const [itemsPerPage, setItemsPerPage] = useState(8); // 한 페이지에 보여줄 데이터 수 (기본값)
+  const [sort, setSort] = useState("name"); // 정렬 기준 상태 (기본값: 이름순)
 
   // 화면 크기에 따라 itemsPerPage 조정
   useEffect(() => {
@@ -37,8 +38,7 @@ export default function PostList() {
   useEffect(() => {
     async function loadSubjects() {
       try {
-        // 현재 페이지와 항목 수, 이름순 정렬 기준으로 질문자 목록 데이터를 가져옵니다.
-        const data = await fetchSubjects(currentPage, itemsPerPage, "name");
+        const data = await fetchSubjects(currentPage, itemsPerPage, sort);
         setSubjects(data.results); // 받아온 데이터 설정
         setTotalItems(data.count); // 총 데이터 수 설정
       } catch (err) {
@@ -47,16 +47,29 @@ export default function PostList() {
     }
 
     loadSubjects();
-  }, [currentPage, itemsPerPage]); // currentPage와 itemsPerPage가 변경될 때 실행
+  }, [currentPage, itemsPerPage, sort]); // currentPage, itemsPerPage, sort 변경 시 실행
 
   // 페이지 변경 함수
   function handlePageChange(page) {
     setCurrentPage(page); // 현재 페이지 변경
   }
 
+  // 정렬 기준 변경 함수
+  function handleSortChange(value) {
+    setSort(value); // 정렬 기준 업데이트
+    setCurrentPage(1); // 정렬 기준 변경 시 첫 페이지로 이동
+  }
+
   // 데이터 출력
   return (
     <div className={styles.container}>
+      <div className={styles.sortBar}>
+        <Select value={sort} onChange={handleSortChange}>
+          <Select.Option value="name">이름순</Select.Option>
+          <Select.Option value="time">최신순</Select.Option>
+        </Select>
+      </div>
+
       <div className={styles.userCardGrid}>
         {subjects.map((subject) => (
           <UserCard

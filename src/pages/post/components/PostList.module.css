@@ -7,6 +7,15 @@
   gap: var(--spacing-20); /* 컴포넌트 간 간격 */
 }
 
+.sortBar {
+  display: flex;
+  justify-content: center;
+}
+
+.sortBar select {
+  max-width: 80px; /* DropDown 너비 */
+}
+
 .userCardGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(18.6rem, 1fr)); /* 카드의 최소 너비와 일치 */
