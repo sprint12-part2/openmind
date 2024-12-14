@@ -1,5 +1,15 @@
-.container {
-  border: 10px solid red;
-  min-height: 100vh;
-  padding: 20px;
+.detail__container {
+  background-color: var(--color-gray-200);
+}
+
+.detail__header {
+  margin-bottom: 5.4rem;
+  background-image: linear-gradient(to bottom, var(--color-white) 65%, var(--color-gray-200) 35%);
+}
+
+.detail__list {
+  width: 100%;
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 0 3.2rem 13.6rem;
 }
