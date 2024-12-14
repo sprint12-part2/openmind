@@ -6,8 +6,8 @@ export default function useLike() {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: ({ id, type }) => addQuestionReaction(id, type),
-    onMutate: async ({ id, type }) => {
+    mutationFn: ({ questionId, type }) => addQuestionReaction(questionId, type),
+    onMutate: async ({ questionId, type }) => {
       // 에러시 원복 데이터 생성
       const prevData = queryClient.getQueriesData(["questions"]);
 
@@ -20,7 +20,7 @@ export default function useLike() {
           pages: prev.pages.map((page) => ({
             ...page,
             results: page.results.map((item) =>
-              item.id === id ? { ...item, [type]: item[type] + 1 } : item,
+              item.id === questionId ? { ...item, [type]: item[type] + 1 } : item,
             ),
           })),
         };
