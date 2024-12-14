@@ -19,24 +19,18 @@ export default function FeedContextProvider({ children }) {
   async function createFeed(name) {
     setIsLoading(true);
 
-    try {
-      const response = await createSubject({ name });
-      setFeeds((prev) => [response, ...prev]);
-      return response;
-    } finally {
-      setIsLoading(false);
-    }
+    const response = await createSubject({ name });
+    setFeeds((prev) => [response, ...prev]);
+    setIsLoading(false);
+    return response;
   }
 
   async function removeFeed(feedId) {
     setIsLoading(true);
 
-    try {
-      await deleteSubject(feedId);
-      setFeeds((prev) => prev.filter((feed) => feed.id !== feedId));
-    } finally {
-      setIsLoading(false);
-    }
+    await deleteSubject(feedId);
+    setFeeds((prev) => prev.filter((feed) => feed.id !== feedId));
+    setIsLoading(false);
   }
 
   function hasFeed(feedId) {
