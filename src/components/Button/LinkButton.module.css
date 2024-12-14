@@ -1,12 +1,14 @@
 .button {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 12px 24px;
   font-size: var(--font-size-md);
   border-radius: var(--border-radius-md);
   color: var(--color-primary-400);
   background-color: var(--color-primary-100);
   border: 1px solid var(--color-primary-400);
+  gap: 4px;
   @media (max-width: 787px) {
     padding: 8px 12px;
     font-size: var(--font-size-sm);

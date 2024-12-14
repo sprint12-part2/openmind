@@ -1,4 +1,4 @@
-// import { Icon } from "@components/Icon";
+import { Icon } from "@components/Icon";
 import clsx from "clsx";
 import styles from "./LinkButton.module.css";
 export function LinkButton({
@@ -17,7 +17,7 @@ export function LinkButton({
       disabled={disabled}
     >
       {children}
-      {/* <Icon name="arrowRight" size={18}></Icon> */}
+      <Icon name="arrowRight" size={18}></Icon>
     </button>
   );
 }
