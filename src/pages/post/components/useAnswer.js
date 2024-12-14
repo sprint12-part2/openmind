@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Notify } from "@components/Toast";
 import { createAnswer, deleteAnswer, updateAnswer } from "@service/Answer";
+import { deleteSubject } from "@service/Subject";
 
 export default function useAnswer() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   function updateCacheData(questionId, updateFunc) {
     queryClient.setQueryData(["questions"], (prev) => {
@@ -75,6 +78,15 @@ export default function useAnswer() {
     },
   });
 
+  const removeFeed = useMutation({
+    mutationFn: ({ subjectId }) => deleteSubject(subjectId),
+    onError: () => Notify({ type: "error", message: "문제가 생겨서, 피드 삭제를 실패했습니다." }),
+    onSuccess: () => {
+      Notify({ type: "success", message: "성공적으로 피드를 삭제했습니다." });
+      navigate("/list");
+    },
+  });
+
   const isPending = create.isPending || update.isPending || remove.isPending || reject.isPending;
 
   return {
@@ -82,6 +94,7 @@ export default function useAnswer() {
     update: update.mutate,
     remove: remove.mutate,
     reject: reject.mutate,
+    removeFeed: removeFeed.mutate,
     isPending,
   };
 }
