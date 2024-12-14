@@ -22,7 +22,9 @@ export default function PostDetailPage() {
     <>
       <QuestionForm />
       <Questions count={count} data={results} />
-      <div ref={ref}>{isFetchingNextPage ? "더 불러오는 중입니다..." : ""}</div>
+      <div ref={ref}>
+        {isFetchingNextPage ? <PostMessage>더 불러오는 중입니다...</PostMessage> : ""}
+      </div>
     </>
   );
 }

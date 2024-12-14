@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { PostMessage } from "@components/FeedCard";
 import useQuestions from "./components/useQuestions";
+import { PostMessage } from "@components/FeedCard";
 import Questions from "./components/Questions";
 
 export default function PostAnswerPage() {
@@ -20,7 +20,9 @@ export default function PostAnswerPage() {
   return (
     <>
       <Questions count={count} data={results} mode="answer" />
-      <div ref={ref}>{isFetchingNextPage ? "더 불러오는 중입니다..." : ""}</div>
+      <div ref={ref}>
+        {isFetchingNextPage ? <PostMessage>더 불러오는 중입니다...</PostMessage> : ""}
+      </div>
     </>
   );
 }
