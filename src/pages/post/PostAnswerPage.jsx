@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
+import { PostMessage } from "@components/FeedCard";
 import useQuestions from "./components/useQuestions";
-import PostMessage from "./components/PostMessage";
 import Questions from "./components/Questions";
 
 export default function PostAnswerPage() {
