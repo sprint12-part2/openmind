@@ -5,27 +5,30 @@ import { createAnswer, deleteAnswer, updateAnswer } from "@service/Answer";
 export default function useAnswer() {
   const queryClient = useQueryClient();
 
+  function updateCacheData(questionId, updateFunc) {
+    queryClient.setQueryData(["questions"], (prev) => {
+      if (!prev) return prev;
+
+      const newData = {
+        ...prev,
+        pages: prev.pages.map((page) => ({
+          ...page,
+          results: page.results.map((item) => (item.id === questionId ? updateFunc(item) : item)),
+        })),
+      };
+
+      return newData;
+    });
+  }
+
   const create = useMutation({
     mutationFn: ({ questionId, content, isRejected }) => {
       return createAnswer(questionId, content, isRejected);
     },
     onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 생성을 실패했습니다." }),
-    onSuccess: async (data) => {
-      queryClient.setQueryData(["questions"], (prev) => {
-        if (!prev) return prev;
-
-        const newData = {
-          ...prev,
-          pages: prev.pages.map((page) => ({
-            ...page,
-            results: page.results.map((item) =>
-              item.id === data.questionId ? { ...item, answer: data } : item,
-            ),
-          })),
-        };
-
-        return newData;
-      });
+    onSuccess: (data) => {
+      Notify({ type: "success", message: "답변을 작성했습니다." });
+      updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
 
@@ -34,22 +37,9 @@ export default function useAnswer() {
       return updateAnswer(answerId, content, isRejected);
     },
     onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 수정을 실패했습니다." }),
-    onSuccess: async (data) => {
-      queryClient.setQueryData(["questions"], (prev) => {
-        if (!prev) return prev;
-
-        const newData = {
-          ...prev,
-          pages: prev.pages.map((page) => ({
-            ...page,
-            results: page.results.map((item) =>
-              item.id === data.questionId ? { ...item, answer: data } : item,
-            ),
-          })),
-        };
-
-        return newData;
-      });
+    onSuccess: (data) => {
+      Notify({ type: "success", message: "답변을 수정했습니다." });
+      updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
 
@@ -60,25 +50,12 @@ export default function useAnswer() {
     },
     onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 삭제를 실패했습니다." }),
     onSuccess: (_, { questionId }) => {
-      queryClient.setQueryData(["questions"], (prev) => {
-        if (!prev) return prev;
+      Notify({ type: "success", message: "답변을 삭제했습니다." });
+      updateCacheData(questionId, (item) => {
+        const newItem = { ...item };
+        delete newItem.answer;
 
-        const newData = {
-          ...prev,
-          pages: prev.pages.map((page) => ({
-            ...page,
-            results: page.results.map((item) => {
-              if (item.id === questionId) {
-                const newItem = { ...item };
-                delete newItem.answer;
-                return newItem;
-              }
-              return item;
-            }),
-          })),
-        };
-
-        return newData;
+        return newItem;
       });
     },
   });
@@ -92,22 +69,9 @@ export default function useAnswer() {
       }
     },
     onError: () => Notify({ type: "error", message: "문제가 생겨서, 거절을 실패했습니다." }),
-    onSuccess: async (data) => {
-      queryClient.setQueryData(["questions"], (prev) => {
-        if (!prev) return prev;
-
-        const newData = {
-          ...prev,
-          pages: prev.pages.map((page) => ({
-            ...page,
-            results: page.results.map((item) =>
-              item.id === data.questionId ? { ...item, answer: data } : item,
-            ),
-          })),
-        };
-
-        return newData;
-      });
+    onSuccess: (data) => {
+      Notify({ type: "success", message: "답변을 거절했습니다." });
+      updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
 
