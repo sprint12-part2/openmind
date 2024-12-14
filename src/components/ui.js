@@ -6,4 +6,5 @@ export * from "./Modal";
 export * from "./Pagination";
 export * from "./Reaction";
 export * from "./Input";
+export * from "./UserCard";
 //export * from "./Button";
