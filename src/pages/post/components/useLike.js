@@ -1,3 +1,4 @@
+import { Notify } from "@components/Toast";
 import { addQuestionReaction } from "@service/Question";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -29,7 +30,7 @@ export default function useLike() {
       return { prevData };
     },
     onError: (error, _, context) => {
-      // 에러시 다시 원복
+      Notify({ type: "error", message: "문제가 발생하여, 요청에 실패했어요." });
       queryClient.setQueryData(["questions"], context.prevData);
     },
     onSuccess: async (data) => {
