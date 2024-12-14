@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useParams, useRouteLoaderData } from "react-router-dom";
-import useQuestion from "./useQuestion";
+import useQuestion from "../../pages/post/components/useQuestion";
 import { Modal, InputTextarea, Avatar } from "@components/ui";
 import usePreventScroll from "@components/Modal/usePreventScroll";
 import styles from "./QuestionForm.module.css";
 
-export default function QuestionForm() {
+export function QuestionForm() {
   const { id } = useParams();
   const { name, imageSource } = useRouteLoaderData("post");
   const [question, setQuestion] = useState("");

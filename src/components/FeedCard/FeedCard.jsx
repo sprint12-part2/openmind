@@ -12,14 +12,16 @@ export function FeedCard({
   onDelete,
   onReject,
   onLike,
-  onDislike,
 }) {
-  const { content, like, dislike, createdAt, answer } = question;
+  const { id: questionId, content, like, dislike, createdAt, answer } = question;
   const [isEdit, setIsEdit] = useState(false);
 
   function handleReject() {
     setIsEdit(false);
-    onReject();
+    onReject({
+      questionId,
+      answerId: answer && answer.id,
+    });
   }
 
   function handleModify() {
@@ -28,6 +30,18 @@ export function FeedCard({
 
   function handleCancel() {
     setIsEdit(false);
+  }
+
+  function handleDelete() {
+    onDelete({
+      questionId,
+      answerId: answer && answer.id,
+    });
+  }
+
+  function handleLike(e) {
+    const type = e.currentTarget.dataset.like;
+    onLike({ questionId, type });
   }
 
   return (
@@ -41,13 +55,14 @@ export function FeedCard({
             <MoreMenu.Item icon="edit" onClick={handleModify}>
               수정하기
             </MoreMenu.Item>
-            <MoreMenu.Item icon="close" onClick={onDelete}>
+            <MoreMenu.Item icon="close" onClick={handleDelete}>
               삭제하기
             </MoreMenu.Item>
           </MoreMenu>
         )}
       </Question>
       <Answer
+        questionId={questionId}
         isPending={isPending}
         answer={answer}
         user={feedOwner}
@@ -58,8 +73,8 @@ export function FeedCard({
         onCancel={handleCancel}
       />
       <Reactions>
-        <Reaction type="like" count={like} onClick={onLike} />
-        <Reaction type="dislike" count={dislike} onClick={onDislike} />
+        <Reaction type="like" count={like} onClick={handleLike} data-like="like" />
+        <Reaction type="dislike" count={dislike} onClick={handleLike} data-like="dislike" />
       </Reactions>
     </FeedCardWrapper>
   );

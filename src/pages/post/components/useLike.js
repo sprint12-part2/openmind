@@ -1,3 +1,4 @@
+import { Notify } from "@components/Toast";
 import { addQuestionReaction } from "@service/Question";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -5,8 +6,8 @@ export default function useLike() {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: ({ id, type }) => addQuestionReaction(id, type),
-    onMutate: async ({ id, type }) => {
+    mutationFn: ({ questionId, type }) => addQuestionReaction(questionId, type),
+    onMutate: async ({ questionId, type }) => {
       // 에러시 원복 데이터 생성
       const prevData = queryClient.getQueriesData(["questions"]);
 
@@ -19,7 +20,7 @@ export default function useLike() {
           pages: prev.pages.map((page) => ({
             ...page,
             results: page.results.map((item) =>
-              item.id === id ? { ...item, [type]: item[type] + 1 } : item,
+              item.id === questionId ? { ...item, [type]: item[type] + 1 } : item,
             ),
           })),
         };
@@ -29,7 +30,7 @@ export default function useLike() {
       return { prevData };
     },
     onError: (error, _, context) => {
-      // 에러시 다시 원복
+      Notify({ type: "error", message: "문제가 발생하여, 요청에 실패했어요." });
       queryClient.setQueryData(["questions"], context.prevData);
     },
     onSuccess: async (data) => {

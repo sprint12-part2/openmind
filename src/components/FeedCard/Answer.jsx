@@ -3,8 +3,18 @@ import { Avatar } from "@components/Avatar";
 import { fromNow } from "@util/format";
 import styles from "./Answer.module.css";
 
-export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCancel, isPending }) {
-  const { createdAt, isRejected, content } = answer || {};
+export function Answer({
+  questionId,
+  answer,
+  user,
+  mode,
+  isEdit,
+  onCreate,
+  onUpdate,
+  onCancel,
+  isPending,
+}) {
+  const { id: answerId, createdAt, isRejected, content } = answer || {};
   const { name, imageSource } = user;
   const isEditMode = mode === "answer" && isEdit;
 
@@ -14,13 +24,23 @@ export function Answer({ answer, user, mode, isEdit, onCreate, onUpdate, onCance
 
   const answerContent = isEditMode ? (
     <AnswerForm
+      questionId={questionId}
+      answerId={answerId}
       initialValue={content}
       onSubmit={onUpdate}
       onCancel={onCancel}
       isPending={isPending}
     />
   ) : (
-    content || <AnswerForm onSubmit={onCreate} onCancel={onCancel} isPending={isPending} />
+    content || (
+      <AnswerForm
+        questionId={questionId}
+        answerId={answerId}
+        onSubmit={onCreate}
+        onCancel={onCancel}
+        isPending={isPending}
+      />
+    )
   );
 
   return (
