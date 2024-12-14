@@ -9,3 +9,4 @@ export * from "./Question";
 export * from "./Reactions";
 export * from "./QuestionForm";
 export * from "./PostMessage";
+export * from "./FeedDeleteButton";
