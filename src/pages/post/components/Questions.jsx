@@ -5,6 +5,7 @@ import {
   FeedDeleteButton,
   FeedListHeader,
   FeedListWrapper,
+  QuestionForm,
 } from "@components/FeedCard";
 import useLike from "./useLike";
 import useAnswer from "./useAnswer";
@@ -50,7 +51,7 @@ export default function Questions({ count, data, mode = "view" }) {
 
   return (
     <>
-      {mode === "answer" && <FeedDeleteButton onClick={handleDeleteFeed} />}
+      {mode === "view" ? <QuestionForm /> : <FeedDeleteButton onClick={handleDeleteFeed} />}
       <FeedListWrapper>
         <FeedListHeader count={count} />
         <FeedCardList data={data}>
