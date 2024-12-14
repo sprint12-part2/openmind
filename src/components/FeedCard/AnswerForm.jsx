@@ -2,12 +2,19 @@ import { useState } from "react";
 import { InputTextarea } from "@components/Input";
 import styles from "./AnswerForm.module.css";
 
-export function AnswerForm({ initialValue = "", onSubmit, onCancel, isPending }) {
+export function AnswerForm({
+  questionId,
+  answerId = null,
+  initialValue = "",
+  onSubmit,
+  onCancel,
+  isPending,
+}) {
   const [value, setValue] = useState(initialValue);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(value);
+    onSubmit({ questionId, answerId, content: value });
     onCancel();
   }
 

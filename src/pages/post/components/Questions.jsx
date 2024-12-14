@@ -9,7 +9,36 @@ import useAnswer from "./useAnswer";
 export default function Questions({ count, data, mode = "view" }) {
   const userInfo = useRouteLoaderData("post");
   const { create, update, remove, reject, isPending } = useAnswer();
-  const { mutate: handleLike } = useLike();
+  const { mutate: reaction } = useLike();
+
+  function handleCreate({ questionId, content }) {
+    create({ questionId, content, isRejected: "false" });
+  }
+
+  function handleUpdate({ answerId, content }) {
+    update({
+      answerId,
+      content,
+      isRejected: "false",
+    });
+  }
+
+  function handleDelete({ questionId, answerId }) {
+    remove({ questionId, answerId });
+  }
+
+  function handleReject({ questionId, answerId }) {
+    reject({
+      questionId,
+      answerId,
+      content: "reject",
+      isRejected: true,
+    });
+  }
+
+  function handleLike({ questionId, type }) {
+    reaction({ questionId, type });
+  }
 
   return (
     <div className={styles.container}>
@@ -28,29 +57,11 @@ export default function Questions({ count, data, mode = "view" }) {
                   question={question}
                   mode={mode}
                   feedOwner={userInfo}
-                  onCreate={(content) =>
-                    create({ questionId: question.id, content, isRejected: "false" })
-                  }
-                  onUpdate={(content) =>
-                    update({
-                      answerId: question.answer?.id,
-                      content,
-                      isRejected: "false",
-                    })
-                  }
-                  onDelete={() =>
-                    remove({ questionId: question.id, answerId: question.answer?.id })
-                  }
-                  onReject={() =>
-                    reject({
-                      questionId: question.id,
-                      answerId: question.answer?.id,
-                      content: "reject",
-                      isRejected: true,
-                    })
-                  }
-                  onLike={() => handleLike({ id: question.id, type: "like" })}
-                  onDislike={() => handleLike({ id: question.id, type: "dislike" })}
+                  onCreate={handleCreate}
+                  onUpdate={handleUpdate}
+                  onDelete={handleDelete}
+                  onReject={handleReject}
+                  onLike={handleLike}
                 />
               </li>
             );
