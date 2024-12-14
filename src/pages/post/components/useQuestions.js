@@ -3,11 +3,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { fetchQuestions } from "@service/Question";
 
-export default function useQuestions(id) {
+export default function useQuestions({ subjectId, itemPerPage }) {
   const { data, error, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: ["questions"],
-      queryFn: ({ pageParam }) => fetchQuestions(id, pageParam, 5),
+      queryFn: ({ pageParam }) => fetchQuestions(subjectId, pageParam, itemPerPage),
       initialPageParam: 1,
       getNextPageParam: (lastPage, pages) => {
         return lastPage.next ? pages.length + 1 : null;
