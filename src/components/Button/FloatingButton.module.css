@@ -9,20 +9,24 @@
   right: 20px;
   bottom: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  @media (max-width: 787px) {
+    padding: 8px 12px;
+    font-size: var(--font-size-sm);
+  }
 }
 
-/* size */
-.sm {
-  padding: 8px 12px;
-  font-size: var(--font-size-sm);
+/* color */
+.primary {
+  color: var(--color-white);
+  background-color: var(--color-primary-400);
+  border: none;
 }
-.md {
-  padding: 12px 24px;
-  font-size: var(--font-size-md);
+.secondary {
+  color: var(--color-white);
+  background-color: var(--color-primary-400);
 }
+
 /* button state */
-.button:hover {
-}
 .button:active {
   background-color: var(--color-primary-500);
 }

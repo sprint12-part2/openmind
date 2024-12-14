@@ -1,17 +1,17 @@
 // import { Icon } from "@components/Icon";
+import clsx from "clsx";
 import styles from "./LinkButton.module.css";
 export function LinkButton({
   onClick,
   children,
-  size = "md",
   color = "primary",
-  // variant = "solid",
   disabled = false,
+  type = "button",
 }) {
   return (
     <button
-      className={`${styles.button} ${styles[size]} ${styles[color]} ${disabled ? styles.disabled : ""}`}
-      type="button"
+      className={clsx(styles.button, styles[color], disabled && styles.disabled)}
+      type={type}
       onClick={onClick}
       disabled={disabled}
     >

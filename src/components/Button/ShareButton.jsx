@@ -1,11 +1,12 @@
 // import { Icon } from "@components/Icon";
+import clsx from "clsx";
 import styles from "./ShareButton.module.css";
 export function ShareButton({
   onClick,
   children,
   icon = "",
   color = "",
-  // variant = "solid",
+  type = "button",
   disabled = false,
 }) {
   const buttonStyle = {
@@ -13,12 +14,13 @@ export function ShareButton({
   };
   return (
     <button
-      className={`${styles.button} ${disabled ? styles.disabled : ""}`}
+      className={clsx(styles.button, disabled && styles.disabled)}
       style={buttonStyle}
-      type="button"
+      type={type}
       onClick={onClick}
       disabled={disabled}
     >
+      {icon && <Icon name={icon} size={18} />}
       {children}
     </button>
   );

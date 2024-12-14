@@ -1,16 +1,16 @@
+import clsx from "clsx";
 import styles from "./FloatingButton.module.css";
 export function FloatingButton({
   onClick,
   children,
-  size = "md",
   color = "primary",
-  // variant = "solid",
+  type = "button",
   disabled = false,
 }) {
   return (
     <button
-      className={`${styles.button} ${styles[size]} ${styles[color]} ${disabled ? styles.disabled : ""}`}
-      type="button"
+      className={clsx(styles.button, styles[color], disabled && styles.disabled)}
+      type={type}
       onClick={onClick}
       disabled={disabled}
     >
