@@ -13,6 +13,7 @@ import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 import PostPageHydrateFallback from "./pages/post/components/PostPageHydrateFallback";
 import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 import PostPageHydrateFallback from "./pages/post/components/PostPageHydrateFallback";
+import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
