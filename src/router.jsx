@@ -9,6 +9,7 @@ import SamplePage from "./pages/sample/SamplePage";
 import PostDetailLayout from "./pages/post/components/PostDetailLayout";
 import PostListLayout from "./pages/post/components/PostListLayout";
 import { loader as PostDetailLoader } from "./pages/post/loader/PostDetailLoader";
+import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ":id/answer",
-            element: <PostAnswerPage />,
+            element: (
+              <ProtectedRoute>
+                <PostAnswerPage />
+              </ProtectedRoute>
+            ),
           },
         ],
       },
