@@ -60,8 +60,12 @@ export function FeedCard({
         onCancel={() => setIsEdit(false)}
       />
       <Reactions>
-        <Reaction type="like" count={like} onClick={() => onLike(questionId, "like")} />
-        <Reaction type="dislike" count={dislike} onClick={() => onLike(questionId, "dislike")} />
+        <Reaction type="like" count={like} onClick={() => onLike({ questionId, type: "like" })} />
+        <Reaction
+          type="dislike"
+          count={dislike}
+          onClick={() => onLike({ questionId, type: "dislike" })}
+        />
       </Reactions>
     </FeedCardWrapper>
   );
