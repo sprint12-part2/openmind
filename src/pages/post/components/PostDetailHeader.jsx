@@ -1,5 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { Avatar, Icon } from "@components/ui";
+import { copyUrl, shareKakao, shareFacebook } from "@util/shareUtils";
 import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 
@@ -21,13 +22,13 @@ export default function PostDetailHeader() {
         <h1>{name}</h1>
       </div>
       <div className={styles.sns}>
-        <button className={styles.sns__link}>
+        <button className={styles.sns__link} onClick={copyUrl}>
           <Icon name="link" color="var(--color-white)" size="18" />
         </button>
-        <button className={styles.sns__kakao}>
+        <button className={styles.sns__kakao} onClick={shareKakao}>
           <Icon name="kakao" color="var(--color-black)" size="18" />
         </button>
-        <button className={styles.sns__facebook}>
+        <button className={styles.sns__facebook} onClick={shareFacebook}>
           <Icon name="facebook" color="var(--color-white)" size="18" />
         </button>
       </div>
