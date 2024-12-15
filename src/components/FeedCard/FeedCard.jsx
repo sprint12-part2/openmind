@@ -1,6 +1,5 @@
 import { useRef } from "react";
-import { MoreMenu, Reaction } from "@components/ui";
-import { Question, Answer, Reactions, FeedCardWrapper } from "@components/FeedCard";
+import { Question, Answer, Reactions, FeedCardWrapper, AnswerMenu } from "@components/FeedCard";
 
 export function FeedCard({
   mode,
@@ -38,19 +37,13 @@ export function FeedCard({
   return (
     <FeedCardWrapper>
       <Question status={!!answer} createdAt={createdAt} content={content}>
-        {mode === "answer" && (
-          <MoreMenu>
-            <MoreMenu.Item icon="reject" onClick={handleReject} disabled={answer?.isRejected}>
-              거절하기
-            </MoreMenu.Item>
-            <MoreMenu.Item icon="edit" onClick={handleModify}>
-              수정하기
-            </MoreMenu.Item>
-            <MoreMenu.Item icon="close" onClick={handleDelete} disabled={!answer}>
-              삭제하기
-            </MoreMenu.Item>
-          </MoreMenu>
-        )}
+        <AnswerMenu
+          mode={mode}
+          answer={answer}
+          onReject={handleReject}
+          onModify={handleModify}
+          onDelete={handleDelete}
+        />
       </Question>
       <Answer
         ref={answerRef}
@@ -62,14 +55,7 @@ export function FeedCard({
         onCreate={onCreateAnswer}
         onUpdate={onUpdateAnswer}
       />
-      <Reactions>
-        <Reaction type="like" count={like} onClick={() => onLike({ questionId, type: "like" })} />
-        <Reaction
-          type="dislike"
-          count={dislike}
-          onClick={() => onLike({ questionId, type: "dislike" })}
-        />
-      </Reactions>
+      <Reactions questionId={questionId} like={like} dislike={dislike} onLike={onLike} />
     </FeedCardWrapper>
   );
 }
