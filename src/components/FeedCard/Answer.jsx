@@ -2,21 +2,27 @@ import { AnswerForm } from "@components/FeedCard";
 import { Avatar } from "@components/Avatar";
 import { fromNow } from "@util/format";
 import styles from "./Answer.module.css";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
-export function Answer({
-  questionId,
-  answer,
-  user,
-  mode,
-  isEdit,
-  onCreate,
-  onUpdate,
-  onCancel,
-  isPending,
-}) {
+export const Answer = forwardRef(function Answer(
+  { questionId, answer, user, mode, onCreate, onUpdate, isPending },
+  ref,
+) {
+  const [isEdit, setIsEdit] = useState(false);
   const { id: answerId, createdAt, isRejected, content } = answer || {};
   const { name, imageSource } = user;
   const isEditMode = mode === "answer" && isEdit;
+
+  useImperativeHandle(ref, () => {
+    return {
+      openEdit: () => setIsEdit(true),
+      closeEdit: () => setIsEdit(false),
+    };
+  });
+
+  function handleCancel() {
+    setIsEdit(false);
+  }
 
   if (!answer && mode === "view") {
     return null;
@@ -34,7 +40,7 @@ export function Answer({
           questionId={questionId}
           answerId={answerId}
           onSubmit={onUpdate}
-          onCancel={onCancel}
+          onCancel={handleCancel}
           isPending={isPending}
         />
       );
@@ -46,7 +52,7 @@ export function Answer({
           questionId={questionId}
           answerId={answerId}
           onSubmit={onCreate}
-          onCancel={onCancel}
+          onCancel={handleCancel}
           isPending={isPending}
         />
       )
@@ -67,4 +73,4 @@ export function Answer({
       </div>
     </div>
   );
-}
+});

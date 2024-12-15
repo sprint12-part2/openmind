@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { MoreMenu, Reaction } from "@components/ui";
 import { Question, Answer, Reactions, FeedCardWrapper } from "@components/FeedCard";
 
@@ -14,14 +14,18 @@ export function FeedCard({
   onLike,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
-  const [isEdit, setIsEdit] = useState(false);
+  const answerRef = useRef(null);
 
   function handleReject() {
-    setIsEdit(false);
+    answerRef.current.closeEdit();
     onRejectAnswer({
       questionId,
       answerId: answer?.id,
     });
+  }
+
+  function handleModify() {
+    answerRef.current.openEdit();
   }
 
   function handleDelete() {
@@ -39,7 +43,7 @@ export function FeedCard({
             <MoreMenu.Item icon="reject" onClick={handleReject} disabled={answer?.isRejected}>
               거절하기
             </MoreMenu.Item>
-            <MoreMenu.Item icon="edit" onClick={() => setIsEdit(true)}>
+            <MoreMenu.Item icon="edit" onClick={handleModify}>
               수정하기
             </MoreMenu.Item>
             <MoreMenu.Item icon="close" onClick={handleDelete} disabled={!answer}>
@@ -49,15 +53,14 @@ export function FeedCard({
         )}
       </Question>
       <Answer
+        ref={answerRef}
         questionId={questionId}
         isPending={isPending}
         answer={answer}
         user={feedOwner}
         mode={mode}
-        isEdit={isEdit}
         onCreate={onCreateAnswer}
         onUpdate={onUpdateAnswer}
-        onCancel={() => setIsEdit(false)}
       />
       <Reactions>
         <Reaction type="like" count={like} onClick={() => onLike({ questionId, type: "like" })} />
