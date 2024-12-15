@@ -11,3 +11,4 @@ export * from "./QuestionForm";
 export * from "./PostMessage";
 export * from "./FeedDeleteButton";
 export * from "./AnswerMenu";
+export * from "./AnswerButton";

@@ -1,4 +1,5 @@
 import {
+  AnswerButton,
   FeedCard,
   FeedCardList,
   FeedDeleteButton,
@@ -6,15 +7,19 @@ import {
   FeedListWrapper,
   QuestionForm,
 } from "@components/FeedCard";
+
 export default function Questions({ mode = "view", count, data, userInfo, handlers, isPending }) {
   return (
     <>
       {mode === "view" ? (
-        <QuestionForm
-          feedOwner={userInfo}
-          onSubmit={handlers.onCreateQuestion}
-          isPending={isPending}
-        />
+        <>
+          <AnswerButton />
+          <QuestionForm
+            feedOwner={userInfo}
+            onSubmit={handlers.onCreateQuestion}
+            isPending={isPending}
+          />
+        </>
       ) : (
         <FeedDeleteButton onClick={handlers.onDeleteFeed} />
       )}
