@@ -1,6 +1,21 @@
-.container {
-  border: 10px solid blue;
-  height: 100px;
-  padding: 20px;
-  margin: 20px;
+.header__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-h1);
+  max-width: 940px;
+}
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0px auto;
+  padding: 4rem;
+}
+
+.header__logo img {
+  width: 17rem;
 }
