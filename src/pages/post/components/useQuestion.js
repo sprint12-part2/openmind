@@ -6,7 +6,7 @@ export default function useQuestion() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ id, question }) => createQuestion(id, question),
+    mutationFn: ({ subjectId, content }) => createQuestion(subjectId, content),
     onSuccess: async (data) => {
       Notify({
         type: "success",

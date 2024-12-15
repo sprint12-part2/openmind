@@ -22,26 +22,36 @@ export function Answer({
     return null;
   }
 
-  const answerContent = isEditMode ? (
-    <AnswerForm
-      questionId={questionId}
-      answerId={answerId}
-      initialValue={content}
-      onSubmit={onUpdate}
-      onCancel={onCancel}
-      isPending={isPending}
-    />
-  ) : (
-    content || (
-      <AnswerForm
-        questionId={questionId}
-        answerId={answerId}
-        onSubmit={onCreate}
-        onCancel={onCancel}
-        isPending={isPending}
-      />
-    )
-  );
+  function renderAnswerContent() {
+    if (isRejected && !isEditMode) {
+      return <div className={styles.reject}>답변 거절</div>;
+    }
+
+    if (isEditMode) {
+      return (
+        <AnswerForm
+          initialValue={content}
+          questionId={questionId}
+          answerId={answerId}
+          onSubmit={onUpdate}
+          onCancel={onCancel}
+          isPending={isPending}
+        />
+      );
+    }
+
+    return (
+      content || (
+        <AnswerForm
+          questionId={questionId}
+          answerId={answerId}
+          onSubmit={onCreate}
+          onCancel={onCancel}
+          isPending={isPending}
+        />
+      )
+    );
+  }
 
   return (
     <div className={styles.answer}>
@@ -53,13 +63,7 @@ export function Answer({
           <span className={styles.name}>{name}</span>
           {createdAt && <span className={styles.date}>{fromNow(createdAt)}</span>}
         </div>
-        <div className={styles.content}>
-          {isRejected && !isEditMode ? (
-            <div className={styles.reject}>답변 거절</div>
-          ) : (
-            answerContent
-          )}
-        </div>
+        <div className={styles.content}>{renderAnswerContent()}</div>
       </div>
     </div>
   );

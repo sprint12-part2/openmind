@@ -3,14 +3,14 @@ import { MoreMenu, Reaction } from "@components/ui";
 import { Question, Answer, Reactions, FeedCardWrapper } from "@components/FeedCard";
 
 export function FeedCard({
-  isPending,
-  question,
   mode,
+  question,
   feedOwner,
-  onUpdate,
-  onCreate,
-  onDelete,
-  onReject,
+  isPending,
+  onCreateAnswer,
+  onUpdateAnswer,
+  onDeleteAnswer,
+  onRejectAnswer,
   onLike,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
@@ -18,30 +18,17 @@ export function FeedCard({
 
   function handleReject() {
     setIsEdit(false);
-    onReject({
+    onRejectAnswer({
       questionId,
-      answerId: answer && answer.id,
+      answerId: answer?.id,
     });
-  }
-
-  function handleModify() {
-    setIsEdit(true);
-  }
-
-  function handleCancel() {
-    setIsEdit(false);
   }
 
   function handleDelete() {
-    onDelete({
+    onDeleteAnswer({
       questionId,
-      answerId: answer && answer.id,
+      answerId: answer?.id,
     });
-  }
-
-  function handleLike(e) {
-    const type = e.currentTarget.dataset.like;
-    onLike({ questionId, type });
   }
 
   return (
@@ -49,13 +36,13 @@ export function FeedCard({
       <Question status={!!answer} createdAt={createdAt} content={content}>
         {mode === "answer" && (
           <MoreMenu>
-            <MoreMenu.Item icon="reject" onClick={handleReject}>
+            <MoreMenu.Item icon="reject" onClick={handleReject} disabled={answer?.isRejected}>
               거절하기
             </MoreMenu.Item>
-            <MoreMenu.Item icon="edit" onClick={handleModify}>
+            <MoreMenu.Item icon="edit" onClick={() => setIsEdit(true)}>
               수정하기
             </MoreMenu.Item>
-            <MoreMenu.Item icon="close" onClick={handleDelete}>
+            <MoreMenu.Item icon="close" onClick={handleDelete} disabled={!answer}>
               삭제하기
             </MoreMenu.Item>
           </MoreMenu>
@@ -68,13 +55,13 @@ export function FeedCard({
         user={feedOwner}
         mode={mode}
         isEdit={isEdit}
-        onCreate={onCreate}
-        onUpdate={onUpdate}
-        onCancel={handleCancel}
+        onCreate={onCreateAnswer}
+        onUpdate={onUpdateAnswer}
+        onCancel={() => setIsEdit(false)}
       />
       <Reactions>
-        <Reaction type="like" count={like} onClick={handleLike} data-like="like" />
-        <Reaction type="dislike" count={dislike} onClick={handleLike} data-like="dislike" />
+        <Reaction type="like" count={like} onClick={() => onLike(questionId, "like")} />
+        <Reaction type="dislike" count={dislike} onClick={() => onLike(questionId, "dislike")} />
       </Reactions>
     </FeedCardWrapper>
   );
