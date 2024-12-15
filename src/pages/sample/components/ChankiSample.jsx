@@ -99,7 +99,9 @@ export default function ChankiSample() {
           <MoreMenu.Item onClick={() => alert("hi")} icon="edit">
             수정하기
           </MoreMenu.Item>
-          <MoreMenu.Item icon="close">삭제하기</MoreMenu.Item>
+          <MoreMenu.Item icon="close" disabled>
+            삭제하기
+          </MoreMenu.Item>
         </MoreMenu>
 
         {/* 기본 사용형태 (최소 너비로 셋팅이 됩니다.) */}
