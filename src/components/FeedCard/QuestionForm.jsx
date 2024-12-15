@@ -10,7 +10,7 @@ export function QuestionForm() {
   const { name, imageSource } = useRouteLoaderData("post");
   const [question, setQuestion] = useState("");
   const [isModal, setIsModal] = useState(false);
-  const { mutate, isPending } = useQuestion(id);
+  const { mutate, isPending } = useQuestion();
   const { preventScroll, allowScroll } = usePreventScroll();
 
   const handleToggleModal = () => {
