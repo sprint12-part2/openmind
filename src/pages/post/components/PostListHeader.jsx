@@ -15,7 +15,7 @@ export default function PostListHeader() {
         </div>
         <LinkButton>
           답변하러 가기
-          <Icon name="arrowRight"></Icon>
+          <Icon name="arrowRight" size={18}></Icon>
         </LinkButton>
       </div>
       <h1 className={styles.title}>누구에게 질문할까요?</h1>

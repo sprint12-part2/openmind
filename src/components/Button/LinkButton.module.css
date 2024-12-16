@@ -3,15 +3,15 @@
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  padding: 12px 24px;
+  gap: 0.8rem;
+  padding: 1.2rem 2.4rem;
   font-size: var(--font-size-md);
   border-radius: var(--border-radius-md);
   color: var(--color-primary-400);
   background-color: var(--color-primary-100);
-  border: 1px solid var(--color-primary-400);
+  border: 0.1rem solid var(--color-primary-400);
   @media (max-width: 787px) {
-    padding: 8px 12px;
+    padding: 0.8rem 1.2rem;
     font-size: var(--font-size-sm);
   }
 }
@@ -19,7 +19,7 @@
 .primary {
   color: var(--color-primary-400);
   background-color: var(--color-primary-100);
-  border: 1px solid var(--color-primary-400);
+  border: 0.1rem solid var(--color-primary-400);
 }
 .secondary {
   color: var(--color-white);
@@ -28,8 +28,8 @@
 
 /* primary button state */
 .button:hover {
-  border: 1px solid var(--color-primary-400);
-  outline: 1px solid var(--color-primary-400);
+  border: 0.1rem solid var(--color-primary-400);
+  outline: 0.1rem solid var(--color-primary-400);
 }
 .button:active {
   background-color: var(--color-primary-200);
@@ -37,8 +37,8 @@
 
 /* secondary button state */
 .secondary:hover {
-  border: 1px solid var(--color-primary-500);
-  outline: 1px solid var(--color-primary-500);
+  border: 0.1rem solid var(--color-primary-500);
+  outline: 0.1rem solid var(--color-primary-500);
 }
 .secondary:active {
   background-color: var(--color-primary-500);
@@ -47,7 +47,7 @@
 /* disabled state */
 .button:disabled {
   background-color: var(--color-primary-300);
-  border: 1px solid var(--color-primary-100);
+  border: 0.1rem solid var(--color-primary-100);
   color: var(--color-primary-100);
 }
 .secondary:disabled {

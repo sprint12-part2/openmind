@@ -1,16 +1,23 @@
 .rinaPage__container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 4rem;
 }
 
 .rinaPage__content {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
+}
+.styles.rinaPage__content__width100 {
+  width: 33.6rem;
 }
 
 .floating {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.width100 {
+  width: 100%;
 }
