@@ -2,11 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Notify } from "@components/Toast";
 import { createAnswer, deleteAnswer, updateAnswer } from "@service/Answer";
 
-export default function useAnswer() {
+export default function useAnswer(subjectId) {
   const queryClient = useQueryClient();
 
   function updateCacheData(questionId, updateFunc) {
-    queryClient.setQueryData(["questions"], (prev) => {
+    queryClient.setQueriesData(["questions", subjectId], (prev) => {
       if (!prev) return prev;
 
       const newData = {

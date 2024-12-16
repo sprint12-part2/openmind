@@ -2,18 +2,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Notify } from "@components/Toast";
 import { createQuestion } from "@service/Question";
 
-export default function useQuestion() {
+export default function useQuestion(subjectId) {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ subjectId, content }) => createQuestion(subjectId, content),
-    onSuccess: async (data) => {
+    mutationFn: ({ content }) => createQuestion(subjectId, content),
+    onSuccess: async (data, { subjectId }) => {
       Notify({
         type: "success",
         message: "성공적으로 작성했습니다.",
       });
 
-      queryClient.setQueryData(["questions"], (prev) => {
+      queryClient.setQueriesData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
         const newData = {
