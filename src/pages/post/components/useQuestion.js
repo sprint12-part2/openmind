@@ -22,6 +22,7 @@ export default function useQuestion() {
             if (index === 0) {
               return {
                 ...page,
+                count: page.count + 1,
                 results: [data, ...page.results],
               };
             }
