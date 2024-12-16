@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useParams, useRouteLoaderData } from "react-router-dom";
+import { useFeed } from "@context/FeedContext";
 import { PostMessage } from "@components/FeedCard";
 import useQuestions from "./components/useQuestions";
 import Questions from "./components/Questions";
@@ -12,6 +14,13 @@ export default function PostDetailPage() {
     itemPerPage: 6,
   });
   const { handlers, isPending } = useQuestionHandlers(id);
+  const { saveVisited } = useFeed();
+
+  useEffect(() => {
+    if (userInfo) {
+      saveVisited(userInfo);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (error) {
     return <PostMessage>질문을 가져오는중에 문제가 생겼습니다.</PostMessage>;
