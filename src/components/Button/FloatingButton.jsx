@@ -4,13 +4,20 @@ export function FloatingButton({
   onClick,
   children,
   className,
+  size = "md",
   color = "primary",
   type = "button",
   disabled = false,
 }) {
   return (
     <button
-      className={clsx(styles.button, styles[color], disabled && styles.disabled, className)}
+      className={clsx(
+        styles.button,
+        styles[color],
+        styles[size],
+        disabled && styles.disabled,
+        className,
+      )}
       type={type}
       onClick={onClick}
       disabled={disabled}

@@ -1,4 +1,4 @@
-// import { Icon } from "@components/Icon";
+import { Icon } from "@components/Icon";
 import clsx from "clsx";
 import styles from "./ShareButton.module.css";
 export function ShareButton({
@@ -9,6 +9,7 @@ export function ShareButton({
   color = "",
   type = "button",
   disabled = false,
+  iconColor = "#ffffff",
 }) {
   const buttonStyle = {
     backgroundColor: color,
@@ -21,7 +22,7 @@ export function ShareButton({
       onClick={onClick}
       disabled={disabled}
     >
-      {icon && <Icon name={icon} size={18} />}
+      {icon && <Icon name={icon} color={iconColor} size={18} />}
       {children}
     </button>
   );
