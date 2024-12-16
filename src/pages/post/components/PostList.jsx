@@ -10,7 +10,7 @@ export default function PostList() {
   const [totalItems, setTotalItems] = useState(0); // 전체 항목 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const [itemsPerPage, setItemsPerPage] = useState(() => getItemsPerPage()); //게으른 초기화 방식
-  const [sort, setSort] = useState("name"); // 정렬 기준 상태 (기본값: 이름순)
+  const [sort, setSort] = useState("time"); // 정렬 기준 상태 (기본값: 최신순)
 
   // 화면 크기 변화 감지 및 itemsPerPage 업데이트
   useEffect(() => {
