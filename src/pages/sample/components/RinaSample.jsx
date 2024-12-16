@@ -13,16 +13,10 @@ export default function RinaSample() {
       </div>
       <div className={styles.rinaPage__content}>
         FloatingButton
-        {/* 플로팅 버튼으로 사용할 때 floating 값을 true로 설정 
-            원하는 위치를 top,right,bottom,left 를 사용해서 위치 지정 가능 기본 위치는 right:20px, bottom:20px
-        */}
-        <FloatingButton size="md" floating={false}>
-          질문 작성하기
-        </FloatingButton>
-        <FloatingButton size="sm" floating={false}>
-          질문 작성하기
-        </FloatingButton>
-        <FloatingButton size="sm" floating={true} position={{ bottom: "50px", left: "50px" }}>
+        {/* 플로팅 버튼으로 사용할 때 className을 floating로 설정 */}
+        <FloatingButton size="md">질문 작성하기</FloatingButton>
+        <FloatingButton size="sm">질문 작성하기</FloatingButton>
+        <FloatingButton size="sm" className="floating">
           질문 작성하기
         </FloatingButton>
       </div>
