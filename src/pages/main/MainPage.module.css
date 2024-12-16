@@ -1,6 +1,10 @@
 .container {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  background: url("/src/assets/img/common/bg.jpg") no-repeat center;
+  background-size: cover;
 }
 
 .header {
@@ -25,12 +29,6 @@
   }
 }
 
-/* 임시 */
-.btn {
-  width: 10rem;
-  background-color: aqua;
-}
-
-.btn:hover {
-  cursor: pointer;
+section {
+  order: 2;
 }

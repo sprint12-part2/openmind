@@ -1,5 +1,5 @@
-import { useParams, useRouteLoaderData } from "react-router-dom";
 import {
+  AnswerButton,
   FeedCard,
   FeedCardList,
   FeedDeleteButton,
@@ -7,66 +7,33 @@ import {
   FeedListWrapper,
   QuestionForm,
 } from "@components/FeedCard";
-import useLike from "./useLike";
-import useAnswer from "./useAnswer";
 
-export default function Questions({ count, data, mode = "view" }) {
-  const userInfo = useRouteLoaderData("post");
-  const { id: subjectId } = useParams();
-  const { create, update, remove, reject, removeFeed, isPending } = useAnswer();
-  const { mutate: reaction } = useLike();
-
-  function handleCreate({ questionId, content }) {
-    create({ questionId, content, isRejected: "false" });
-  }
-
-  function handleUpdate({ answerId, content }) {
-    update({
-      answerId,
-      content,
-      isRejected: "false",
-    });
-  }
-
-  function handleDelete({ questionId, answerId }) {
-    remove({ questionId, answerId });
-  }
-
-  function handleReject({ questionId, answerId }) {
-    reject({
-      questionId,
-      answerId,
-      content: "reject",
-      isRejected: true,
-    });
-  }
-
-  function handleLike({ questionId, type }) {
-    reaction({ questionId, type });
-  }
-
-  function handleDeleteFeed() {
-    removeFeed({ subjectId });
-  }
-
+export default function Questions({ mode = "view", count, data, userInfo, handlers, isPending }) {
   return (
     <>
-      {mode === "view" ? <QuestionForm /> : <FeedDeleteButton onClick={handleDeleteFeed} />}
+      {mode === "view" ? (
+        <>
+          <AnswerButton />
+          <QuestionForm
+            feedOwner={userInfo}
+            onSubmit={handlers.onCreateQuestion}
+            isPending={isPending}
+          />
+        </>
+      ) : (
+        <FeedDeleteButton onClick={handlers.onDeleteFeed} />
+      )}
       <FeedListWrapper>
         <FeedListHeader count={count} />
         <FeedCardList data={data}>
           {(question) => (
             <FeedCard
               key={question.id}
-              isPending={isPending}
-              question={question}
               mode={mode}
+              question={question}
               feedOwner={userInfo}
-              onCreate={handleCreate}
-              onUpdate={handleUpdate}
-              onDelete={handleDelete}
-              onReject={handleReject}
-              onLike={handleLike}
+              isPending={isPending}
+              {...handlers}
             />
           )}
         </FeedCardList>

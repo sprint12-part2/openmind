@@ -10,6 +10,11 @@
 
 ---
 
+## 서비스 링크
+- main : https://openmind-sprint12.netlify.app
+- develop : https://develop--openmind-sprint12.netlify.app/
+---
+
 ## 👥 팀원 소개
 
 <table>

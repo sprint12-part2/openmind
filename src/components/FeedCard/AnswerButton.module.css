@@ -1,0 +1,13 @@
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2em;
+}
+
+a.button {
+  padding: 1em 0;
+  margin-bottom: 1em;
+  color: var(--color-primary-400);
+  text-decoration: underline;
+}

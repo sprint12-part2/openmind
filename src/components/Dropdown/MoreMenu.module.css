@@ -52,6 +52,11 @@
   color: var(--color-blue);
 }
 
+.item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 @keyframes show {
   from {
     opacity: 0;
