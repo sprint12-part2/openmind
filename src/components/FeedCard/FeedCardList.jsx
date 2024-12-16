@@ -28,7 +28,7 @@ export function FeedCardList({ data, children }) {
   return (
     <motion.ul className={styles.list} variants={container} initial="hidden" animate="show">
       {data.map((question) => (
-        <motion.li key={question.id} variants={item} layout>
+        <motion.li key={question.id} variants={item}>
           {children(question)}
         </motion.li>
       ))}
