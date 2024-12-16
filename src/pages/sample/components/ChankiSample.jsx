@@ -168,16 +168,17 @@ export default function ChankiSample() {
         <Reaction type="dislike" count={6} disabled />
       </div>
       <div className={styles.flex}>
-        <Icon name="arrowDown" />
-        <Icon name="arrowDown" color="#fc0" />
-        <Icon name="arrowDown" color="red" />
-        <Icon name="arrowDown" size={40} color="var(--color-primary-300)" />
-        <Icon name="arrowDown" color="primary" />
+        <Icon name="elbowDown" />
+        <Icon name="elbowDown" color="#fc0" />
+        <Icon name="elbowDown" color="red" />
+        <Icon name="elbowDown" size={40} color="var(--color-primary-300)" />
+        <Icon name="elbowDown" color="primary" />
       </div>
       <div className={styles.flex}>
-        <Icon name="arrowDown" />
-        <Icon name="arrowUp" />
-        <Icon name="arrowLeft" />
+        <Icon name="elbowDown" />
+        <Icon name="elbowUp" />
+        <Icon name="elbowLeft" />
+        <Icon name="elbowRight" />
         <Icon name="arrowRight" />
         <Icon name="close" />
         <Icon name="edit" />

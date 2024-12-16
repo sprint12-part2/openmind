@@ -34,9 +34,9 @@ export function Select({ value, onChange, className, children, ...props }) {
           <div className={clsx(styles.button, isOpen && styles.open)}>
             <span className={styles.label}>{selectedLabel}</span>
             {isOpen ? (
-              <Icon name="arrowUp" color="black" size={14} />
+              <Icon name="elbowUp" color="black" size={14} />
             ) : (
-              <Icon name="arrowDown" color="gray-400" size={14} />
+              <Icon name="elbowDown" color="gray-400" size={14} />
             )}
           </div>
         )}
