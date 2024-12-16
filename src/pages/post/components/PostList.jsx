@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { fetchSubjects } from "@service/Subject";
 import { UserCard, Pagination, Select } from "@components/ui";
 import { getItemsPerPage } from "./itemPerPage";
+import { Link } from "react-router-dom";
 
 export default function PostList() {
   const [subjects, setSubjects] = useState([]); // 질문자 목록 상태
@@ -64,12 +65,17 @@ export default function PostList() {
 
       <div className={styles.userCardGrid}>
         {subjects.map((subject) => (
-          <UserCard
+          <Link
+            to={`/post/${subject.id}`} // 각 질문자의 질문 목록 페이지로 이동
             key={subject.id}
-            name={subject.name}
-            imageSource={subject.imageSource || "default.jpg"} // 기본 이미지
-            questionCount={subject.questionCount}
-          />
+            aria-label={`${subject.name}의 질문 목록으로 이동`} // 접근성을 위한 설명 추가
+          >
+            <UserCard
+              name={subject.name}
+              imageSource={subject.imageSource || "default.jpg"}
+              questionCount={subject.questionCount}
+            />
+          </Link>
         ))}
       </div>
 
