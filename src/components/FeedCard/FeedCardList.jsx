@@ -1,5 +1,21 @@
+import { motion } from "motion/react";
 import emptyIcon from "@assets/img/common/icon_empty.svg";
 import styles from "./FeedCardList.module.css";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, scale: 0.4 },
+  show: { opacity: 1, scale: 1 },
+};
 
 export function FeedCardList({ data, children }) {
   if (data.length === 0) {
@@ -10,10 +26,12 @@ export function FeedCardList({ data, children }) {
     );
   }
   return (
-    <ul className={styles.list}>
+    <motion.ul className={styles.list} variants={container} initial="hidden" animate="show">
       {data.map((question) => (
-        <li key={question.id}>{children(question)}</li>
+        <motion.li key={question.id} variants={item} layout>
+          {children(question)}
+        </motion.li>
       ))}
-    </ul>
+    </motion.ul>
   );
 }
