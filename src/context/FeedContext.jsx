@@ -57,7 +57,7 @@ export default function FeedContextProvider({ children }) {
         return [feedData, ...filterd].slice(0, 4);
       });
     },
-    [feeds],
+    [visited],
   );
 
   const clearVisited = useCallback(() => {
