@@ -1,4 +1,8 @@
 import { Notify } from "@components/Toast";
+import { useEffect } from "react";
+
+const urlPath = window.location.pathname;
+const currentUrl = import.meta.env.VITE_BASE_URL + urlPath;
 
 const showToast = (type) => {
   const data = {
@@ -26,10 +30,28 @@ export const copyUrl = async () => {
   }
 };
 
-export const shareKakao = async () => {
-  alert("카카오톡 공유하기");
+export const shareKakao = async (name) => {
+  if (window.Kakao) {
+    window.Kakao.Share.createDefaultButton({
+      container: "#kakao-link-btn",
+      objectType: "feed",
+      content: {
+        title: `OPENMIND-<${name}>님의 피드 바로가기`,
+        description: "", // 공유 설명
+        imageUrl: "https://iamhs232.cafe24.com/img/seo_kakao_share.jpg",
+        link: {
+          mobileWebUrl: `${currentUrl}`,
+          webUrl: `${currentUrl}`,
+        },
+      },
+    });
+  }
 };
 
 export const shareFacebook = async () => {
-  alert("페이스북 공유하기");
+  window.open(
+    `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+    "페이스북 공유하기",
+    "width=600,height=800,location=no,status=no,scrollbars=yes", //새창 뜨는 것 조절 (없어도 작동됨)
+  );
 };
