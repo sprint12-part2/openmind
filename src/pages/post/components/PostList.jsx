@@ -71,7 +71,6 @@ export default function PostList() {
 
   // 정렬 기준 변경 함수
   function handleSortChange(value) {
-    setSort(value); // 정렬 기준 업데이트
     setSearchParams({ page: 1, sort: value }); // 정렬 기준 변경 시 첫 페이지로 이동
   }
 
