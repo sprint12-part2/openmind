@@ -29,12 +29,6 @@
   }
 }
 
-/* 임시 */
-.btn {
-  width: 10rem;
-  background-color: aqua;
-}
-
-.btn:hover {
-  cursor: pointer;
+section {
+  order: 2;
 }

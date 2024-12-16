@@ -1,0 +1,15 @@
+.form {
+  width: 40rem;
+  height: 17.2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  padding: var(--spacing-34);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-white);
+}
+
+.button {
+  border: 1px solid black;
+}
