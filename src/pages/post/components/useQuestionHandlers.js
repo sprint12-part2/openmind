@@ -6,14 +6,14 @@ import useQuestion from "./useQuestion";
 import { Notify } from "@components/Toast";
 
 export default function useQuestionHandlers(subjectId) {
-  const { mutate: question, isPending: isQuestionPending } = useQuestion();
-  const { create, update, remove, reject, isPending: isAnswerPending } = useAnswer();
-  const { mutate: reaction } = useLike();
+  const { mutate: question, isPending: isQuestionPending } = useQuestion(subjectId);
+  const { create, update, remove, reject, isPending: isAnswerPending } = useAnswer(subjectId);
+  const { mutate: reaction } = useLike(subjectId);
   const { removeFeed, isLoading: isFeedPending } = useFeed();
   const navigate = useNavigate();
 
   function handleCreateQuestion({ content }) {
-    question({ subjectId, content });
+    question({ content });
   }
 
   function handleCreateAnswer({ questionId, content }) {

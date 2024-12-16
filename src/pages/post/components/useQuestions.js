@@ -6,7 +6,7 @@ import { fetchQuestions } from "@service/Question";
 export default function useQuestions({ subjectId, itemPerPage }) {
   const { data, error, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading } =
     useInfiniteQuery({
-      queryKey: ["questions"],
+      queryKey: ["questions", subjectId],
       queryFn: ({ pageParam }) => fetchQuestions(subjectId, pageParam, itemPerPage),
       initialPageParam: 1,
       getNextPageParam: (lastPage, pages) => {
