@@ -1,30 +1,23 @@
 import { useState } from "react";
-import { useParams, useRouteLoaderData } from "react-router-dom";
-import useQuestion from "../../pages/post/components/useQuestion";
 import { Modal, InputTextarea, Avatar } from "@components/ui";
 import usePreventScroll from "@components/Modal/usePreventScroll";
 import styles from "./QuestionForm.module.css";
 
-export function QuestionForm() {
-  const { id } = useParams();
-  const { name, imageSource } = useRouteLoaderData("post");
-  const [question, setQuestion] = useState("");
+export function QuestionForm({ feedOwner, onSubmit, isPending }) {
+  const { name, imageSource } = feedOwner;
+  const [content, setContent] = useState("");
   const [isModal, setIsModal] = useState(false);
-  const { mutate, isPending } = useQuestion(id);
   const { preventScroll, allowScroll } = usePreventScroll();
 
   const handleToggleModal = () => {
-    setQuestion("");
+    setContent("");
     setIsModal(!isModal);
     isModal ? allowScroll() : preventScroll();
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
-    mutate({
-      id,
-      question,
-    });
+    onSubmit({ content });
     handleToggleModal();
   }
 
@@ -42,11 +35,11 @@ export function QuestionForm() {
           </div>
           <form onSubmit={handleSubmit}>
             <InputTextarea
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               placeholder="질문을 입력해주세요"
             />
-            <button type="submit" disabled={!question || isPending} className={styles.button}>
+            <button type="submit" disabled={!content || isPending} className={styles.button}>
               질문 보내기
             </button>
           </form>

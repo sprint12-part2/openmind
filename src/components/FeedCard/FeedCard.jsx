@@ -1,81 +1,61 @@
-import { useState } from "react";
-import { MoreMenu, Reaction } from "@components/ui";
-import { Question, Answer, Reactions, FeedCardWrapper } from "@components/FeedCard";
+import { useRef } from "react";
+import { Question, Answer, Reactions, FeedCardWrapper, AnswerMenu } from "@components/FeedCard";
 
 export function FeedCard({
-  isPending,
-  question,
   mode,
+  question,
   feedOwner,
-  onUpdate,
-  onCreate,
-  onDelete,
-  onReject,
+  isPending,
+  onCreateAnswer,
+  onUpdateAnswer,
+  onDeleteAnswer,
+  onRejectAnswer,
   onLike,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
-  const [isEdit, setIsEdit] = useState(false);
+  const answerRef = useRef(null);
 
   function handleReject() {
-    setIsEdit(false);
-    onReject({
+    answerRef.current.closeEdit();
+    onRejectAnswer({
       questionId,
-      answerId: answer && answer.id,
+      answerId: answer?.id,
     });
   }
 
   function handleModify() {
-    setIsEdit(true);
-  }
-
-  function handleCancel() {
-    setIsEdit(false);
+    answerRef.current.openEdit();
   }
 
   function handleDelete() {
-    onDelete({
+    onDeleteAnswer({
       questionId,
-      answerId: answer && answer.id,
+      answerId: answer?.id,
     });
-  }
-
-  function handleLike(e) {
-    const type = e.currentTarget.dataset.like;
-    onLike({ questionId, type });
   }
 
   return (
     <FeedCardWrapper>
       <Question status={!!answer} createdAt={createdAt} content={content}>
-        {mode === "answer" && (
-          <MoreMenu>
-            <MoreMenu.Item icon="reject" onClick={handleReject}>
-              거절하기
-            </MoreMenu.Item>
-            <MoreMenu.Item icon="edit" onClick={handleModify}>
-              수정하기
-            </MoreMenu.Item>
-            <MoreMenu.Item icon="close" onClick={handleDelete}>
-              삭제하기
-            </MoreMenu.Item>
-          </MoreMenu>
-        )}
+        <AnswerMenu
+          mode={mode}
+          answer={answer}
+          onReject={handleReject}
+          onModify={handleModify}
+          onDelete={handleDelete}
+        />
       </Question>
       <Answer
+        ref={answerRef}
         questionId={questionId}
         isPending={isPending}
         answer={answer}
         user={feedOwner}
         mode={mode}
-        isEdit={isEdit}
-        onCreate={onCreate}
-        onUpdate={onUpdate}
-        onCancel={handleCancel}
+        onCreate={onCreateAnswer}
+        onUpdate={onUpdateAnswer}
       />
-      <Reactions>
-        <Reaction type="like" count={like} onClick={handleLike} data-like="like" />
-        <Reaction type="dislike" count={dislike} onClick={handleLike} data-like="dislike" />
-      </Reactions>
+      <Reactions questionId={questionId} like={like} dislike={dislike} onLike={onLike} />
     </FeedCardWrapper>
   );
 }

@@ -28,13 +28,13 @@ export default function FeedContextProvider({ children }) {
   async function removeFeed(feedId) {
     setIsLoading(true);
 
-    await deleteSubject(feedId);
+    await deleteSubject(Number(feedId));
     setFeeds((prev) => prev.filter((feed) => feed.id !== feedId));
     setIsLoading(false);
   }
 
   function hasFeed(feedId) {
-    return feeds.find((feed) => feed.id === feedId);
+    return feeds.find((feed) => feed.id === Number(feedId));
   }
 
   const ctxValue = { isLoading, feeds, createFeed, removeFeed, hasFeed };
