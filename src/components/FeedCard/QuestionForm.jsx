@@ -19,6 +19,7 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
     e.preventDefault();
     onSubmit({ content });
     handleToggleModal();
+    window.scrollTo(0, 0);
   }
 
   return (
