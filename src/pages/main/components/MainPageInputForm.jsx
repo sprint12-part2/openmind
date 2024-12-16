@@ -21,13 +21,8 @@ export default function MainPageInputForm() {
     e.preventDefault();
     try {
       // Input값 유효성 검증
-      if (name) {
+      if (name.trim()) {
         const data = await createFeed(name);
-
-        // localStorage에 저장
-        const savedFeeds = JSON.parse(localStorage.getItem("feeds")) || [];
-        localStorage.setItem("feeds", JSON.stringify([data, ...savedFeeds]));
-        // console.log(JSON.parse(localStorage.getItem("feeds")));
 
         Notify({ type: "success", message: "피드를 생성했습니다." });
         navigate(`/post/${data.id}/answer`);
