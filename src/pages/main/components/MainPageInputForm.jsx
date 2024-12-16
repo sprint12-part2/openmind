@@ -8,6 +8,7 @@ import { Notify } from "@components/Toast";
 
 export default function MainPageInputForm() {
   const [name, setName] = useState("");
+  const trimmedName = name.trim();
 
   const { createFeed, isLoading } = useFeed();
 
@@ -22,7 +23,7 @@ export default function MainPageInputForm() {
     try {
       // Input값 유효성 검증
       if (name.trim()) {
-        const data = await createFeed(name);
+        const data = await createFeed(trimmedName);
 
         Notify({ type: "success", message: "피드를 생성했습니다." });
         navigate(`/post/${data.id}/answer`);
