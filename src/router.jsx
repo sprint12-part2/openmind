@@ -11,7 +11,6 @@ import PostListLayout from "./pages/post/components/PostListLayout";
 import { loader as PostDetailLoader } from "./pages/post/loader/PostDetailLoader";
 import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 import PostPageHydrateFallback from "./pages/post/components/PostPageHydrateFallback";
-import ProtectedRoute from "./pages/post/components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
