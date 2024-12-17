@@ -36,12 +36,6 @@ export default function PostDetailPage() {
       <Helmet prioritizeSeoTags>
         <title>{userInfo?.name}님의 피드 | OPENMIND</title>
         <meta name="description" content={`${userInfo?.name}님에게 익명으로 질문해주세요.`} />
-        <meta property="og:title" content={`${userInfo?.name}님의 피드 | OPENMIND`} />
-        <meta
-          property="og:description"
-          content={`${userInfo?.name}님에게 익명으로 질문해주세요.`}
-        />
-        <meta property="og:image" content={userInfo?.imageSource || `/og_img.png`} />
       </Helmet>
       <Questions
         mode="view"
