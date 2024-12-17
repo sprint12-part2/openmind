@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { fetchSubjects } from "@service/Subject";
 import { UserCard, Pagination, Select } from "@components/ui";
@@ -9,6 +9,7 @@ export default function PostList() {
   const [subjects, setSubjects] = useState([]); // 질문자 목록 상태
   const [totalItems, setTotalItems] = useState(0); // 전체 항목 수
   const [itemsPerPage, setItemsPerPage] = useState(() => getItemsPerPage()); // 화면 크기에 맞는 초기값
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
   const [searchParams, setSearchParams] = useSearchParams(); // URL 쿼리 파라미터
 
   // 현재 페이지와 정렬 기준을 URL에서 가져옴
@@ -48,19 +49,24 @@ export default function PostList() {
   }, [currentPage, totalItems, sort, setSearchParams]);
 
   // 질문자 목록 가져오기 함수
-  useEffect(() => {
-    async function loadSubjects() {
-      try {
-        const data = await fetchSubjects(currentPage, itemsPerPage, sort); // API 호출
-        setSubjects(data.results); // 받아온 데이터 설정
-        setTotalItems(data.count); // 총 데이터 수 설정
-      } catch (err) {
-        console.error("질문자 목록을 불러오는 데 실패했습니다.", err); // 에러 로그
-      }
+  const loadSubjects = useCallback(async () => {
+    if (loading) return; // 이미 로딩 중이라면 중복 호출 방지
+    setLoading(true); // 로딩 시작
+    try {
+      const data = await fetchSubjects(currentPage, itemsPerPage, sort);
+      setSubjects(data.results); // 데이터 설정
+      setTotalItems(data.count); // 전체 항목 수 설정
+    } catch (err) {
+      console.error("데이터 불러오기에 실패했습니다.", err); //에러로그
+    } finally {
+      setLoading(false); // 로딩 종료
     }
+  }, [currentPage, itemsPerPage, sort]);
 
+  // API 호출 (useEffect)
+  useEffect(() => {
     loadSubjects();
-  }, [currentPage, itemsPerPage, sort]); // 상태 변경 시 실행
+  }, [loadSubjects]); // 의존성에 loadSubjects만 추가
 
   // 페이지 변경 함수
   function handlePageChange(page) {
@@ -83,19 +89,23 @@ export default function PostList() {
         </Select>
       </div>
 
-      <ul className={styles.userCardList} role="list">
-        {subjects.map((subject) => (
-          <li key={subject.id} role="listitem" className={styles.userCardItem}>
-            <Link to={`/post/${subject.id}`} aria-label={`${subject.name}의 질문 목록으로 이동`}>
-              <UserCard
-                name={subject.name}
-                imageSource={subject.imageSource || "default.jpg"}
-                questionCount={subject.questionCount}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {loading ? ( // 로딩 중 UI 표시
+        <div>로딩 중...</div>
+      ) : (
+        <ul className={styles.userCardList} role="list">
+          {subjects.map((subject) => (
+            <li key={subject.id} role="listitem" className={styles.userCardItem}>
+              <Link to={`/post/${subject.id}`} aria-label={`${subject.name}의 질문 목록으로 이동`}>
+                <UserCard
+                  name={subject.name}
+                  imageSource={subject.imageSource || "default.jpg"}
+                  questionCount={subject.questionCount}
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className={styles.paginationBar}>
         <Pagination
