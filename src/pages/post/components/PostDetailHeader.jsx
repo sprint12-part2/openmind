@@ -1,13 +1,15 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { Avatar, Icon } from "@components/ui";
 import { copyUrl, shareKakao, shareFacebook } from "@util/shareUtils";
+import { fromNow } from "@util/format";
+import { AnswerButton } from "@components/FeedCard";
 import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 import { useEffect } from "react";
 
 export default function PostDetailHeader() {
   //const data = useLoaderData(); // 이렇게 쓰셔도 되고, 분해하셔도 되욤
-  const { name, imageSource } = useLoaderData();
+  const { name, imageSource, createdAt } = useLoaderData();
 
   // 카카오톡 공유하기
   useEffect(() => {
@@ -31,6 +33,8 @@ export default function PostDetailHeader() {
       <div className={styles.title}>
         <h1>{name}</h1>
       </div>
+      <div className={styles.meta}>생성일 {fromNow(createdAt)}</div>
+      <AnswerButton />
       <div className={styles.sns}>
         <button className={styles.sns__link} onClick={copyUrl}>
           <Icon name="link" color="var(--color-white)" size="18" />
