@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { Icon } from "@components/Icon";
 import styles from "./Modal.module.css";
 
@@ -9,14 +10,31 @@ import styles from "./Modal.module.css";
  * @param {children} props.children - 모달 콘텐츠
  */
 
+const overlay = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+const container = {
+  hidden: { opacity: 0, scale: 0.4 },
+  show: { opacity: 1, scale: 1 },
+};
+
 export function Modal({ handleToggleModal, title, icon, children }) {
   if (!handleToggleModal) return null;
 
   return (
     <>
-      <div className={styles["modal-overlay"]} onClick={handleToggleModal}>
-        <div
+      <motion.div
+        className={styles["modal-overlay"]}
+        variants={overlay}
+        initial="hidden"
+        animate="show"
+        onClick={handleToggleModal}
+      >
+        <motion.div
           className={styles["modal-container"]}
+          variants={container}
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -33,8 +51,8 @@ export function Modal({ handleToggleModal, title, icon, children }) {
             </button>
           </div>
           <div className={styles["modal-content"]}>{children}</div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
