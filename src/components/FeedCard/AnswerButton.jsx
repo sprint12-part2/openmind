@@ -6,7 +6,7 @@ export function AnswerButton() {
   const { id } = useParams();
   const { hasFeed } = useFeed();
   const isOwner = hasFeed(id);
-  const isQuestionPage = useMatch("/post/:id");
+  const isQuestionPage = useMatch("/post/:id"); // 분기 처리
 
   if (!isOwner || !isQuestionPage) return null;
 
