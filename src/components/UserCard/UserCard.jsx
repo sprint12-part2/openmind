@@ -1,5 +1,6 @@
 import { Avatar } from "@components/Avatar/Avatar";
 import { Icon } from "@components/Icon/index.js";
+import { useState } from "react";
 import styles from "./UserCard.module.css";
 
 export function UserCard({

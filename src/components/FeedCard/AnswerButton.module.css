@@ -1,13 +1,6 @@
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -2em;
-}
-
-a.button {
-  padding: 1em 0;
-  margin-bottom: 1em;
+.controls a.button {
+  display: inline-block;
+  margin-top: 1.5rem;
   color: var(--color-primary-400);
   text-decoration: underline;
 }

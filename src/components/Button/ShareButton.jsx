@@ -10,6 +10,7 @@ export function ShareButton({
   type = "button",
   disabled = false,
   iconColor = "#ffffff",
+  ...props
 }) {
   const buttonStyle = {
     backgroundColor: color,
@@ -21,6 +22,7 @@ export function ShareButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      {...props}
     >
       {icon && <Icon name={icon} color={iconColor} size={18} />}
       {children}

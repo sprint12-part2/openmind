@@ -1,13 +1,14 @@
 import { useFeed } from "@context/FeedContext";
-import { Link, useParams } from "react-router-dom";
+import { Link, useMatch, useParams } from "react-router-dom";
 import styles from "./AnswerButton.module.css";
 
 export function AnswerButton() {
   const { id } = useParams();
   const { hasFeed } = useFeed();
   const isOwner = hasFeed(id);
+  const isQuestionPage = useMatch("/post/:id"); // 분기 처리
 
-  if (!isOwner) return null;
+  if (!isOwner || !isQuestionPage) return null;
 
   return (
     <div className={styles.controls}>

@@ -46,6 +46,8 @@ export default function useQuestionHandlers(subjectId) {
   }
 
   async function handleDeleteFeed() {
+    if (!confirm("정말 피드를 삭제하시겠습니까?")) return;
+
     try {
       await removeFeed(subjectId);
       Notify({ type: "success", message: "피드를 삭제했습니다." });
