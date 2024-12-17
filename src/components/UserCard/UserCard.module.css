@@ -43,10 +43,18 @@
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-xl);
   color: var(--color-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (max-width: 767px) {
     font-size: var(--font-size-lg);
   }
+}
+
+.name:hover {
+  color: var(--color-blue);
+  white-space: wrap;
 }
 
 .meta {

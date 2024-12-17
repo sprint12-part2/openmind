@@ -10,7 +10,7 @@ export default function GyeonSample() {
       <div className={styles["section-container"]}>
         <section className={styles.section}>
           <UserCard
-            name={"남기연"}
+            name={"남기연남기연남기연남기연"}
             imageSource={
               "https://fastly.picsum.photos/id/502/200/200.jpg?hmac=c6mcZ5mcmjadIeDKaJClpvPz9R9-X9q6c0Un-n73Kv4"
             }
