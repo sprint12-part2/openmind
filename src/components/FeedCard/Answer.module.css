@@ -32,11 +32,15 @@
 .answer .name {
   font-size: var(--font-size-lg);
   color: var(--color-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .answer .date {
   font-size: var(--font-size-sm);
   color: var(--color-gray-400);
+  white-space: nowrap;
 }
 
 .answer .content {
