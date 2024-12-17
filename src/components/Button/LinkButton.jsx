@@ -1,4 +1,3 @@
-// import { Icon } from "@components/Icon";
 import clsx from "clsx";
 import styles from "./LinkButton.module.css";
 export function LinkButton({
@@ -8,16 +7,26 @@ export function LinkButton({
   color = "primary",
   disabled = false,
   type = "button",
+  size = "md",
+  responsive = false,
+  ...props
 }) {
   return (
     <button
-      className={clsx(styles.button, styles[color], disabled && styles.disabled, className)}
+      className={clsx(
+        styles.button,
+        styles[color],
+        styles[size],
+        disabled && styles.disabled,
+        responsive && styles.responsive,
+        className,
+      )}
       type={type}
       onClick={onClick}
       disabled={disabled}
+      {...props}
     >
       {children}
-      {/* <Icon name="arrowRight" size={18}></Icon> */}
     </button>
   );
 }

@@ -8,16 +8,12 @@
   display: flex;
   gap: 1rem;
 }
-.styles.rinaPage__content__width100 {
-  width: 33.6rem;
+.styles.rinaPage__content__width {
+  width: 50rem;
 }
 
 .floating {
   position: fixed;
   right: 2rem;
   bottom: 2rem;
-}
-
-.width100 {
-  width: 100%;
 }
