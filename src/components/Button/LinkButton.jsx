@@ -8,6 +8,8 @@ export function LinkButton({
   color = "primary",
   disabled = false,
   type = "button",
+  size = "md",
+  ...props
 }) {
   return (
     <button
@@ -15,6 +17,7 @@ export function LinkButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      {...props}
     >
       {children}
       {/* <Icon name="arrowRight" size={18}></Icon> */}

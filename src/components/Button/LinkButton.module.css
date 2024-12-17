@@ -15,6 +15,18 @@
     font-size: var(--font-size-sm);
   }
 }
+/* size */
+.md {
+  padding: 1.2rem 4.9rem;
+  height: 5.4rem;
+  font-size: var(--font-size-xl);
+}
+.sm {
+  padding: 0.8rem 2.4rem;
+  height: 3.5rem;
+  font-size: var(--font-size-sm);
+}
+
 /* color */
 .primary {
   color: var(--color-primary-400);
@@ -28,8 +40,7 @@
 
 /* primary button state */
 .button:hover {
-  border: 0.1rem solid var(--color-primary-400);
-  outline: 0.1rem solid var(--color-primary-400);
+  border: 0.2rem solid var(--color-primary-400);
 }
 .button:active {
   background-color: var(--color-primary-200);
@@ -37,8 +48,7 @@
 
 /* secondary button state */
 .secondary:hover {
-  border: 0.1rem solid var(--color-primary-500);
-  outline: 0.1rem solid var(--color-primary-500);
+  border: 0.2rem solid var(--color-primary-500);
 }
 .secondary:active {
   background-color: var(--color-primary-500);
@@ -49,8 +59,16 @@
   background-color: var(--color-primary-300);
   border: 0.1rem solid var(--color-primary-100);
   color: var(--color-primary-100);
+  cursor: not-allowed;
+}
+.button:disabled:hover {
+  background-color: var(--color-primary-300);
+  border: none;
+  color: var(--color-primary-100);
+  cursor: not-allowed;
 }
 .secondary:disabled {
   background-color: var(--color-primary-300);
   border: none;
+  cursor: not-allowed;
 }

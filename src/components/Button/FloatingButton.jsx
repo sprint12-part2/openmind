@@ -8,6 +8,7 @@ export function FloatingButton({
   color = "primary",
   type = "button",
   disabled = false,
+  ...props
 }) {
   return (
     <button
@@ -21,6 +22,7 @@ export function FloatingButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      {...props}
     >
       {children}
     </button>
