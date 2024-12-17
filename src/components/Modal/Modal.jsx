@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
 import { Icon } from "@components/Icon";
 import styles from "./Modal.module.css";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import usePreventScroll from "./usePreventScroll";
+import { createPortal } from "react-dom";
 
 /**
  * @param {object} props
@@ -20,39 +23,64 @@ const container = {
   show: { opacity: 1, scale: 1 },
 };
 
-export function Modal({ handleToggleModal, title, icon, children }) {
-  if (!handleToggleModal) return null;
+export const Modal = forwardRef(function Modal({ title, icon, children }, ref) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
+  const { preventScroll, allowScroll } = usePreventScroll();
+
+  useEffect(() => {
+    if (isOpen) {
+      preventScroll();
+    } else {
+      allowScroll();
+    }
+    return () => allowScroll();
+  }, [isOpen, preventScroll, allowScroll]);
+
+  useImperativeHandle(ref, function () {
+    return {
+      open() {
+        setIsOpen(true);
+      },
+      close() {
+        setIsOpen(false);
+      },
+    };
+  });
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return createPortal(
+    <motion.div
+      className={styles["modal-overlay"]}
+      variants={overlay}
+      initial="hidden"
+      animate="show"
+      onClick={() => setIsOpen(false)}
+    >
       <motion.div
-        className={styles["modal-overlay"]}
-        variants={overlay}
-        initial="hidden"
-        animate="show"
-        onClick={handleToggleModal}
+        className={styles["modal-container"]}
+        variants={container}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       >
-        <motion.div
-          className={styles["modal-container"]}
-          variants={container}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <div className={styles["modal-header"]}>
-            {icon && (
-              <div className={styles["modal-image"]}>
-                <Icon name={icon} />
-              </div>
-            )}
-            {title && <div className={styles["modal-title"]}>{title}</div>}
-            <button className={styles["modal-close-btn"]} onClick={handleToggleModal}>
-              <Icon name="close" />
-            </button>
-          </div>
-          <div className={styles["modal-content"]}>{children}</div>
-        </motion.div>
+        <div className={styles["modal-header"]}>
+          {icon && (
+            <div className={styles["modal-image"]}>
+              <Icon name={icon} />
+            </div>
+          )}
+          {title && <div className={styles["modal-title"]}>{title}</div>}
+          <button className={styles["modal-close-btn"]} onClick={() => setIsOpen(false)}>
+            <Icon name="close" />
+          </button>
+        </div>
+        <div className={styles["modal-content"]}>{children}</div>
       </motion.div>
-    </>
+    </motion.div>,
+    document.querySelector("#root"),
   );
-}
+});

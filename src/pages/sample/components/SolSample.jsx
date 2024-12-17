@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { Badge } from "@components/Badge";
 import { Modal } from "@components/Modal";
-import usePreventScroll from "@components/Modal/usePreventScroll";
 import { Toast, Notify } from "@components/Toast";
 
 export default function SolSample() {
@@ -23,13 +22,7 @@ export default function SolSample() {
   /**
    * 모달창
    */
-  const [isModal, setIsModal] = useState(false);
-  const { preventScroll, allowScroll } = usePreventScroll();
-
-  const handleToggleModal = () => {
-    setIsModal(!isModal);
-    isModal ? allowScroll() : preventScroll();
-  };
+  const modelRef = useRef(null);
 
   /**
    * 토스트
@@ -52,23 +45,22 @@ export default function SolSample() {
       <Badge status={status} />
 
       {/* 모달창 */}
-      <button onClick={handleToggleModal}>[ 모달 열기 ]</button>
-      {isModal && (
-        <Modal handleToggleModal={handleToggleModal} title="질문을 작성하세요" icon="message">
-          <p>To. 😸 아초는고양이</p>
-          <div
-            style={{
-              width: "100%",
-              height: "300px",
-              marginTop: "15px",
-              padding: "20px",
-              backgroundColor: "#f9f9f9",
-            }}
-          >
-            질문을 입력해주세요
-          </div>
-        </Modal>
-      )}
+      <button onClick={() => modelRef.current.open()}>[ 모달 열기 ]</button>
+
+      <Modal ref={modelRef} title="질문을 작성하세요" icon="message">
+        <p>To. 😸 아초는고양이</p>
+        <div
+          style={{
+            width: "100%",
+            height: "300px",
+            marginTop: "15px",
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          질문을 입력해주세요
+        </div>
+      </Modal>
     </>
   );
 }
