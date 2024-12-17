@@ -22,7 +22,7 @@ export default function SolSample() {
   /**
    * 모달창
    */
-  const modelRef = useRef(null);
+  const modalRef = useRef(null);
 
   /**
    * 토스트
@@ -45,9 +45,9 @@ export default function SolSample() {
       <Badge status={status} />
 
       {/* 모달창 */}
-      <button onClick={() => modelRef.current.open()}>[ 모달 열기 ]</button>
+      <button onClick={() => modalRef.current.open()}>[ 모달 열기 ]</button>
 
-      <Modal ref={modelRef} title="질문을 작성하세요" icon="message">
+      <Modal ref={modalRef} title="질문을 작성하세요" icon="message">
         <p>To. 😸 아초는고양이</p>
         <div
           style={{
