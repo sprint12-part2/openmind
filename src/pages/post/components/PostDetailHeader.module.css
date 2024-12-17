@@ -21,11 +21,18 @@
 }
 
 .title {
+  width: 100%;
+  max-width: 70rem;
   margin-top: 1.5rem;
+  padding: 0 3.2rem;
 }
 
 .title h1 {
   font-size: var(--font-size-h2);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .meta {
