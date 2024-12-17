@@ -24,7 +24,6 @@ export function FloatingButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      responsive={responsive}
       {...props}
     >
       {children}
