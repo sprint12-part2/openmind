@@ -15,7 +15,7 @@ export default function MainPage() {
       <div className={styles.header}>
         <div className={styles.link}>
           <LinkButton onClick={() => navigate(`/list`)}>
-            답변하러 가기 <Icon name="arrowRight" size={18}></Icon>
+            질문하러 가기 <Icon name="arrowRight" size={18}></Icon>
           </LinkButton>
         </div>
       </div>
