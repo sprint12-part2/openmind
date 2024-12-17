@@ -30,7 +30,7 @@
   }
 }
 
-section {
+.section {
   order: 2;
   z-index: 1;
 }

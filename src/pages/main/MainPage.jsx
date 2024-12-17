@@ -20,7 +20,7 @@ export default function MainPage() {
         </div>
       </div>
       <MainLogo />
-      <section className="">
+      <section className={styles.section}>
         <MainPageInputForm />
       </section>
       <div className={styles.lottie}>
