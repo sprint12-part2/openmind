@@ -67,4 +67,5 @@ html {
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-md);
+  min-width: 37.5rem;
 }
