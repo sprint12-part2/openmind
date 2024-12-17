@@ -1,58 +1,74 @@
+/* 전체 컨테이너 스타일 */
 .container {
-  max-width: 1200px; /* 중앙 고정 레이아웃 */
-  margin: 0 auto; /* 가운데 정렬 */
-  padding: 32px; /* 좌우 최소 여백 */
+  max-width: 100.4rem; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 3.2rem; /* 좌우 여백 */
+}
+
+.header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-20); /* 컴포넌트 간 간격 */
+  align-items: center;
+  gap: 1.8rem;
+  margin-bottom: 3rem;
 }
+
+.title {
+  font-size: var(--font-size-h1);
+}
+
+/* 정렬 바 스타일 */
 
 .sortBar {
+  width: 8.2rem; /* DropDown 너비 제한 */
+}
+
+/* 사용자 카드 리스트 */
+.userCardList {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 4.6rem;
 }
 
-.sortBar select {
-  max-width: 80px; /* DropDown 너비 */
+.userCardItem {
+  width: calc(25% - 15px); /* (20 x 3)/ 4 */
 }
 
-.userCardGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(18.6rem, 1fr)); /* 카드의 최소 너비와 일치 */
-  gap: 2.8rem; /* 카드 간격 */
-  justify-content: space-between; /* 중앙 정렬 */
-  align-items: start;
-  margin: 0 auto; /* 그리드 중앙 정렬 */
-}
-
+/* 페이지네이션 바 스타일 */
 .paginationBar {
   display: flex;
   justify-content: center; /* 페이지네이션 가운데 정렬 */
-  margin-top: 20px; /* 위와 간격 추가 */
-  width: 100%; /* 페이지네이션이 그리드에 맞게 */
-  padding: 0; /* 여백 제거 */
+  margin-top: 20px; /* 위와의 간격 추가 */
+  width: 100%;
+  padding: 0;
 }
 
-/* 태블릿 크기 */
-@media (max-width: 1200px) {
-  .container {
-    padding: 32px; /* 좌우 여백 유지 */
-  }
-
-  .userCardGrid {
-    grid-template-columns: repeat(3, 1fr); /* 한 행에 3개 */
-    gap: 2.8rem; /* 카드 간격 동일 */
+@media (width < 868px) {
+  .userCardItem {
+    width: calc(33.333% - 13.333px); /* (20 x 2)/ 3 */
   }
 }
 
-/* 모바일 크기 */
-@media (max-width: 768px) {
+@media (width < 662px) {
   .container {
-    padding: 24px; /* 좌우 여백 조정 */
+    padding: 0 24px;
   }
 
-  .userCardGrid {
-    grid-template-columns: repeat(2, 1fr); /* 한 행에 2개 */
-    gap: 2.4rem; /* 카드 간격 모바일 기준 */
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: var(--font-size-h3);
+  }
+
+  .userCardList {
+    gap: 16px;
+  }
+
+  .userCardItem {
+    width: calc(50% - 8px); /* (16x2)/2 */
   }
 }

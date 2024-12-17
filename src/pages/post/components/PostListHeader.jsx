@@ -18,7 +18,7 @@ export default function PostListHeader() {
           <Icon name="arrowRight" size={18}></Icon>
         </LinkButton>
       </div>
-      <h1 className={styles.title}>누구에게 질문할까요?</h1>
+      {/* <h1 className={styles.title}>누구에게 질문할까요?</h1> */}
     </div>
   );
 }
