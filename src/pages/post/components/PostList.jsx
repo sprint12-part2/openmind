@@ -75,8 +75,9 @@ export default function PostList() {
   // 데이터 출력
   return (
     <div className={styles.container}>
-      <div className={styles.sortBar}>
-        <Select value={sort} onChange={handleSortChange}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>누구에게 질문할까요?</h1>
+        <Select value={sort} onChange={handleSortChange} className={styles.sortBar}>
           <Select.Option value="name">이름순</Select.Option>
           <Select.Option value="time">최신순</Select.Option>
         </Select>

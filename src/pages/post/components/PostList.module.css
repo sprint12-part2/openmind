@@ -1,49 +1,38 @@
 /* 전체 컨테이너 스타일 */
 .container {
-  max-width: 1004px; /* 최대 너비 */
+  max-width: 100.4rem; /* 최대 너비 */
   margin: 0 auto; /* 중앙 정렬 */
-  padding: 0 32px; /* 좌우 여백 */
+  padding: 0 3.2rem; /* 좌우 여백 */
+}
+
+.header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-20); /* 컴포넌트 간 간격 */
+  align-items: center;
+  gap: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: var(--font-size-h1);
 }
 
 /* 정렬 바 스타일 */
-.sortBar {
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  margin-bottom: 20px;
-}
 
-.sortBar select {
-  max-width: 80px; /* DropDown 너비 제한 */
+.sortBar {
+  width: 8.2rem; /* DropDown 너비 제한 */
 }
 
 /* 사용자 카드 리스트 */
 .userCardList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); /* 최소 186px부터 유연하게 확장 */
-  gap: 20px; /* 카드 간격 */
-  margin: 0;
-  padding: 0;
-  list-style: none; /* 기본 ul 스타일 제거 */
-}
-
-/* 사용자 카드 아이템 */
-.userCardItem {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box; /* padding 포함한 크기 유지 */
-  max-width: 220px; /* 최대 너비 */
-  min-width: 186px; /* 최소 너비 */
-  width: 100%; /* 부모 grid 셀에 맞춤 */
-  height: 100%; /* 부모 grid 셀에 맞춤 */
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 4.6rem;
 }
 
-.userCardItem > * {
-  width: 100%;
-  height: 100%;
+.userCardItem {
+  width: calc(25% - 15px); /* (20 x 3)/ 4 */
 }
 
 /* 페이지네이션 바 스타일 */
@@ -55,21 +44,31 @@
   padding: 0;
 }
 
-/* 태블릿 사이즈 */
-@media (max-width: 1004px) {
-  .userCardList {
-    grid-template-columns: repeat(3, minmax(186px, 1fr)); /* 3단 레이아웃 */
+@media (width < 868px) {
+  .userCardItem {
+    width: calc(33.333% - 13.333px); /* (20 x 2)/ 3 */
   }
 }
 
-/* 모바일 사이즈 */
-@media (max-width: 662px) {
+@media (width < 662px) {
   .container {
-    padding: 0 24px; /* 모바일 여백 조정 */
+    padding: 0 24px;
+  }
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: var(--font-size-h3);
   }
 
   .userCardList {
-    grid-template-columns: repeat(2, minmax(186px, 1fr)); /* 2단 레이아웃 */
-    gap: 16px; /* 모바일 간격 조정 */
+    gap: 16px;
+  }
+
+  .userCardItem {
+    width: calc(50% - 8px); /* (16x2)/2 */
   }
 }
