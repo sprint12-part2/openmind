@@ -1,9 +1,9 @@
-import styles from "./PostList.module.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { fetchSubjects } from "@service/Subject";
 import { UserCard, Pagination, Select } from "@components/ui";
 import { getItemsPerPage } from "./itemPerPage";
-import { Link, useSearchParams } from "react-router-dom";
+import styles from "./PostList.module.css";
 
 export default function PostList() {
   const [subjects, setSubjects] = useState([]); // 질문자 목록 상태
