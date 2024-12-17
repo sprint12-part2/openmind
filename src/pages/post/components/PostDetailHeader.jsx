@@ -38,16 +38,13 @@ export default function PostDetailHeader() {
           iconColor="var(--color-white)"
           onClick={copyUrl}
         ></ShareButton>
-        {/* <ShareButton
+        <ShareButton
           color="var(--color-yellow)"
           icon="kakao"
           iconColor="var(--color-black)"
           id="kakao-link-btn"
           onClick={shareKakao}
-        ></ShareButton> */}
-        <button className={styles.sns__kakao} id="kakao-link-btn" onClick={shareKakao}>
-          <Icon name="kakao" color="var(--color-black)" size="18" />
-        </button>
+        ></ShareButton>
         <ShareButton
           color="#1877F2"
           icon="facebook"
