@@ -1,6 +1,4 @@
 .form {
-  width: 40rem;
-  height: 17.2rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -8,6 +6,10 @@
   padding: var(--spacing-34);
   border-radius: var(--border-radius-lg);
   background-color: var(--color-white);
+
+  @media (max-width: 767px) {
+    padding: var(--spacing-24);
+  }
 }
 
 .button {

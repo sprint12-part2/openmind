@@ -22,6 +22,10 @@ export default function MainPageInputForm() {
     e.preventDefault();
     try {
       // Input값 유효성 검증
+      if (trimmedName.length > 12) {
+        Notify({ type: "error", message: "이름은 12자 미만으로 입력해주세요." });
+        return;
+      }
       if (name.trim()) {
         const data = await createFeed(trimmedName);
 
