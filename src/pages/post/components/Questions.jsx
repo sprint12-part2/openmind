@@ -1,5 +1,4 @@
 import {
-  AnswerButton,
   FeedCard,
   FeedCardList,
   FeedDeleteButton,
@@ -13,7 +12,6 @@ export default function Questions({ mode = "view", count, data, userInfo, handle
     <>
       {mode === "view" ? (
         <>
-          <AnswerButton />
           <QuestionForm
             feedOwner={userInfo}
             onSubmit={handlers.onCreateQuestion}
