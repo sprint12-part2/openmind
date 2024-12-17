@@ -52,11 +52,6 @@
   }
 }
 
-.name:hover {
-  color: var(--color-blue);
-  white-space: wrap;
-}
-
 .meta {
   display: flex;
   justify-content: space-between;
