@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useRouteLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useFeed } from "@context/FeedContext";
 import { PostMessage } from "@components/FeedCard";
 import useQuestions from "./components/useQuestions";
@@ -32,6 +33,16 @@ export default function PostDetailPage() {
 
   return (
     <>
+      <Helmet prioritizeSeoTags>
+        <title>{userInfo?.name}님의 피드 | OPENMIND</title>
+        <meta name="description" content={`${userInfo?.name}님에게 익명으로 질문해주세요.`} />
+        <meta property="og:title" content={`${userInfo?.name}님의 피드 | OPENMIND`} />
+        <meta
+          property="og:description"
+          content={`${userInfo?.name}님에게 익명으로 질문해주세요.`}
+        />
+        <meta property="og:image" content={userInfo?.imageSource || `/og_img.png`} />
+      </Helmet>
       <Questions
         mode="view"
         count={count}
