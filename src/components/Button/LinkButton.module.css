@@ -9,21 +9,25 @@
   border-radius: var(--border-radius-md);
   color: var(--color-primary-400);
   background-color: var(--color-primary-100);
-  border: 0.1rem solid var(--color-primary-400);
+  border: 1px solid var(--color-primary-400);
+}
+/* responsive state */
+.responsive {
   @media (max-width: 787px) {
     padding: 0.8rem 1.2rem;
+    height: 3.4rem;
     font-size: var(--font-size-sm);
   }
 }
 /* size */
 .md {
-  padding: 1.2rem 4.9rem;
-  height: 5.4rem;
-  font-size: var(--font-size-xl);
+  padding: 1.2rem 2.4rem;
+  height: 4.6rem;
+  font-size: var(--font-size-md);
 }
 .sm {
   padding: 0.8rem 2.4rem;
-  height: 3.5rem;
+  height: 3.4rem;
   font-size: var(--font-size-sm);
 }
 
@@ -31,7 +35,7 @@
 .primary {
   color: var(--color-primary-400);
   background-color: var(--color-primary-100);
-  border: 0.1rem solid var(--color-primary-400);
+  border: 1px solid var(--color-primary-400);
 }
 .secondary {
   color: var(--color-white);
@@ -39,33 +43,31 @@
 }
 
 /* primary button state */
-.button:hover {
-  border: 0.2rem solid var(--color-primary-400);
+.primary:hover {
+  box-shadow: inset 0 0 0 1px var(--color-primary-400);
 }
-.button:active {
+.primary:active {
   background-color: var(--color-primary-200);
 }
 
 /* secondary button state */
 .secondary:hover {
-  border: 0.2rem solid var(--color-primary-500);
+  box-shadow: inset 0 0 0 1px var(--color-primary-500);
 }
 .secondary:active {
   background-color: var(--color-primary-500);
 }
 
 /* disabled state */
-.button:disabled {
-  background-color: var(--color-primary-300);
-  border: 0.1rem solid var(--color-primary-100);
-  color: var(--color-primary-100);
+.primary:disabled {
+  background-color: var(--color-primary-100);
+  border: 1px solid var(--color-primary-300);
+  color: var(--color-primary-300);
   cursor: not-allowed;
 }
-.button:disabled:hover {
-  background-color: var(--color-primary-300);
-  border: none;
-  color: var(--color-primary-100);
+.disabled:hover {
   cursor: not-allowed;
+  box-shadow: none;
 }
 .secondary:disabled {
   background-color: var(--color-primary-300);
