@@ -2,21 +2,21 @@ import Lottie from "react-lottie";
 import LogoLottie from "@assets/img/common/logo.json";
 import styles from "./MainPage.module.css";
 import MainLogo from "./components/MainLogo";
-import { Link } from "react-router-dom";
 import MainPageInputForm from "./components/MainPageInputForm";
 import { LinkButton } from "@components/Button/index.js";
 import { Icon } from "@components/Icon/index.js";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.link}>
-          <Link to="/list">
-            <LinkButton>
-              답변하러 가기 <Icon name="arrowRight" size={18}></Icon>
-            </LinkButton>
-          </Link>
+          <LinkButton onClick={() => navigate(`/list`)}>
+            답변하러 가기 <Icon name="arrowRight" size={18}></Icon>
+          </LinkButton>
         </div>
       </div>
       <MainLogo />
