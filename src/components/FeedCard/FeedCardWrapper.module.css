@@ -4,3 +4,9 @@
   box-shadow: var(--shadow-100);
   background: var(--color-white);
 }
+
+@media (width < 768px) {
+  .card {
+    padding: 2.4rem;
+  }
+}
