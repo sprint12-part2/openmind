@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { Avatar, Icon, ShareButton } from "@components/ui";
+import { Avatar, ShareButton } from "@components/ui";
 import { copyUrl, shareKakao, shareFacebook } from "@util/shareUtils";
 import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
