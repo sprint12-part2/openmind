@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, InputTextarea, Avatar } from "@components/ui";
+import { Modal, InputTextarea, Avatar, FloatingButton, LinkButton } from "@components/ui";
 import usePreventScroll from "@components/Modal/usePreventScroll";
 import styles from "./QuestionForm.module.css";
 
@@ -24,9 +24,9 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
 
   return (
     <>
-      <button type="button" onClick={handleToggleModal} className={styles.floatButton}>
+      <FloatingButton type="button" onClick={handleToggleModal} className={styles.floatButton}>
         질문 작성<em>하기</em>
-      </button>
+      </FloatingButton>
       {isModal && (
         <Modal handleToggleModal={handleToggleModal} title="질문을 작성하세요" icon="message">
           <div className={styles.user}>
@@ -40,9 +40,14 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
               onChange={(e) => setContent(e.target.value)}
               placeholder="질문을 입력해주세요"
             />
-            <button type="submit" disabled={!content || isPending} className={styles.button}>
+            <LinkButton
+              type="submit"
+              color="secondary"
+              disabled={!content || isPending}
+              className={styles.button}
+            >
               질문 보내기
-            </button>
+            </LinkButton>
           </form>
         </Modal>
       )}

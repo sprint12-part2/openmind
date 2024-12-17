@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputTextarea } from "@components/Input";
+import { InputTextarea, LinkButton } from "@components/ui";
 import styles from "./AnswerForm.module.css";
 
 export function AnswerForm({
@@ -30,9 +30,14 @@ export function AnswerForm({
         onChange={(e) => setValue(e.target.value)}
         placeholder="답변을 입력해주세요"
       />
-      <button type="submit" className={styles.button} disabled={!value || isPending}>
+      <LinkButton
+        color="secondary"
+        type="submit"
+        className={styles.button}
+        disabled={!value || isPending}
+      >
         {initialValue ? "수정" : "작성"}
-      </button>
+      </LinkButton>
       <button type="button" onClick={handleReset} className={styles.reset}>
         취소
       </button>
