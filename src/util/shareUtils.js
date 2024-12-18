@@ -49,9 +49,33 @@ export const shareKakao = async (name) => {
 };
 
 export const shareFacebook = async () => {
-  window.open(
-    `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
-    "페이스북 공유하기",
-    "width=600,height=800,location=no,status=no,scrollbars=yes", //새창 뜨는 것 조절 (없어도 작동됨)
-  );
+  const currentUrl = window.location.href; // 현재 URL 가져오기
+
+  // 페이스북 SDK 초기화
+  window.FB.init({
+    appId: "2014957785686272", // 본인의 페이스북 앱 ID
+    xfbml: true,
+    version: "v15.0",
+  });
+
+  // 로그인되어 있지 않으면 로그인하도록 유도
+  window.FB.getLoginStatus((response) => {
+    if (response.status === "connected") {
+      window.FB.ui(
+        {
+          method: "share",
+          href: currentUrl,
+        },
+        function (response) {
+          if (response && !response.error_message) {
+            alert("공유 성공!");
+          } else {
+            alert("공유 실패");
+          }
+        },
+      );
+    } else {
+      window.FB.login();
+    }
+  });
 };
