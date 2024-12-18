@@ -1,6 +1,6 @@
 import { MoreMenu } from "@components/Dropdown";
 
-export function AnswerMenu({ mode, answer, onReject, onModify, onDelete }) {
+export function AnswerMenu({ mode, answer, onReject, onModify, onDelete, onDeleteQuestion }) {
   if (mode === "view") return null;
 
   return (
@@ -12,7 +12,10 @@ export function AnswerMenu({ mode, answer, onReject, onModify, onDelete }) {
         수정하기
       </MoreMenu.Item>
       <MoreMenu.Item icon="close" onClick={onDelete} disabled={!answer}>
-        삭제하기
+        답변삭제
+      </MoreMenu.Item>
+      <MoreMenu.Item icon="close" onClick={onDeleteQuestion}>
+        질문삭제
       </MoreMenu.Item>
     </MoreMenu>
   );

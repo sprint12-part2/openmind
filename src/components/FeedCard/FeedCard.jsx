@@ -10,6 +10,7 @@ export function FeedCard({
   onUpdateAnswer,
   onDeleteAnswer,
   onRejectAnswer,
+  onDeleteQuestion,
   onLike,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
@@ -28,9 +29,17 @@ export function FeedCard({
   }
 
   function handleDelete() {
+    if (!confirm("정말 답변을 삭제할까요?")) return;
     onDeleteAnswer({
       questionId,
       answerId: answer?.id,
+    });
+  }
+
+  function handleDeleteQuestion() {
+    if (!confirm("정말 질문을 삭제할까요?")) return;
+    onDeleteQuestion({
+      questionId,
     });
   }
 
@@ -43,6 +52,7 @@ export function FeedCard({
           onReject={handleReject}
           onModify={handleModify}
           onDelete={handleDelete}
+          onDeleteQuestion={handleDeleteQuestion}
         />
       </Question>
       <Answer
