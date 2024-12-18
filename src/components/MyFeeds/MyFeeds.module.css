@@ -29,3 +29,9 @@
   font-size: var(--font-size-sm);
   color: var(--color-gray-400);
 }
+
+.empty {
+  padding: 2em;
+  text-align: center;
+  color: var(--color-gray-400);
+}
