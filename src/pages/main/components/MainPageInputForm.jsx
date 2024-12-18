@@ -26,7 +26,7 @@ export default function MainPageInputForm() {
         Notify({ type: "error", message: "이름은 12자 미만으로 입력해주세요." });
         return;
       }
-      if (name.trim()) {
+      if (name) {
         const data = await createFeed(trimmedName);
 
         Notify({ type: "success", message: "피드를 생성했습니다." });

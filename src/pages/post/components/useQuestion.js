@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Notify } from "@components/Toast";
-import { createQuestion } from "@service/Question";
+import { createQuestion, deleteQuestion } from "@service/Question";
 
 export default function useQuestion(subjectId) {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const create = useMutation({
     mutationFn: ({ content }) => createQuestion(subjectId, content),
     onSuccess: async (data, { subjectId }) => {
       Notify({
@@ -40,8 +40,35 @@ export default function useQuestion(subjectId) {
       }),
   });
 
+  const remove = useMutation({
+    mutationFn: ({ questionId }) => deleteQuestion(questionId),
+    onError: () =>
+      Notify({
+        type: "error",
+        message: "문제가 생겨서, 질문 삭제에 실패했습니다.",
+      }),
+    onSuccess: (_, { questionId }) => {
+      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+        if (!prev) return prev;
+
+        const newData = {
+          ...prev,
+          pages: prev.pages.map((page) => ({
+            ...page,
+            results: page.results.filter((item) => item.id !== questionId),
+          })),
+        };
+
+        return newData;
+      });
+    },
+  });
+
+  const isPending = create.isPending || remove.isPending;
+
   return {
-    mutate,
+    create: create.mutate,
+    remove: remove.mutate,
     isPending,
   };
 }
