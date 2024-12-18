@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Modal, InputTextarea, Avatar, FloatingButton, LinkButton } from "@components/ui";
 import styles from "./QuestionForm.module.css";
+import { Notify } from "@components/Toast";
 
 export function QuestionForm({ feedOwner, onSubmit, isPending }) {
   const { name, imageSource } = feedOwner;
@@ -14,6 +15,9 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!content.trim()) return Notify({ type: "error", message: "한글자 이상 입력해주세요" });
+
     onSubmit({ content });
     modalRef.current.close();
     window.scrollTo(0, 0);
