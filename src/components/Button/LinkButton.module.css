@@ -11,14 +11,7 @@
   background-color: var(--color-primary-100);
   border: 1px solid var(--color-primary-400);
 }
-/* responsive state */
-.responsive {
-  @media (max-width: 787px) {
-    padding: 0.8rem 1.2rem;
-    height: 3.4rem;
-    font-size: var(--font-size-sm);
-  }
-}
+
 /* size */
 .md {
   padding: 1.2rem 2.4rem;
@@ -73,4 +66,12 @@
   background-color: var(--color-primary-300);
   border: none;
   cursor: not-allowed;
+}
+/* responsive state */
+.responsive {
+  @media (max-width: 787px) {
+    padding: 0.8rem 1.2rem;
+    height: 3.4rem;
+    font-size: var(--font-size-sm);
+  }
 }
