@@ -3,13 +3,21 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 0 auto 4rem;
+  margin: 0 auto 6rem;
   padding-top: 5rem;
   width: 100%;
   max-width: 1200px;
-  background-image: url("/src/assets/img/page-detail/header-bg.svg");
+  background: url("/src/assets/img/page-detail/header-bg.svg");
   background-repeat: no-repeat;
   background-position: top center;
+}
+
+.header__wrapper > div {
+  margin-top: 1.5rem;
+}
+
+.header__wrapper > div:first-child {
+  margin-top: 0;
 }
 
 .logo img {
@@ -23,7 +31,7 @@
 .title {
   width: 100%;
   max-width: 60rem;
-  margin-top: 1.5rem;
+  padding: 0 3.2rem;
 }
 
 .title h1 {
@@ -33,16 +41,18 @@
 }
 
 .meta {
-  margin-top: 1.5rem;
   font-size: 1.5rem;
   color: var(--color-primary-300);
+}
+
+.header__wrapper .sns {
+  margin-top: 3rem;
 }
 
 .sns {
   display: flex;
   justify-content: center;
   gap: 1.2rem;
-  margin-top: 3rem;
 }
 
 .sns button {
@@ -64,4 +74,89 @@
 
 .sns__facebook {
   background-color: var(--color-blue);
+}
+
+@media (max-width: 768px) {
+  .header__wrapper {
+    display: grid;
+    grid-template-areas:
+      "logo logo"
+      "avatar sns"
+      "name name"
+      "meta button";
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    margin: 0 auto 4rem;
+    padding: 4rem 2.4rem 0;
+    background: none;
+  }
+
+  .header__wrapper > div {
+    margin-top: 0;
+  }
+
+  .logo {
+    grid-area: logo;
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar {
+    grid-area: avatar;
+    justify-self: start;
+  }
+
+  .sns {
+    grid-area: sns;
+    justify-self: end;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .title {
+    grid-area: name;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0;
+  }
+
+  .title h1 {
+    text-align: left;
+  }
+
+  .meta {
+    grid-area: meta;
+    text-align: left;
+  }
+
+  .header__wrapper .sns {
+    margin-top: 0;
+  }
+
+  .sns button {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .answer-button {
+    grid-area: button;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    width: 12.4rem;
+  }
+
+  .avatar {
+    width: 10.4rem;
+  }
+
+  .title h1 {
+    font-size: var(--font-size-h3);
+    line-height: 1.15;
+  }
 }
