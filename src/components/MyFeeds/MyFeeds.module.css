@@ -1,0 +1,31 @@
+.item {
+  padding: var(--spacing-10) 0;
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-20);
+  padding: var(--spacing-16);
+  border-radius: var(--border-radius-md);
+}
+.card:hover {
+  background: var(--color-gray-200);
+}
+
+.item + .item {
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.avatar {
+  width: 6rem;
+}
+
+.name {
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-6);
+}
+
+.date {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+}
