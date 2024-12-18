@@ -6,5 +6,12 @@ dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 export function fromNow(date) {
-  return dayjs(date).fromNow();
+  const now = dayjs();
+  const formatDate = dayjs(date);
+
+  if (formatDate.isSame(now) || formatDate.isAfter(now)) {
+    return "방금전";
+  }
+
+  return formatDate.fromNow();
 }
