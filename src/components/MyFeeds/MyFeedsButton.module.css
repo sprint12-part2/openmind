@@ -1,0 +1,22 @@
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-16);
+}
+
+.more {
+  display: inline-flex;
+  padding: 0.8em 1em;
+  border-radius: var(--border-radius-md);
+  color: var(--color-primary-400);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  letter-spacing: -0.04em;
+  text-decoration: underline;
+  text-underline-position: under;
+  cursor: pointer;
+}
+
+.more:hover {
+  background: var(--color-primary-100);
+}
