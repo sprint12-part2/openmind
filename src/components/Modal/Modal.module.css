@@ -29,7 +29,7 @@
   position: relative;
   display: flex;
   gap: 0.8rem;
-  padding-bottom: 40px;
+  padding-bottom: 4rem;
 }
 
 .modal-title {
@@ -51,4 +51,28 @@
 .modal-content {
   flex-grow: 1;
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding: 2.4rem 2.4rem;
+  }
+
+  .modal-header {
+    position: relative;
+    display: flex;
+    gap: 0.8rem;
+    padding-bottom: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+  }
+
+  .modal-header {
+    padding-bottom: 1.5rem;
+  }
 }
