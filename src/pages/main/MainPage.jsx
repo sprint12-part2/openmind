@@ -18,7 +18,7 @@ export default function MainPage() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.link}>
-          <LinkButton onClick={() => navigate(`/list`)}>
+          <LinkButton responsive={true} onClick={() => navigate(`/list`)}>
             질문하러 가기 <Icon name="arrowRight" size={18}></Icon>
           </LinkButton>
         </div>
