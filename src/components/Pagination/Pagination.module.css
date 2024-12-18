@@ -11,7 +11,7 @@
   gap: var(--spacing-8); /* 페이지 번호 간격 */
   list-style: none; /* 기본 ul 스타일 제거 */
   padding: 0;
-  margin: 0;
+  margin-bottom: 4rem;
 }
 
 .arrowButton {
