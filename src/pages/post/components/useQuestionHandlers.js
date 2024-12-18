@@ -6,14 +6,22 @@ import useQuestion from "./useQuestion";
 import { Notify } from "@components/Toast";
 
 export default function useQuestionHandlers(subjectId) {
-  const { mutate: question, isPending: isQuestionPending } = useQuestion(subjectId);
+  const {
+    create: createQuestion,
+    remove: removeQuestion,
+    isPending: isQuestionPending,
+  } = useQuestion(subjectId);
   const { create, update, remove, reject, isPending: isAnswerPending } = useAnswer(subjectId);
   const { mutate: reaction } = useLike(subjectId);
   const { removeFeed, isLoading: isFeedPending } = useFeed();
   const navigate = useNavigate();
 
   function handleCreateQuestion({ content }) {
-    question({ content });
+    createQuestion({ content });
+  }
+
+  function handleDeleteQuestion({ questionId }) {
+    removeQuestion({ questionId });
   }
 
   function handleCreateAnswer({ questionId, content }) {
@@ -63,6 +71,7 @@ export default function useQuestionHandlers(subjectId) {
   return {
     handlers: {
       onCreateQuestion: handleCreateQuestion,
+      onDeleteQuestion: handleDeleteQuestion,
       onCreateAnswer: handleCreateAnswer,
       onUpdateAnswer: handleUpdateAnswer,
       onDeleteAnswer: handleDeleteAnswer,
