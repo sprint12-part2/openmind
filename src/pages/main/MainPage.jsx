@@ -30,7 +30,10 @@ export default function MainPage() {
         <MyFeeds ref={myFeedsModalRef} />
       </section>
       <div className={styles.lottie}>
-        <Lottie options={{ loop: true, autoplay: true, animationData: LogoLottie }} />
+        <Lottie
+          options={{ loop: true, autoplay: true, animationData: LogoLottie }}
+          isClickToPauseDisabled={true}
+        />
       </div>
     </div>
   );
