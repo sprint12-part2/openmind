@@ -34,17 +34,19 @@ export function AnswerForm({
         onChange={(e) => setValue(e.target.value)}
         placeholder="답변을 입력해주세요"
       />
-      <LinkButton
-        color="secondary"
-        type="submit"
-        className={styles.button}
-        disabled={!value || isPending}
-      >
-        {initialValue ? "수정" : "작성"}
-      </LinkButton>
-      <button type="button" onClick={handleReset} className={styles.reset}>
-        취소
-      </button>
+      <div className={styles.controls}>
+        <LinkButton type="button" onClick={handleReset} className={styles.reset}>
+          취소
+        </LinkButton>
+        <LinkButton
+          color="secondary"
+          type="submit"
+          className={styles.button}
+          disabled={!value || isPending}
+        >
+          {initialValue ? "수정" : "작성"}
+        </LinkButton>
+      </div>
     </form>
   );
 }
