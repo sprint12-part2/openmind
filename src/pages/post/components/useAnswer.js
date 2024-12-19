@@ -25,9 +25,7 @@ export default function useAnswer(subjectId) {
     mutationFn: ({ questionId, content, isRejected }) => {
       return createAnswer(questionId, content, isRejected);
     },
-    onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 생성을 실패했습니다." }),
     onSuccess: (data) => {
-      Notify({ type: "success", message: "답변을 작성했습니다." });
       updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
@@ -36,9 +34,7 @@ export default function useAnswer(subjectId) {
     mutationFn: ({ answerId, content, isRejected }) => {
       return updateAnswer(answerId, content, isRejected);
     },
-    onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 수정을 실패했습니다." }),
     onSuccess: (data) => {
-      Notify({ type: "success", message: "답변을 수정했습니다." });
       updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
@@ -48,9 +44,7 @@ export default function useAnswer(subjectId) {
       if (!answerId) return Notify({ type: "error", message: "삭제할 내용이 없습니다." });
       return deleteAnswer(answerId);
     },
-    onError: () => Notify({ type: "error", message: "문제가 생겨서, 답변 삭제를 실패했습니다." }),
     onSuccess: (_, { questionId }) => {
-      Notify({ type: "success", message: "답변을 삭제했습니다." });
       updateCacheData(questionId, (item) => {
         const newItem = { ...item };
         delete newItem.answer;
@@ -63,14 +57,14 @@ export default function useAnswer(subjectId) {
   const reject = useMutation({
     mutationFn: ({ questionId, answerId, content, isRejected }) => {
       if (answerId) {
+        console.log("답변있는데 거절");
         return updateAnswer(answerId, content, isRejected);
       } else {
+        console.log("답변없는데 거절");
         return createAnswer(questionId, content, isRejected);
       }
     },
-    onError: () => Notify({ type: "error", message: "문제가 생겨서, 거절을 실패했습니다." }),
     onSuccess: (data) => {
-      Notify({ type: "success", message: "답변을 거절했습니다." });
       updateCacheData(data.questionId, (item) => ({ ...item, answer: data }));
     },
   });
@@ -78,10 +72,10 @@ export default function useAnswer(subjectId) {
   const isPending = create.isPending || update.isPending || remove.isPending || reject.isPending;
 
   return {
-    create: create.mutate,
-    update: update.mutate,
-    remove: remove.mutate,
-    reject: reject.mutate,
+    create: create.mutateAsync,
+    update: update.mutateAsync,
+    remove: remove.mutateAsync,
+    reject: reject.mutateAsync,
     isPending,
   };
 }
