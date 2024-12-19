@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-8); /* 0.8rem 간격 */
-  height: 4rem; /* 40px */
 }
 
 .paginationList {
@@ -11,7 +10,7 @@
   gap: var(--spacing-8); /* 페이지 번호 간격 */
   list-style: none; /* 기본 ul 스타일 제거 */
   padding: 0;
-  margin-bottom: 4rem;
+  margin: 0; /* 마진 제거 (병합 방지) */
 }
 
 .arrowButton {

@@ -39,9 +39,9 @@
 .paginationBar {
   display: flex;
   justify-content: center; /* 페이지네이션 가운데 정렬 */
-  margin-top: 20px; /* 위와의 간격 추가 */
   width: 100%;
   padding: 0;
+  margin-bottom: 60px;
 }
 
 @media (width < 868px) {
