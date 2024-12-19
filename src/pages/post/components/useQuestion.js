@@ -48,6 +48,11 @@ export default function useQuestion(subjectId) {
         message: "문제가 생겨서, 질문 삭제에 실패했습니다.",
       }),
     onSuccess: (_, { questionId }) => {
+      Notify({
+        type: "success",
+        message: "질문을 삭제했습니다.",
+      });
+
       queryClient.setQueriesData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 

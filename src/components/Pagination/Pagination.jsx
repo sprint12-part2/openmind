@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@components/ui";
 import styles from "./Pagination.module.css";
 
 export function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange }) {
@@ -19,11 +20,8 @@ export function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange
 
   // 페이지 변경 함수
   function handlePageChange(page) {
-    // 페이지 번호가 유효하지 않으면 아무 동작도 하지 않음
-    if (page < 1 || page > totalPages) return;
-
-    // 부모 컴포넌트로 변경된 페이지 번호 전달
-    if (onPageChange) onPageChange(page);
+    if (page < 1 || page > totalPages) return; // 페이지 번호가 유효하지 않으면 아무 동작도 하지 않음
+    if (onPageChange) onPageChange(page); // 부모 컴포넌트로 변경된 페이지 번호 전달
   }
 
   // 이전 그룹으로 이동하는 함수
@@ -37,39 +35,43 @@ export function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange
   }
 
   return (
-    <div className={styles.paginationContainer}>
-      {/* 이전 그룹 버튼 */}
-      {currentPage !== 1 && ( // 현재 페이지가 첫 번째 페이지가 아닐 경우만 렌더링
-        <button
-          className={styles.arrowButton}
-          onClick={handlePreviousGroup} // 이전 그룹으로 이동
-        >
-          &lt; {/* 왼쪽 화살표 */}
-        </button>
-      )}
-
-      {/* 현재 그룹의 페이지 번호 */}
-      {Array.from({ length: groupEnd - groupStart + 1 }, (_, index) => (
-        <button
-          key={groupStart + index} // 고유 키 설정
-          className={`${styles.pageButton} ${
-            currentPage === groupStart + index ? styles.active : "" // 현재 페이지 스타일 적용
-          }`}
-          onClick={() => handlePageChange(groupStart + index)} // 해당 페이지로 이동
-        >
-          {groupStart + index} {/* 페이지 번호 */}
-        </button>
-      ))}
-
-      {/* 다음 그룹 버튼 */}
-      {currentPage !== totalPages && ( // 현재 페이지가 마지막 페이지가 아닐 경우만 렌더링
-        <button
-          className={styles.arrowButton}
-          onClick={handleNextGroup} // 다음 그룹으로 이동
-        >
-          &gt; {/* 오른쪽 화살표 */}
-        </button>
-      )}
-    </div>
+    <nav className={styles.paginationContainer} aria-label="페이지 네비게이션">
+      <ul className={styles.paginationList}>
+        {currentPage !== 1 && (
+          <li>
+            <button
+              className={styles.arrowButton}
+              onClick={handlePreviousGroup}
+              aria-label="이전 페이지 그룹으로 이동"
+            >
+              <Icon name="elbowLeft" className={styles.icon} />
+            </button>
+          </li>
+        )}
+        {Array.from({ length: groupEnd - groupStart + 1 }, (_, index) => (
+          <li key={groupStart + index}>
+            <button
+              className={`${styles.pageButton} ${
+                currentPage === groupStart + index ? styles.active : ""
+              }`}
+              onClick={() => handlePageChange(groupStart + index)}
+            >
+              {groupStart + index}
+            </button>
+          </li>
+        ))}
+        {currentPage !== totalPages && (
+          <li>
+            <button
+              className={styles.arrowButton}
+              onClick={handleNextGroup}
+              aria-label="다음 페이지 그룹으로 이동"
+            >
+              <Icon name="elbowRight" className={styles.icon} />
+            </button>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 }

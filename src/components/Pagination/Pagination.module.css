@@ -3,23 +3,36 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-8); /* 0.8rem 간격 */
-  height: 4rem; /* 40px */
+}
+
+.paginationList {
+  display: flex;
+  gap: var(--spacing-8); /* 페이지 번호 간격 */
+  list-style: none; /* 기본 ul 스타일 제거 */
+  padding: 0;
+  margin: 0; /* 마진 제거 (병합 방지) */
 }
 
 .arrowButton {
   width: 40px;
   height: 40px;
-  font-size: var(--font-size-xl); /* 1.8rem */
-  color: var(--color-primary-400); /* 화살표 기본 색상 */
+  border: none;
   cursor: pointer;
   display: flex; /* 버튼 내부 아이템 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
   justify-content: center; /* 가로 중앙 정렬 */
 }
 
-.arrowButton:disabled {
-  color: var(--color-gray-300);
+.icon:disabled {
   cursor: not-allowed;
+}
+
+.icon {
+  color: var(--color-gray-400);
+}
+
+.icon:hover {
+  color: var(--color-primary-300); /* 호버 시 배경색 추가 */
 }
 
 .pageButton {

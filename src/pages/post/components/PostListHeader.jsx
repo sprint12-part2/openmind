@@ -28,7 +28,7 @@ export default function PostListHeader() {
             <img src={logo} alt="오픈마인드 로고" />
           </Link>
         </div>
-        <LinkButton onClick={handleClick}>
+        <LinkButton onClick={handleClick} responsive={true}>
           답변하러 가기
           <Icon name="arrowRight" size={18}></Icon>
         </LinkButton>

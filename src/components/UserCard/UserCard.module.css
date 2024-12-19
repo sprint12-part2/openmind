@@ -6,6 +6,7 @@
   padding: 2rem;
   border: 0.1rem solid var(--color-gray-400);
   border-radius: var(--border-radius-lg);
+  background-color: var(--color-white);
 }
 
 .card:hover {

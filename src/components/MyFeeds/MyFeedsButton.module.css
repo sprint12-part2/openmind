@@ -12,8 +12,6 @@
   font-weight: var(--font-weight-medium);
   text-align: center;
   letter-spacing: -0.04em;
-  text-decoration: underline;
-  text-underline-position: under;
   cursor: pointer;
 }
 

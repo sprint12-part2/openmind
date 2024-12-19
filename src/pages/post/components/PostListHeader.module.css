@@ -1,19 +1,32 @@
 .header__container {
   display: flex;
   flex-direction: column;
-  margin: 0px auto;
   justify-content: center;
   align-items: center;
   font-size: var(--font-size-h1);
-  max-width: 940px;
+  max-width: 100.4rem; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 3.2rem; /* 좌우 여백 */
+  @media (width < 1004px) {
+    padding: 0 5rem;
+  }
+  @media (width < 662px) {
+    padding: 1.2rem 3.2rem;
+  }
 }
+
 .header__content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin: 0px auto;
-  padding: 4rem;
+  padding: 4rem 0;
+
+  @media (width < 662px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
 .header__logo img {
