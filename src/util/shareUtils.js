@@ -9,6 +9,9 @@ const showToast = (type) => {
     seccess: {
       message: "URL이 복사되었습니다",
     },
+    facebookSeccess: {
+      message: "공유가 완료되었습니다",
+    },
     error: {
       type: "error",
       message: "오류가 발생했습니다",
@@ -63,9 +66,9 @@ export const shareFacebook = async () => {
           },
           function (response) {
             if (response && !response.error_message) {
-              alert("공유 성공!");
+              showToast("facebookSeccess");
             } else {
-              alert("공유 실패");
+              showToast("error");
             }
           },
         );
@@ -81,9 +84,9 @@ export const shareFacebook = async () => {
               },
               function (shareResponse) {
                 if (shareResponse && !shareResponse.error_message) {
-                  alert("공유 성공!");
+                  showToast("facebookSeccess");
                 } else {
-                  alert("공유 실패");
+                  showToast("error");
                 }
               },
             );
