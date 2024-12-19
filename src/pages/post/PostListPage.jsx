@@ -3,16 +3,20 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSubjects } from "@service/Subject";
 import PostList from "./components/PostList";
+import { useItemPerPage } from "./components/useItemPerPage";
 
 export default function PostListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const sort = searchParams.get("sort") || "time";
 
+  // 반응형 아이템 개수 가져오기
+  const itemsPerPage = useItemPerPage();
+
   // React Query로 데이터 패칭
   const { data, isLoading, error } = useQuery({
-    queryKey: ["subjects", currentPage, sort],
-    queryFn: () => fetchSubjects(currentPage, 8, sort), // 페이지당 8개 데이터
+    queryKey: ["subjects", currentPage, itemsPerPage, sort],
+    queryFn: () => fetchSubjects(currentPage, itemsPerPage, sort),
     keepPreviousData: true, // 페이지 이동 간 캐시 유지
   });
 
