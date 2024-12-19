@@ -32,7 +32,7 @@
       // Facebook SDK 초기화
       window.fbAsyncInit = function () {
         FB.init({
-          appId: "2014957785686272", // 앱 ID를 여기에 설정
+          appId: %VITE_FACEBOOK_KEY%, // 앱 ID를 여기에 설정
           cookie: true, // 쿠키 지원
           xfbml: true, // 소셜 플러그인 지원
           version: "v15.0", // Facebook Graph API 버전

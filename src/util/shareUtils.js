@@ -1,16 +1,22 @@
+/**
+ * @module 공유 유틸리티
+ * URL 복사, 카카오톡 공유, 페이스북 공유 기능을 제공하는 모듈입니다.
+ */
 import { isMobile } from "react-device-detect";
 import { Notify } from "@components/Toast";
 
 const urlPath = window.location.pathname;
 const currentUrl = import.meta.env.VITE_BASE_URL + urlPath;
 
+/**
+ * 토스트 알림을 표시합니다.
+ *
+ * @param {string} type - 표시할 메시지의 타입 ("seccess" 또는 "error")
+ */
 const showToast = (type) => {
   const data = {
     seccess: {
       message: "URL이 복사되었습니다",
-    },
-    facebookSeccess: {
-      message: "공유가 완료되었습니다",
     },
     error: {
       type: "error",
@@ -22,6 +28,13 @@ const showToast = (type) => {
   Notify(message);
 };
 
+/**
+ * 현재 페이지의 URL을 클립보드에 복사합니다.
+ *
+ * @async
+ * @function copyUrl
+ * @throws 복사 실패 시 오류 토스트 메시지를 표시합니다.
+ */
 export const copyUrl = async () => {
   try {
     const url = window.location.href;
@@ -33,6 +46,13 @@ export const copyUrl = async () => {
   }
 };
 
+/**
+ * 카카오톡을 통해 피드를 공유합니다.
+ *
+ * @async
+ * @function shareKakao
+ * @param {string} name - 공유할 피드의 사용자 이름
+ */
 export const shareKakao = async (name) => {
   if (window.Kakao) {
     window.Kakao.Share.createDefaultButton({
@@ -51,9 +71,15 @@ export const shareKakao = async (name) => {
   }
 };
 
+/**
+ * 현재 URL을 페이스북에 공유합니다.
+ * 모바일과 PC 환경을 구분하여 각각 적합한 방식으로 처리합니다.
+ *
+ * @async
+ * @function shareFacebook
+ * @throws 공유 실패나 로그인 실패 시 경고 메시지를 표시합니다.
+ */
 export const shareFacebook = async () => {
-  //const currentUrl = window.location.href; // 현재 URL 가져오기
-
   if (isMobile) {
     // 모바일 환경: 로그인 상태 확인 및 공유
     window.FB.getLoginStatus((response) => {
@@ -66,9 +92,9 @@ export const shareFacebook = async () => {
           },
           function (response) {
             if (response && !response.error_message) {
-              showToast("facebookSeccess");
+              alert("공유 성공 🎉");
             } else {
-              showToast("error");
+              alert("공유 실패 🥲");
             }
           },
         );
@@ -84,9 +110,9 @@ export const shareFacebook = async () => {
               },
               function (shareResponse) {
                 if (shareResponse && !shareResponse.error_message) {
-                  showToast("facebookSeccess");
+                  alert("공유 성공 🎉");
                 } else {
-                  showToast("error");
+                  alert("공유 실패 🥲");
                 }
               },
             );
