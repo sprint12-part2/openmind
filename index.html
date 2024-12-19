@@ -21,12 +21,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Openmind" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
+    <!-- 카카오 SDK -->
     <script
       src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
       integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka"
       crossorigin="anonymous"
     ></script>
-    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <!-- 페이스북 SDK -->
+    <script>
+      // Facebook SDK 초기화
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: %VITE_FACEBOOK_KEY%, // 앱 ID를 여기에 설정
+          cookie: true, // 쿠키 지원
+          xfbml: true, // 소셜 플러그인 지원
+          version: "v15.0", // Facebook Graph API 버전
+        });
+        console.log("Facebook SDK initialized");
+      };
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
   </head>
   <body>
     <div id="root"></div>
