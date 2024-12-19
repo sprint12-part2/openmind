@@ -47,7 +47,7 @@ export default function PostDetailHeader() {
           icon="kakao"
           iconColor="var(--color-black)"
           id="kakao-link-btn"
-          onClick={shareKakao}
+          onClick={() => shareKakao(name)}
         ></ShareButton>
         <ShareButton
           color="#1877F2"

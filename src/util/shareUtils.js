@@ -1,5 +1,5 @@
+import { isMobile } from "react-device-detect";
 import { Notify } from "@components/Toast";
-import { useEffect } from "react";
 
 const urlPath = window.location.pathname;
 const currentUrl = import.meta.env.VITE_BASE_URL + urlPath;
@@ -49,33 +49,62 @@ export const shareKakao = async (name) => {
 };
 
 export const shareFacebook = async () => {
-  const currentUrl = window.location.href; // 현재 URL 가져오기
+  //const currentUrl = window.location.href; // 현재 URL 가져오기
 
-  // 페이스북 SDK 초기화
-  window.FB.init({
-    appId: "2014957785686272", // 본인의 페이스북 앱 ID
-    xfbml: true,
-    version: "v15.0",
-  });
-
-  // 로그인되어 있지 않으면 로그인하도록 유도
-  window.FB.getLoginStatus((response) => {
-    if (response.status === "connected") {
-      window.FB.ui(
-        {
-          method: "share",
-          href: currentUrl,
-        },
-        function (response) {
-          if (response && !response.error_message) {
-            alert("공유 성공!");
+  if (isMobile) {
+    // 모바일 환경: 로그인 상태 확인 및 공유
+    window.FB.getLoginStatus((response) => {
+      if (response.status === "connected") {
+        // 이미 로그인된 상태에서 공유
+        window.FB.ui(
+          {
+            method: "share",
+            href: currentUrl,
+          },
+          function (response) {
+            if (response && !response.error_message) {
+              alert("공유 성공!");
+            } else {
+              alert("공유 실패");
+            }
+          },
+        );
+      } else {
+        // 로그인 필요
+        window.FB.login((loginResponse) => {
+          if (loginResponse.authResponse) {
+            // 로그인 성공 후 바로 공유
+            window.FB.ui(
+              {
+                method: "share",
+                href: currentUrl,
+              },
+              function (shareResponse) {
+                if (shareResponse && !shareResponse.error_message) {
+                  alert("공유 성공!");
+                } else {
+                  alert("공유 실패");
+                }
+              },
+            );
           } else {
-            alert("공유 실패");
+            alert("로그인을 취소했습니다.");
           }
-        },
-      );
+        });
+      }
+    });
+  } else {
+    // PC 환경: 단순 팝업 공유
+    const popup = window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+      "페이스북 공유하기",
+      "width=800,height=800,location=no,status=no,scrollbars=yes",
+    );
+
+    if (popup) {
+      popup.focus();
     } else {
-      window.FB.login();
+      alert("팝업이 차단되었습니다. 팝업 차단을 해제해주세요.");
     }
-  });
+  }
 };
