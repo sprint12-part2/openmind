@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Modal, InputTextarea, Avatar, FloatingButton, LinkButton } from "@components/ui";
-import styles from "./QuestionForm.module.css";
 import { Notify } from "@components/Toast";
+import styles from "./QuestionForm.module.css";
 
 export function QuestionForm({ feedOwner, onSubmit, isPending }) {
   const { name, imageSource } = feedOwner;
@@ -18,9 +18,15 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
 
     if (!content.trim()) return Notify({ type: "error", message: "한글자 이상 입력해주세요" });
 
-    onSubmit({ content });
-    modalRef.current.close();
-    window.scrollTo(0, 0);
+    try {
+      await onSubmit({ content });
+      Notify({ type: "success", message: "성공적으로 질문을 작성했습니다." });
+      modalRef.current.close();
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.log(error);
+      Notify({ type: "error", message: "문제가 생겨, 작성에 실패했습니다." });
+    }
   }
 
   return (

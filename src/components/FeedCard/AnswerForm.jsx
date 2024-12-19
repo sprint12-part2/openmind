@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InputTextarea, LinkButton } from "@components/ui";
-import styles from "./AnswerForm.module.css";
 import { Notify } from "@components/Toast";
+import styles from "./AnswerForm.module.css";
 
 export function AnswerForm({
   questionId,

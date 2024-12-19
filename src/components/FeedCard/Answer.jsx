@@ -1,11 +1,11 @@
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { AnswerForm } from "@components/FeedCard";
 import { Avatar } from "@components/Avatar";
 import { fromNow } from "@util/format";
 import styles from "./Answer.module.css";
-import { forwardRef, useImperativeHandle, useState } from "react";
 
 export const Answer = forwardRef(function Answer(
-  { questionId, answer, user, mode, onCreate, onUpdate, isPending },
+  { mode, questionId, user, answer, onCreateAnswer, onUpdateAnswer, isPending },
   ref,
 ) {
   const [isEdit, setIsEdit] = useState(false);
@@ -13,6 +13,7 @@ export const Answer = forwardRef(function Answer(
   const { name, imageSource } = user;
   const isEditMode = mode === "answer" && isEdit;
 
+  // Answer 컴포넌트의 부모가 edit 모드를 컨트롤 할 수 있게 메서드 제공
   useImperativeHandle(ref, () => {
     return {
       openEdit: () => setIsEdit(true),
@@ -29,29 +30,32 @@ export const Answer = forwardRef(function Answer(
   }
 
   function renderAnswerContent() {
+    // 거절상태일 경우
     if (isRejected && !isEditMode) {
       return <div className={styles.reject}>답변 거절</div>;
     }
 
+    // 수정하기를 누를 경우
     if (isEditMode) {
       return (
         <AnswerForm
           initialValue={content}
           questionId={questionId}
           answerId={answerId}
-          onSubmit={onUpdate}
+          onSubmit={onUpdateAnswer}
           onCancel={handleCancel}
           isPending={isPending}
         />
       );
     }
 
+    // 컨텐츠가 있으면 컨텐츠 노출, 없으면 작성폼 노출
     return (
       content || (
         <AnswerForm
           questionId={questionId}
           answerId={answerId}
-          onSubmit={onCreate}
+          onSubmit={onCreateAnswer}
           onCancel={handleCancel}
           isPending={isPending}
         />

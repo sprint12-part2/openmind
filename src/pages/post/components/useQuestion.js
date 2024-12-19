@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Notify } from "@components/Toast";
-import { createQuestion, deleteQuestion } from "@service/Question";
+import { addQuestionReaction, createQuestion, deleteQuestion } from "@service/Question";
 
 export default function useQuestion(subjectId) {
   const queryClient = useQueryClient();
@@ -8,11 +7,6 @@ export default function useQuestion(subjectId) {
   const create = useMutation({
     mutationFn: ({ content }) => createQuestion(subjectId, content),
     onSuccess: async (data, { subjectId }) => {
-      Notify({
-        type: "success",
-        message: "성공적으로 작성했습니다.",
-      });
-
       queryClient.setQueriesData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
@@ -33,26 +27,11 @@ export default function useQuestion(subjectId) {
         return newData;
       });
     },
-    onError: () =>
-      Notify({
-        type: "error",
-        message: "등록에 실패했습니다. 다시 확인해주세요",
-      }),
   });
 
   const remove = useMutation({
     mutationFn: ({ questionId }) => deleteQuestion(questionId),
-    onError: () =>
-      Notify({
-        type: "error",
-        message: "문제가 생겨서, 질문 삭제에 실패했습니다.",
-      }),
     onSuccess: (_, { questionId }) => {
-      Notify({
-        type: "success",
-        message: "질문을 삭제했습니다.",
-      });
-
       queryClient.setQueriesData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
@@ -69,11 +48,57 @@ export default function useQuestion(subjectId) {
     },
   });
 
-  const isPending = create.isPending || remove.isPending;
+  const reaction = useMutation({
+    mutationFn: ({ questionId, type }) => addQuestionReaction(questionId, type),
+    onMutate: async ({ questionId, type }) => {
+      // 에러시 원복 데이터 생성
+      const prevData = queryClient.getQueriesData(["questions", subjectId]);
+
+      // optimistic update (기존 데이터 이용해서 ui바로 업데이트)
+      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+        if (!prev) return prev;
+
+        const newData = {
+          ...prev,
+          pages: prev.pages.map((page) => ({
+            ...page,
+            results: page.results.map((item) =>
+              item.id === questionId ? { ...item, [type]: item[type] + 1 } : item,
+            ),
+          })),
+        };
+        return newData;
+      });
+
+      return { prevData };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueriesData(["questions", subjectId], context.prevData);
+    },
+    onSuccess: async (data) => {
+      // 성공하면서 받아온 데이터로 바꿔치기
+      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+        if (!prev) return prev;
+
+        const newData = {
+          ...prev,
+          pages: prev.pages.map((page) => ({
+            ...page,
+            results: page.results.map((item) => (item.id === data.id ? data : item)),
+          })),
+        };
+
+        return newData;
+      });
+    },
+  });
+
+  const isPending = create.isPending || remove.isPending || reaction.isPending;
 
   return {
-    create: create.mutate,
-    remove: remove.mutate,
+    create: create.mutateAsync,
+    remove: remove.mutateAsync,
+    reaction: reaction.mutateAsync,
     isPending,
   };
 }

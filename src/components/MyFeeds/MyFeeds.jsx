@@ -18,7 +18,7 @@ export const MyFeeds = forwardRef(function MyFeeds(_, ref) {
           <ul className={styles.list}>
             {feeds.map((feed) => (
               <li key={feed.id} className={styles.item}>
-                <Link className={styles.card} to={`/post/${feed.id}`}>
+                <Link className={styles.card} to={`/post/${feed.id}/answer`}>
                   <div className={styles.avatar}>
                     <Avatar src={feed.imageSource} alt={feed.name} />
                   </div>
