@@ -6,7 +6,7 @@ export default function useAnswer(subjectId) {
   const queryClient = useQueryClient();
 
   function updateCacheData(questionId, updateFunc) {
-    queryClient.setQueriesData(["questions", subjectId], (prev) => {
+    queryClient.setQueryData(["questions", subjectId], (prev) => {
       if (!prev) return prev;
 
       const newData = {
