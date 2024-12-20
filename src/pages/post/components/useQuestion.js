@@ -39,6 +39,7 @@ export default function useQuestion(subjectId) {
           ...prev,
           pages: prev.pages.map((page) => ({
             ...page,
+            count: page.count - 1,
             results: page.results.filter((item) => item.id !== questionId),
           })),
         };
