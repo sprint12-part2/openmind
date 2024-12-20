@@ -1,0 +1,9 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: url("/src/assets/img/common/bg.jpg") no-repeat center;
+  background-size: cover;
+}
