@@ -57,10 +57,8 @@ export default function useAnswer(subjectId) {
   const reject = useMutation({
     mutationFn: ({ questionId, answerId, content, isRejected }) => {
       if (answerId) {
-        console.log("답변있는데 거절");
         return updateAnswer(answerId, content, isRejected);
       } else {
-        console.log("답변없는데 거절");
         return createAnswer(questionId, content, isRejected);
       }
     },

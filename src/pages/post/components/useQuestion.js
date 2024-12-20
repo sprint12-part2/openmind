@@ -6,7 +6,7 @@ export default function useQuestion(subjectId) {
 
   const create = useMutation({
     mutationFn: ({ content }) => createQuestion(subjectId, content),
-    onSuccess: async (data, { subjectId }) => {
+    onSuccess: (data, { subjectId }) => {
       queryClient.setQueriesData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
@@ -51,7 +51,7 @@ export default function useQuestion(subjectId) {
 
   const reaction = useMutation({
     mutationFn: ({ questionId, type }) => addQuestionReaction(questionId, type),
-    onMutate: async ({ questionId, type }) => {
+    onMutate: ({ questionId, type }) => {
       // 에러시 원복 데이터 생성
       const prevData = queryClient.getQueriesData(["questions", subjectId]);
 
