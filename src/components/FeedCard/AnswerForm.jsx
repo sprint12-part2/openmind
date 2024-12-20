@@ -12,10 +12,12 @@ export function AnswerForm({
   isPending,
 }) {
   const [value, setValue] = useState(initialValue);
+  const isModified = initialValue !== value;
 
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (!isModified) return;
     if (!value.trim()) return Notify({ type: "error", message: "한글자 이상 입력해주세요" });
 
     onSubmit({ questionId, answerId, content: value });
@@ -42,7 +44,7 @@ export function AnswerForm({
           color="secondary"
           type="submit"
           className={styles.button}
-          disabled={!value || isPending}
+          disabled={!isModified || !value || isPending}
         >
           {initialValue ? "수정" : "작성"}
         </LinkButton>
