@@ -75,22 +75,6 @@ export default function useQuestion(subjectId) {
     onError: (error, _, context) => {
       queryClient.setQueriesData(["questions", subjectId], context.prevData);
     },
-    onSuccess: async (data) => {
-      // 성공하면서 받아온 데이터로 바꿔치기
-      queryClient.setQueriesData(["questions", subjectId], (prev) => {
-        if (!prev) return prev;
-
-        const newData = {
-          ...prev,
-          pages: prev.pages.map((page) => ({
-            ...page,
-            results: page.results.map((item) => (item.id === data.id ? data : item)),
-          })),
-        };
-
-        return newData;
-      });
-    },
   });
 
   const isPending = create.isPending || remove.isPending || reaction.isPending;
