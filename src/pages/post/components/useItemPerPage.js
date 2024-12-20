@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 
+// 화면 크기에 따라 항목 수를 계산하는 함수 (훅 외부로 분리)
+const calculateItemsPerPage = () => {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth < 662) {
+    return 6; // 모바일: 6개
+  } else if (screenWidth < 868) {
+    return 6; // 태블릿: 6개
+  } else {
+    return 8; // PC: 8개
+  }
+};
+
 /**
  * 화면 크기에 따라 한 페이지당 항목 수를 계산하는 커스텀 훅
  * @returns {number} itemsPerPage - 화면 크기에 따른 항목 수
  */
 export function useItemPerPage() {
-  // 화면 크기에 따라 항목 수를 계산하는 함수
-  const calculateItemsPerPage = () => {
-    const screenWidth = window.innerWidth;
-
-    if (screenWidth < 662) {
-      return 6; // 모바일: 6개
-    } else if (screenWidth < 868) {
-      return 6; // 태블릿: 6개
-    } else {
-      return 8; // PC: 8개
-    }
-  };
-
-  const [itemsPerPage, setItemsPerPage] = useState(calculateItemsPerPage); // 초기값 설정
+  const [itemsPerPage, setItemsPerPage] = useState(() => calculateItemsPerPage()); // 게으른 초기화 적용
 
   useEffect(() => {
     // 화면 크기 변경 이벤트 핸들러

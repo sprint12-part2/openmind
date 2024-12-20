@@ -45,7 +45,7 @@ export default function PostList({
             >
               <UserCard
                 name={subject.name} // 질문자 이름
-                imageSource={subject.imageSource || "default.jpg"} // 프로필 이미지
+                imageSource={subject.imageSource} // 프로필 이미지
                 questionCount={subject.questionCount} // 질문 개수
               />
             </Link>
