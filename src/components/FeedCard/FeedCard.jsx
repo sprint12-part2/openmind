@@ -101,7 +101,11 @@ export function FeedCard({
             <MoreMenu.Item icon="reject" onClick={handleRejectAnswer} disabled={answer?.isRejected}>
               거절하기
             </MoreMenu.Item>
-            <MoreMenu.Item icon="edit" onClick={() => answerRef.current.openEdit()}>
+            <MoreMenu.Item
+              icon="edit"
+              onClick={() => answerRef.current.openEdit()}
+              disabled={!answer}
+            >
               수정하기
             </MoreMenu.Item>
             <MoreMenu.Item icon="close" onClick={handleRemoveAnswer} disabled={!answer}>
