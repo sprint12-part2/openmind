@@ -6,7 +6,7 @@ export default function useQuestion(subjectId) {
 
   const create = useMutation({
     mutationFn: ({ content }) => createQuestion(subjectId, content),
-    onSuccess: (data, { subjectId }) => {
+    onSuccess: (data) => {
       queryClient.setQueryData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
@@ -58,7 +58,7 @@ export default function useQuestion(subjectId) {
       // optimistic update (기존 데이터 이용해서 ui바로 업데이트)
       queryClient.setQueryData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
-        console.log(prev);
+
         const newData = {
           ...prev,
           pages: prev.pages.map((page) => ({
