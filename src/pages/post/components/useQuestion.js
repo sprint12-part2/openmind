@@ -6,8 +6,8 @@ export default function useQuestion(subjectId) {
 
   const create = useMutation({
     mutationFn: ({ content }) => createQuestion(subjectId, content),
-    onSuccess: async (data, { subjectId }) => {
-      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+    onSuccess: (data) => {
+      queryClient.setQueryData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
         const newData = {
@@ -32,13 +32,14 @@ export default function useQuestion(subjectId) {
   const remove = useMutation({
     mutationFn: ({ questionId }) => deleteQuestion(questionId),
     onSuccess: (_, { questionId }) => {
-      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+      queryClient.setQueryData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
         const newData = {
           ...prev,
           pages: prev.pages.map((page) => ({
             ...page,
+            count: page.count - 1,
             results: page.results.filter((item) => item.id !== questionId),
           })),
         };
@@ -50,12 +51,12 @@ export default function useQuestion(subjectId) {
 
   const reaction = useMutation({
     mutationFn: ({ questionId, type }) => addQuestionReaction(questionId, type),
-    onMutate: async ({ questionId, type }) => {
+    onMutate: ({ questionId, type }) => {
       // 에러시 원복 데이터 생성
       const prevData = queryClient.getQueriesData(["questions", subjectId]);
 
       // optimistic update (기존 데이터 이용해서 ui바로 업데이트)
-      queryClient.setQueriesData(["questions", subjectId], (prev) => {
+      queryClient.setQueryData(["questions", subjectId], (prev) => {
         if (!prev) return prev;
 
         const newData = {
@@ -73,7 +74,7 @@ export default function useQuestion(subjectId) {
       return { prevData };
     },
     onError: (error, _, context) => {
-      queryClient.setQueriesData(["questions", subjectId], context.prevData);
+      queryClient.setQueryData(["questions", subjectId], context.prevData);
     },
   });
 

@@ -1,4 +1,4 @@
-import { useParams, useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import useQuestions from "./components/useQuestions";
 import {
   FeedDeleteButton,
@@ -13,6 +13,7 @@ import { Notify } from "@components/Toast";
 
 export default function PostAnswerPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // 피드 정보 (loader 데이터)
   const userInfo = useRouteLoaderData("post");
@@ -35,10 +36,15 @@ export default function PostAnswerPage() {
 
     try {
       await removeFeed(id);
-      Notify({ type: "success", message: "피드를 삭제했습니다." });
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 800);
+      Notify(
+        { type: "success", message: "피드를 삭제했습니다." },
+        {
+          onClose: () => {
+            navigate("/");
+            window.location.reload(); // context에서 setFeeds를 하지않고 앱을 다시 마운팅 (protected router 때문에)
+          },
+        },
+      );
     } catch (error) {
       console.error(error);
       Notify({ type: "error", message: "문제가 생겨 삭제를 실패했습니다." });

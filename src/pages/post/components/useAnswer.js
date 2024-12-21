@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Notify } from "@components/Toast";
 import { createAnswer, deleteAnswer, updateAnswer } from "@service/Answer";
 
 export default function useAnswer(subjectId) {
   const queryClient = useQueryClient();
 
   function updateCacheData(questionId, updateFunc) {
-    queryClient.setQueriesData(["questions", subjectId], (prev) => {
+    queryClient.setQueryData(["questions", subjectId], (prev) => {
       if (!prev) return prev;
 
       const newData = {
@@ -41,7 +40,7 @@ export default function useAnswer(subjectId) {
 
   const remove = useMutation({
     mutationFn: ({ answerId }) => {
-      if (!answerId) return Notify({ type: "error", message: "삭제할 내용이 없습니다." });
+      if (!answerId) return;
       return deleteAnswer(answerId);
     },
     onSuccess: (_, { questionId }) => {
@@ -57,10 +56,8 @@ export default function useAnswer(subjectId) {
   const reject = useMutation({
     mutationFn: ({ questionId, answerId, content, isRejected }) => {
       if (answerId) {
-        console.log("답변있는데 거절");
         return updateAnswer(answerId, content, isRejected);
       } else {
-        console.log("답변없는데 거절");
         return createAnswer(questionId, content, isRejected);
       }
     },
