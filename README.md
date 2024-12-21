@@ -64,6 +64,8 @@
 
 ## 🔧 프로젝트 소개
 
+![codit-openmind-part2-team2-detail](https://github.com/user-attachments/assets/81e1579c-3906-4a51-b01b-9d999c23089c)
+
 ### 주요 기능
 
 - 익명성을 보장하며 CRUD(Create, Read, Update, Delete) 기능 구현
