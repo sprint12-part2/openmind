@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { Modal, InputTextarea, Avatar, FloatingButton, LinkButton } from "@components/ui";
-import styles from "./QuestionForm.module.css";
 import { Notify } from "@components/Toast";
+import styles from "./QuestionForm.module.css";
+import { MESSAGES } from "@constants/messages";
 
 export function QuestionForm({ feedOwner, onSubmit, isPending }) {
   const { name, imageSource } = feedOwner;
@@ -16,11 +17,17 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!content.trim()) return Notify({ type: "error", message: "한글자 이상 입력해주세요" });
+    if (!content.trim()) return Notify({ type: "error", message: MESSAGES.QUESTION.ERROR.EMPTY });
 
-    onSubmit({ content });
-    modalRef.current.close();
-    window.scrollTo(0, 0);
+    try {
+      await onSubmit({ content });
+      Notify({ type: "success", message: MESSAGES.QUESTION.SUCCESS.CREATE });
+      modalRef.current.close();
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.log(error);
+      Notify({ type: "error", message: MESSAGES.QUESTION.ERROR.CREATE });
+    }
   }
 
   return (

@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.4rem;
+}
+
+.controls {
+  margin-bottom: 6.9rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logo {
+  text-align: center;
+  padding: 0 6.4rem;
+}
+
+.logo img {
+  max-width: 100%;
+}
+
+@media (width<768px) {
+  .header {
+    flex-direction: column-reverse;
+    margin-bottom: 2.4rem;
+  }
+  .controls {
+    justify-content: center;
+    margin: 0;
+  }
+  .logo {
+    margin-bottom: 2.4rem;
+  }
+}

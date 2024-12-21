@@ -1,39 +1,84 @@
-import { useParams, useRouteLoaderData } from "react-router-dom";
+import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import useQuestions from "./components/useQuestions";
-import { PostMessage } from "@components/FeedCard";
-import Questions from "./components/Questions";
-import useQuestionHandlers from "./components/useQuestionHandlers";
+import {
+  FeedDeleteButton,
+  FeedList,
+  FeedListHeader,
+  FeedCardList,
+  FeedCard,
+  Message,
+} from "@components/FeedCard";
+import useSubject from "./components/useSubject";
+import { Notify } from "@components/Toast";
+import { MESSAGES } from "@constants/messages";
 
 export default function PostAnswerPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  // 피드 정보 (loader 데이터)
   const userInfo = useRouteLoaderData("post");
+
+  // 질문리스트 패칭훅
   const { count, results, ref, error, isLoading, isFetchingNextPage } = useQuestions({
     subjectId: id,
     itemPerPage: 6,
   });
-  const { handlers, isPending } = useQuestionHandlers(id);
+
+  // 질문, 답변 핸들링 훅
+  const {
+    subjectHandler: { removeFeed },
+    questionHandler,
+    answerHandler,
+  } = useSubject(id);
+
+  async function handleDeleteSubject() {
+    if (!confirm(MESSAGES.SUBJECT.CONFIRM)) return;
+
+    try {
+      await removeFeed(id);
+      Notify(
+        { type: "success", message: MESSAGES.SUBJECT.SUCCESS.DELETE },
+        {
+          onClose: () => {
+            navigate("/");
+            window.location.reload(); // context에서 setFeeds를 하지않고 앱을 다시 마운팅 (protected router 때문에)
+          },
+        },
+      );
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.DELETE });
+    }
+  }
 
   if (error) {
-    return <PostMessage>질문을 가져오는중에 문제가 생겼습니다.</PostMessage>;
+    return <Message>질문을 가져오는중에 문제가 생겼습니다.</Message>;
   }
 
   if (isLoading) {
-    return <PostMessage>질문을 가져오는 중입니다.</PostMessage>;
+    return <Message>질문을 가져오는 중입니다.</Message>;
   }
 
   return (
     <>
-      <Questions
-        mode="answer"
-        count={count}
-        data={results}
-        userInfo={userInfo}
-        handlers={handlers}
-        isPending={isPending}
-      />
-      <div ref={ref}>
-        {isFetchingNextPage ? <PostMessage>더 불러오는 중입니다...</PostMessage> : ""}
-      </div>
+      <FeedDeleteButton onClick={handleDeleteSubject} />
+      <FeedList>
+        <FeedListHeader count={count} />
+        <FeedCardList data={results}>
+          {(question) => (
+            <FeedCard
+              key={question.id}
+              mode="answer"
+              question={question}
+              feedOwner={userInfo}
+              {...questionHandler}
+              {...answerHandler}
+            />
+          )}
+        </FeedCardList>
+      </FeedList>
+      <div ref={ref}>{isFetchingNextPage && <Message>더 불러오는 중입니다...</Message>}</div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import styles from "./MainPageInputForm.module.css";
 import { LinkButton } from "@components/Button/index.js";
 import { useFeed } from "@context/FeedContext";
 import { Notify } from "@components/Toast";
+import { MESSAGES } from "@constants/messages";
 
 export default function MainPageInputForm() {
   const [name, setName] = useState("");
@@ -23,22 +24,22 @@ export default function MainPageInputForm() {
     try {
       // Input값 유효성 검증
       if (trimmedName.length > 12) {
-        Notify({ type: "error", message: "이름은 12자 미만으로 입력해주세요." });
+        Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.MAX_LENGTH });
         return;
       }
-      if (name) {
+      if (trimmedName) {
         const data = await createFeed(trimmedName);
 
-        Notify({ type: "success", message: "피드를 생성했습니다." });
+        Notify({ type: "success", message: MESSAGES.SUBJECT.SUCCESS.CREATE });
         navigate(`/post/${data.id}/answer`);
       } else {
-        Notify({ type: "error", message: "이름을 입력해주세요." });
+        Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.EMPTY });
       }
     } catch (e) {
       if (e.response) {
         // console.log(e.response.status);
         // console.log(e.response.data);
-        Notify({ type: "error", message: "피드 생성을 실패했습니다." });
+        Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.CREATE });
       } else {
         // console.log("리퀘스트가 실패했습니다");
       }

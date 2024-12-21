@@ -19,22 +19,22 @@ export function Toast() {
   );
 }
 
-export function Notify(data) {
+export function Notify(data, options) {
   if (!data || !data.message) {
     return null;
   }
 
   switch (data.type) {
     case "success":
-      toast.success(data.message);
+      toast.success(data.message, options);
       break;
     case "error":
-      toast.error(data.message);
+      toast.error(data.message, options);
       break;
     case "info":
-      toast.info(data.message);
+      toast.info(data.message, options);
       break;
     default:
-      toast(data.message);
+      toast(data.message, options);
   }
 }

@@ -1,71 +1,139 @@
 import { useRef } from "react";
-import { Question, Answer, Reactions, FeedCardWrapper, AnswerMenu } from "@components/FeedCard";
+import { Question, Answer, Reactions } from "@components/FeedCard";
+import { Notify } from "@components/Toast";
+import { MoreMenu } from "@components/Dropdown";
+import styles from "./FeedCard.module.css";
+import { MESSAGES } from "@constants/messages";
 
 export function FeedCard({
   mode,
   question,
   feedOwner,
-  isPending,
-  onCreateAnswer,
-  onUpdateAnswer,
-  onDeleteAnswer,
-  onRejectAnswer,
-  onDeleteQuestion,
-  onLike,
+  removeQuestion,
+  reactionQuestion,
+  createAnswer,
+  updateAnswer,
+  removeAnwer,
+  rejectAnswer,
+  isAnswerPending,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
   const answerRef = useRef(null);
 
-  function handleReject() {
+  async function handleCreateAnswer({ content }) {
+    try {
+      await createAnswer({ questionId, content, isRejected: "false" });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.CREATE });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.CREATE });
+    }
+  }
+
+  async function handleUpdateAnswer({ content }) {
+    try {
+      await updateAnswer({
+        answerId: answer?.id,
+        content,
+        isRejected: "false",
+      });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.UPDATE });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.UPDATE });
+    }
+  }
+
+  async function handleRejectAnswer() {
     answerRef.current.closeEdit();
-    onRejectAnswer({
-      questionId,
-      answerId: answer?.id,
-    });
+
+    try {
+      await rejectAnswer({
+        questionId,
+        answerId: answer?.id,
+        content: "reject",
+        isRejected: true,
+      });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.REJECT });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.REJECT });
+    }
   }
 
-  function handleModify() {
-    answerRef.current.openEdit();
+  async function handleRemoveAnswer() {
+    if (!confirm(MESSAGES.ANSWER.CONFIRM)) return;
+
+    try {
+      await removeAnwer({
+        questionId,
+        answerId: answer?.id,
+      });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.DELETE });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.DELETE });
+    }
   }
 
-  function handleDelete() {
-    if (!confirm("정말 답변을 삭제할까요?")) return;
-    onDeleteAnswer({
-      questionId,
-      answerId: answer?.id,
-    });
+  async function handleRemoveQuestion() {
+    if (!confirm(MESSAGES.QUESTION.CONFIRM)) return;
+
+    try {
+      await removeQuestion({
+        questionId,
+      });
+      Notify({ type: "success", message: MESSAGES.QUESTION.SUCCESS.DELETE });
+    } catch (error) {
+      console.error(error);
+      Notify({ type: "error", message: MESSAGES.QUESTION.ERROR.DELETE });
+    }
   }
 
-  function handleDeleteQuestion() {
-    if (!confirm("정말 질문을 삭제할까요?")) return;
-    onDeleteQuestion({
-      questionId,
-    });
+  async function handleReaction(type) {
+    reactionQuestion({ questionId, type });
   }
 
   return (
-    <FeedCardWrapper>
+    <div className={styles.card}>
       <Question status={!!answer} createdAt={createdAt} content={content}>
-        <AnswerMenu
-          mode={mode}
-          answer={answer}
-          onReject={handleReject}
-          onModify={handleModify}
-          onDelete={handleDelete}
-          onDeleteQuestion={handleDeleteQuestion}
-        />
+        {mode === "answer" && (
+          <MoreMenu>
+            <MoreMenu.Item icon="reject" onClick={handleRejectAnswer} disabled={answer?.isRejected}>
+              거절하기
+            </MoreMenu.Item>
+            <MoreMenu.Item
+              icon="edit"
+              onClick={() => answerRef.current.openEdit()}
+              disabled={!answer}
+            >
+              수정하기
+            </MoreMenu.Item>
+            <MoreMenu.Item icon="close" onClick={handleRemoveAnswer} disabled={!answer}>
+              답변삭제
+            </MoreMenu.Item>
+            <MoreMenu.Item icon="close" onClick={handleRemoveQuestion}>
+              질문삭제
+            </MoreMenu.Item>
+          </MoreMenu>
+        )}
       </Question>
       <Answer
         ref={answerRef}
-        questionId={questionId}
-        isPending={isPending}
-        answer={answer}
-        user={feedOwner}
         mode={mode}
-        onCreate={onCreateAnswer}
-        onUpdate={onUpdateAnswer}
+        questionId={questionId}
+        user={feedOwner}
+        answer={answer}
+        onCreateAnswer={handleCreateAnswer}
+        onUpdateAnswer={handleUpdateAnswer}
+        isPending={isAnswerPending}
       />
-      <Reactions questionId={questionId} like={like} dislike={dislike} onLike={onLike} />
-    </FeedCardWrapper>
+      <Reactions
+        questionId={questionId}
+        like={like}
+        dislike={dislike}
+        onReaction={handleReaction}
+      />
+    </div>
   );
 }

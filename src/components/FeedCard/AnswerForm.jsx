@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { InputTextarea, LinkButton } from "@components/ui";
-import styles from "./AnswerForm.module.css";
 import { Notify } from "@components/Toast";
+import styles from "./AnswerForm.module.css";
+import { MESSAGES } from "@constants/messages";
 
 export function AnswerForm({
   questionId,
@@ -12,11 +13,13 @@ export function AnswerForm({
   isPending,
 }) {
   const [value, setValue] = useState(initialValue);
+  const isModified = initialValue !== value;
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!value.trim()) return Notify({ type: "error", message: "한글자 이상 입력해주세요" });
+    if (!isModified) return;
+    if (!value.trim()) return Notify({ type: "error", message: MESSAGES.ANSWER.EMPTY });
 
     onSubmit({ questionId, answerId, content: value });
     onCancel();
@@ -42,7 +45,7 @@ export function AnswerForm({
           color="secondary"
           type="submit"
           className={styles.button}
-          disabled={!value || isPending}
+          disabled={!isModified || !value || isPending}
         >
           {initialValue ? "수정" : "작성"}
         </LinkButton>
