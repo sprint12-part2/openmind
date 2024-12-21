@@ -61,7 +61,7 @@ export const shareKakao = async (name) => {
       content: {
         title: `OPENMIND-<${name}>님의 피드 바로가기`,
         description: "", // 공유 설명
-        imageUrl: "https://iamhs232.cafe24.com/img/seo_kakao_share.jpg",
+        imageUrl: "https://openmind-sprint12.netlify.app/seo_kakao_share.jpg",
         link: {
           mobileWebUrl: `${currentUrl}`,
           webUrl: `${currentUrl}`,
