@@ -1,6 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { UserCard, Pagination, Select } from "@components/ui";
+import { UserCard } from "@components/ui";
+import { PostListError } from "./PostListError";
 import styles from "./PostList.module.css";
 
 /**
@@ -9,29 +9,12 @@ import styles from "./PostList.module.css";
  * - 상태 관리나 데이터 로직은 PostListPage에서 처리됨
  */
 
-export default function PostList({
-  subjects, // 질문자 목록 데이터 배열
-  totalItems, // 전체 데이터 수
-  currentPage, // 현재 페이지 번호
-  onPageChange, // 페이지 변경 핸들러 함수
-  onSortChange, // 정렬 기준 변경 핸들러 함수
-  sort, // 현재 정렬 기준 ("name" 또는 "time")
-}) {
+export default function PostList({ subjects }) {
+  if (subjects.length === 0) {
+    return <PostListError message="검색 결과가 없습니다. 다른 조건으로 검색해보세요." />;
+  }
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>누구에게 질문할까요?</h1>
-
-        <Select
-          value={sort} // 현재 선택된 정렬 기준
-          onChange={onSortChange} // 정렬 기준 변경 시 호출
-          className={styles.sortBar}
-        >
-          <Select.Option value="name">이름순</Select.Option>
-          <Select.Option value="time">최신순</Select.Option>
-        </Select>
-      </div>
-
       <ul className={styles.userCardList} role="list">
         {subjects.map((subject) => (
           <li
@@ -52,15 +35,6 @@ export default function PostList({
           </li>
         ))}
       </ul>
-
-      <div className={styles.paginationBar}>
-        <Pagination
-          totalItems={totalItems} // 전체 데이터 수
-          itemsPerPage={8} // 한 페이지당 표시할 데이터 개수
-          currentPage={currentPage} // 현재 페이지 번호
-          onPageChange={onPageChange} // 페이지 변경 핸들러
-        />
-      </div>
     </div>
   );
 }
