@@ -22,7 +22,7 @@
   width: 100%;
   margin: 0px auto;
   padding: 4rem 0;
-
+  /* 모바일 사이즈는 컨텐츠 세로 정렬 */
   @media (width < 662px) {
     flex-direction: column;
     gap: 2rem;
