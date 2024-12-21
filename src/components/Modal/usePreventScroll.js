@@ -13,7 +13,7 @@ import { useRef, useEffect } from "react";
  * const [isOpen, setIsOpen] = useState(false);
  * usePreventScroll(isOpen); // 모달이 열릴 때 스크롤을 잠그고, 닫을 때 복원
  */
-const usePreventScroll = (isOpen) => {
+const usePreventScroll = (isOpen, forceScrollTop) => {
   const scrollPositionRef = useRef(0);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const usePreventScroll = (isOpen) => {
       document.body.style.width = "";
       document.body.style.top = "";
       document.body.style.overflowY = "";
-      window.scrollTo(0, scrollPositionRef.current); // 원래의 위치로 스크롤 복원
+      window.scrollTo(0, forceScrollTop ? 0 : scrollPositionRef.current); // 원래의 위치로 스크롤 복원
     }
 
     // 컴포넌트 언마운트 시 클린업 작업
@@ -45,7 +45,7 @@ const usePreventScroll = (isOpen) => {
         window.scrollTo(0, scrollPositionRef.current);
       }
     };
-  }, [isOpen]);
+  }, [isOpen, forceScrollTop]);
 };
 
 export default usePreventScroll;

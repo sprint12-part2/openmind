@@ -22,8 +22,7 @@ export function QuestionForm({ feedOwner, onSubmit, isPending }) {
     try {
       await onSubmit({ content });
       Notify({ type: "success", message: MESSAGES.QUESTION.SUCCESS.CREATE });
-      modalRef.current.close();
-      window.scrollTo(0, 0);
+      modalRef.current.closeAndScrollTop();
     } catch (error) {
       console.log(error);
       Notify({ type: "error", message: MESSAGES.QUESTION.ERROR.CREATE });
