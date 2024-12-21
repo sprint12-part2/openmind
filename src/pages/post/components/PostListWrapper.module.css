@@ -1,0 +1,11 @@
+.container {
+  max-width: 100.4rem; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 3.2rem; /* 좌우 여백 */
+}
+
+@media (width < 662px) {
+  .container {
+    padding: 0 24px;
+  }
+}

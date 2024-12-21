@@ -1,0 +1,47 @@
+.errorContainer {
+  text-align: center;
+  padding: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.goHomeButton {
+  background-color: var(--color-primary-400);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.goHomeButton:hover {
+  background-color: var(--color-primary-500);
+}
+
+.errorBackground {
+  width: 100%; /* 컨테이너 너비에 맞게 조정 */
+  height: 200px; /* 적절한 높이 설정 */
+  background-image: url("../../../assets/img/page-detail/header-bg.svg");
+  background-size: contain; /* 이미지를 컨테이너 안에 맞춤 */
+  background-repeat: no-repeat; /* 반복되지 않도록 설정 */
+  background-position: center; /* 중앙 정렬 */
+  margin-bottom: 20px; /* 배경과 텍스트 간격 */
+}
+
+.errorTitle {
+  color: var(--color-red);
+  font-size: var(--font-size-h1);
+  margin-bottom: 10px;
+}
+
+.errorMessage {
+  font-size: var(--font-size-md);
+  color: var(--color-gray-500);
+}

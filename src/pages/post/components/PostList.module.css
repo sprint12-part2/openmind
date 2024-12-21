@@ -1,29 +1,3 @@
-/* 전체 컨테이너 스타일 */
-.container {
-  max-width: 100.4rem; /* 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
-  padding: 0 3.2rem; /* 좌우 여백 */
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.8rem;
-  margin-bottom: 3rem;
-}
-
-.title {
-  font-size: var(--font-size-h1);
-}
-
-/* 정렬 바 스타일 */
-
-.sortBar {
-  width: 8.2rem; /* DropDown 너비 제한 */
-}
-
-/* 사용자 카드 리스트 */
 .userCardList {
   display: flex;
   flex-wrap: wrap;
@@ -35,15 +9,6 @@
   width: calc(25% - 15px); /* (20 x 3)/ 4 */
 }
 
-/* 페이지네이션 바 스타일 */
-.paginationBar {
-  display: flex;
-  justify-content: center; /* 페이지네이션 가운데 정렬 */
-  width: 100%;
-  padding: 0;
-  margin-bottom: 60px;
-}
-
 @media (width < 868px) {
   .userCardItem {
     width: calc(33.333% - 13.333px); /* (20 x 2)/ 3 */
@@ -51,19 +16,6 @@
 }
 
 @media (width < 662px) {
-  .container {
-    padding: 0 24px;
-  }
-
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .title {
-    font-size: var(--font-size-h3);
-  }
-
   .userCardList {
     gap: 16px;
   }

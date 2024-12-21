@@ -4,6 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchSubjects } from "@service/Subject";
 import PostList from "./components/PostList";
 import { useItemPerPage } from "./components/useItemPerPage";
+import { PostListLoading } from "./components/PostListLoading";
+import { PostListError } from "./components/PostListError";
+import PostListWrapper from "./components/PostListWrapper";
+import PostListFilter from "./components/PostListFilter";
+import PostListPagination from "./components/PostListPagination";
+
+/**
+ * PostListPage 컴포넌트: 데이터 로직 및 상태 관리를 담당
+ * - 데이터를 React Query로 패칭
+ * - PostList에 데이터를 전달하여 UI 렌더링
+ */
 
 export default function PostListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +28,8 @@ export default function PostListPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["subjects", currentPage, itemsPerPage, sort],
     queryFn: () => fetchSubjects(currentPage, itemsPerPage, sort),
-    keepPreviousData: true, // 페이지 이동 간 캐시 유지
+    keepPreviousData: true, // 이전 데이터 유지
+    retry: false, // 실패해도 재시도 안하게 설정
   });
 
   // 페이지 변경 핸들러
@@ -30,19 +42,26 @@ export default function PostListPage() {
     setSearchParams({ page: 1, sort: value });
   };
 
-  // 로딩 및 에러 상태 처리
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>에러 발생: {error.message}</div>;
+  // 에러 상태 처리
+  if (error) {
+    return <PostListError message={error?.message} />;
+  }
 
-  // 렌더링
   return (
-    <PostList
-      subjects={data.results} // 데이터 목록 전달
-      totalItems={data.count} // 전체 항목 수 전달
-      currentPage={currentPage} // 현재 페이지 전달
-      onPageChange={handlePageChange} // 페이지 변경 핸들러 전달
-      onSortChange={handleSortChange} // 정렬 변경 핸들러 전달
-      sort={sort} // 현재 정렬 기준 전달
-    />
+    <PostListWrapper>
+      <PostListFilter onSortChange={handleSortChange} sort={sort} />
+      {isLoading ? (
+        <PostListLoading />
+      ) : (
+        <>
+          <PostList subjects={data.results} />
+          <PostListPagination
+            totalItems={data.count}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
+    </PostListWrapper>
   );
 }
