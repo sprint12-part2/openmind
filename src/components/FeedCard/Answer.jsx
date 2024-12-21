@@ -11,7 +11,9 @@ export const Answer = forwardRef(function Answer(
   const [isEdit, setIsEdit] = useState(false);
   const { id: answerId, createdAt, isRejected, content } = answer || {};
   const { name, imageSource } = user;
-  const isEditMode = mode === "answer" && isEdit;
+  const isEditMode = mode === "answer" && isEdit; // 수정모드 : '답변페이지'이면서 수정버튼을 클릭했을 경우
+  const isRejectedMode = isRejected && !isEditMode; // 거절모드 : 거절된상태이면서 수정모드가 아닐때
+  const isAnswerFormMode = isEditMode || !content; // 답변작성(수정)모드 : 수정버튼을 클릭했거나, 컨텐츠(답변)가 없을때
 
   // Answer 컴포넌트의 부모가 edit 모드를 컨트롤 할 수 있게 메서드 제공
   useImperativeHandle(ref, () => {
@@ -30,36 +32,22 @@ export const Answer = forwardRef(function Answer(
   }
 
   function renderAnswerContent() {
-    // 거절상태일 경우
-    if (isRejected && !isEditMode) {
+    // 거절모드
+    if (isRejectedMode) {
       return <div className={styles.reject}>답변 거절</div>;
     }
 
-    // 수정하기를 누를 경우
-    if (isEditMode) {
-      return (
-        <AnswerForm
-          initialValue={content}
-          questionId={questionId}
-          answerId={answerId}
-          onSubmit={onUpdateAnswer}
-          onCancel={handleCancel}
-          isPending={isPending}
-        />
-      );
-    }
-
-    // 컨텐츠가 있으면 컨텐츠 노출, 없으면 작성폼 노출
-    return (
-      content || (
-        <AnswerForm
-          questionId={questionId}
-          answerId={answerId}
-          onSubmit={onCreateAnswer}
-          onCancel={handleCancel}
-          isPending={isPending}
-        />
-      )
+    return isAnswerFormMode ? (
+      <AnswerForm
+        initialValue={content}
+        questionId={questionId}
+        answerId={answerId}
+        onSubmit={isEditMode ? onUpdateAnswer : onCreateAnswer}
+        onCancel={handleCancel}
+        isPending={isPending}
+      />
+    ) : (
+      content
     );
   }
 
