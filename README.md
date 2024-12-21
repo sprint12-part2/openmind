@@ -1,4 +1,5 @@
 # OPENMIND (코드잇 스프린트 프론트엔드 12기 2팀)
+![codit-openmind-part2-team2](https://github.com/user-attachments/assets/3e427af4-88fe-4f9d-a059-2d7f22630685)
 
 > **"익명성을 보장하며 질문과 답변을 통해 소통하는 웹 애플리케이션"**
 
@@ -12,8 +13,7 @@
 
 ## 🔗 서비스 링크
 
-- main : https://openmind-sprint12.netlify.app
-- develop : https://develop--openmind-sprint12.netlify.app/
+- OPENMIND : https://openmind-sprint12.netlify.app
 
 ---
 
@@ -62,6 +62,9 @@
 ---
 
 ## 🔧 프로젝트 소개
+
+![codit-openmind-part2-team2-detail-3](https://github.com/user-attachments/assets/c78a4ec8-d661-4fe9-8666-dd27845b8d22)
+
 
 ### 주요 기능
 
