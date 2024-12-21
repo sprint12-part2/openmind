@@ -10,6 +10,7 @@ import {
 } from "@components/FeedCard";
 import useSubject from "./components/useSubject";
 import { Notify } from "@components/Toast";
+import { MESSAGES } from "@constants/messages";
 
 export default function PostAnswerPage() {
   const { id } = useParams();
@@ -32,12 +33,12 @@ export default function PostAnswerPage() {
   } = useSubject(id);
 
   async function handleDeleteSubject() {
-    if (!confirm("정말 피드를 삭제하시겠습니까?")) return;
+    if (!confirm(MESSAGES.SUBJECT.CONFIRM)) return;
 
     try {
       await removeFeed(id);
       Notify(
-        { type: "success", message: "피드를 삭제했습니다." },
+        { type: "success", message: MESSAGES.SUBJECT.SUCCESS.DELETE },
         {
           onClose: () => {
             navigate("/");
@@ -47,7 +48,7 @@ export default function PostAnswerPage() {
       );
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨 삭제를 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.DELETE });
     }
   }
 
