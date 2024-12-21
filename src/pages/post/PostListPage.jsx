@@ -4,11 +4,30 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchSubjects } from "@service/Subject";
 import PostList from "./components/PostList";
 import { useItemPerPage } from "./components/useItemPerPage";
+import { PostListLoading } from "./components/PostListLoading";
+import { PostListError } from "./components/PostListError";
+
+/**
+ * PostListPage 컴포넌트: 데이터 로직 및 상태 관리를 담당
+ * - 데이터를 React Query로 패칭
+ * - PostList에 데이터를 전달하여 UI 렌더링
+ */
 
 export default function PostListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const sort = searchParams.get("sort") || "time";
+
+  // 정렬 기준 검증 함수
+  const isValidSort = (sort) => {
+    const validSorts = ["time", "name"];
+    return validSorts.includes(sort);
+  };
+
+  // 잘못된 입력 처리
+  if (isNaN(currentPage) || currentPage < 1 || !isValidSort(sort)) {
+    return <PostListError message="잘못된 페이지 번호나 정렬 기준입니다. URL을 확인해주세요." />;
+  }
 
   // 반응형 아이템 개수 가져오기
   const itemsPerPage = useItemPerPage();
@@ -17,7 +36,8 @@ export default function PostListPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["subjects", currentPage, itemsPerPage, sort],
     queryFn: () => fetchSubjects(currentPage, itemsPerPage, sort),
-    keepPreviousData: true, // 페이지 이동 간 캐시 유지
+    keepPreviousData: true, // 이전 데이터 유지
+    useErrorBoundary: false, // 전역 에러 방지
   });
 
   // 페이지 변경 핸들러
@@ -30,9 +50,20 @@ export default function PostListPage() {
     setSearchParams({ page: 1, sort: value });
   };
 
-  // 로딩 및 에러 상태 처리
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>에러 발생: {error.message}</div>;
+  // 에러 상태 처리
+  if (error) {
+    return <PostListError message={error?.message} />;
+  }
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return <PostListLoading />;
+  }
+
+  // 빈 데이터 처리
+  if (data && data.results.length === 0) {
+    return <PostListError message="검색 결과가 없습니다. 다른 조건으로 검색해보세요." />;
+  }
 
   // 렌더링
   return (
