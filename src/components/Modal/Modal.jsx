@@ -48,11 +48,11 @@ export const Modal = forwardRef(function Modal({ title, icon, children }, ref) {
    * @type {boolean}
    */
   const [isOpen, setIsOpen] = useState(false);
-
+  const [forceScrollTop, setForceScrollTop] = useState(false);
   /**
    * 모달이나 특정 UI 요소가 열릴 때 스크롤을 잠그는 커스텀 훅입니다.
    */
-  usePreventScroll(isOpen);
+  usePreventScroll(isOpen, forceScrollTop);
 
   /**
    * 부모 컴포넌트에게 open과 close 메서드를 전달하기 위한 useImperativeHandle 훅 사용
@@ -63,6 +63,10 @@ export const Modal = forwardRef(function Modal({ title, icon, children }, ref) {
         setIsOpen(true);
       },
       close() {
+        setIsOpen(false);
+      },
+      closeAndScrollTop() {
+        setForceScrollTop(true);
         setIsOpen(false);
       },
     };
