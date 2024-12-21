@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Notify } from "@components/Toast";
 import { createAnswer, deleteAnswer, updateAnswer } from "@service/Answer";
 
 export default function useAnswer(subjectId) {
@@ -41,7 +40,7 @@ export default function useAnswer(subjectId) {
 
   const remove = useMutation({
     mutationFn: ({ answerId }) => {
-      if (!answerId) return Notify({ type: "error", message: "삭제할 내용이 없습니다." });
+      if (!answerId) return;
       return deleteAnswer(answerId);
     },
     onSuccess: (_, { questionId }) => {
