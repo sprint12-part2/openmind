@@ -41,8 +41,7 @@ export default function PostAnswerPage() {
         { type: "success", message: MESSAGES.SUBJECT.SUCCESS.DELETE },
         {
           onClose: () => {
-            navigate("/");
-            window.location.reload(); // context에서 setFeeds를 하지않고 앱을 다시 마운팅 (protected router 때문에)
+            window.location.replace("/");
           },
         },
       );
