@@ -1,9 +1,24 @@
 .container {
-  position: relative;
-  min-height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  background: url("/src/assets/img/common/bg.jpg") no-repeat center;
-  background-size: cover;
+  min-height: 100vh;
+  padding-top: 4.5rem;
+  background: url("/src/assets/img/common/bg.jpg") no-repeat center / cover;
+}
+
+.inner {
+  width: 100%;
+  max-width: 104rem;
+  padding: 0 5rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (width < 768px) {
+  .container {
+    padding-top: 8rem;
+  }
+  .inner {
+    padding: 0 var(--spacing-32);
+  }
 }

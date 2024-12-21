@@ -1,6 +1,8 @@
+/* 제가 로티 이미지를 밑에 짤리게 만들어서 하단으로 10px 내렸습니다. */
 .lottie {
-  position: absolute;
-  min-width: 100vw;
-  bottom: 0;
-  order: 3;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -1rem;
 }

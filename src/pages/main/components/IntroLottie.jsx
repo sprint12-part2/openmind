@@ -1,6 +1,6 @@
-import styles from "./IntroLottie.module.css";
 import Lottie from "react-lottie";
 import LogoLottie from "@assets/img/common/logo.json";
+import styles from "./IntroLottie.module.css";
 
 function IntroLottie() {
   return (

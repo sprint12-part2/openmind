@@ -1,21 +1,13 @@
 .form {
-  width: 100%;
   max-width: 40rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-10);
-  margin: 0 auto;
   padding: var(--spacing-34);
   border-radius: var(--border-radius-lg);
   background-color: var(--color-white);
 
   @media (max-width: 767px) {
-    width: 100%;
-    max-width: 30.5rem;
     padding: var(--spacing-24);
   }
-}
-
-.button {
-  border: 1px solid black;
 }
