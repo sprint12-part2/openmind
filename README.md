@@ -107,18 +107,18 @@
   <img src="https://img.shields.io/badge/ESlint-4B32C3?style=for-the-badge&logo=ESlint&logoColor=white" alt="ESlint" />
 </p>
 
-#### 🖥️ 배포
-
-<p>
-  <img src="https://img.shields.io/badge/Netlify-05BDBB?style=for-the-badge&logo=Netlify&logoColor=white" alt="Netlify" />
-</p>
-
 #### 🔧 협업 도구
 
 <p>
   <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white" alt="Notion" />
   <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=white" alt="Discord" />
   <img src="https://img.shields.io/badge/GitHub-F05133?style=for-the-badge&logo=GitHub&logoColor=white" alt="GitHub" />
+</p>
+
+#### 🖥️ 배포
+
+<p>
+  <img src="https://img.shields.io/badge/Netlify-05BDBB?style=for-the-badge&logo=Netlify&logoColor=white" alt="Netlify" />
 </p>
 
 ---
