@@ -3,6 +3,7 @@ import { Question, Answer, Reactions } from "@components/FeedCard";
 import { Notify } from "@components/Toast";
 import { MoreMenu } from "@components/Dropdown";
 import styles from "./FeedCard.module.css";
+import { MESSAGES } from "@constants/messages";
 
 export function FeedCard({
   mode,
@@ -22,10 +23,10 @@ export function FeedCard({
   async function handleCreateAnswer({ content }) {
     try {
       await createAnswer({ questionId, content, isRejected: "false" });
-      Notify({ type: "success", message: "답변을 작성했습니다." });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.CREATE });
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨, 작성에 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.CREATE });
     }
   }
 
@@ -36,10 +37,10 @@ export function FeedCard({
         content,
         isRejected: "false",
       });
-      Notify({ type: "success", message: "답변을 수정했습니다." });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.UPDATE });
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨, 수정에 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.UPDATE });
     }
   }
 
@@ -53,39 +54,39 @@ export function FeedCard({
         content: "reject",
         isRejected: true,
       });
-      Notify({ type: "success", message: "거절했습니다." });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.REJECT });
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨, 거절에 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.REJECT });
     }
   }
 
   async function handleRemoveAnswer() {
-    if (!confirm("정말 답변을 삭제할까요?")) return;
+    if (!confirm(MESSAGES.ANSWER.CONFIRM)) return;
 
     try {
       await removeAnwer({
         questionId,
         answerId: answer?.id,
       });
-      Notify({ type: "success", message: "답변을 삭제했습니다." });
+      Notify({ type: "success", message: MESSAGES.ANSWER.SUCCESS.DELETE });
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨, 삭제에 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.ANSWER.ERROR.DELETE });
     }
   }
 
   async function handleRemoveQuestion() {
-    if (!confirm("정말 질문을 삭제할까요?")) return;
+    if (!confirm(MESSAGES.QUESTION.CONFIRM)) return;
 
     try {
       await removeQuestion({
         questionId,
       });
-      Notify({ type: "success", message: "질문을 삭제했습니다." });
+      Notify({ type: "success", message: MESSAGES.QUESTION.SUCCESS.DELETE });
     } catch (error) {
       console.error(error);
-      Notify({ type: "error", message: "문제가 생겨, 삭제에 실패했습니다." });
+      Notify({ type: "error", message: MESSAGES.QUESTION.ERROR.DELETE });
     }
   }
 
