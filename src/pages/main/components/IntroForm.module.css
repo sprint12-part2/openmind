@@ -1,13 +1,10 @@
 .section {
-  width: 40rem;
-  height: 17.2rem;
+  width: 100%;
+  max-width: 40rem;
   margin: var(--spacing-24) auto 0;
   order: 2;
-  z-index: 1;
 
   @media (max-width: 767px) {
-    width: 30.5rem;
-    height: 15.6rem;
     margin: 0 auto;
   }
 }

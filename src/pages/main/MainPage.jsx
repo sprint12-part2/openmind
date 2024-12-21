@@ -3,13 +3,16 @@ import IntroHeader from "./components/IntroHeader";
 import IntroForm from "./components/IntroForm";
 import IntroLottie from "./components/IntroLottie";
 import IntroWrapper from "./components/IntroWrapper";
+import MainPageInner from "./components/MainPageInner";
 
 export default function MainPage() {
   return (
     <IntroWrapper>
-      <IntroHeader />
-      <MainLogo />
-      <IntroForm />
+      <MainPageInner>
+        <IntroHeader />
+        <MainLogo />
+        <IntroForm />
+      </MainPageInner>
       <IntroLottie />
     </IntroWrapper>
   );
