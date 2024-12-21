@@ -64,7 +64,8 @@
 
 ## 🔧 프로젝트 소개
 
-![codit-openmind-part2-team2-detail-2](https://github.com/user-attachments/assets/86bb24e6-dd50-4a08-930e-887253926843)
+![codit-openmind-part2-team2-detail-3](https://github.com/user-attachments/assets/c78a4ec8-d661-4fe9-8666-dd27845b8d22)
+
 
 ### 주요 기능
 
