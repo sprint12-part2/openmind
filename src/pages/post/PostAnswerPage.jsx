@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
+import { useParams, useRouteLoaderData } from "react-router-dom";
 import useQuestions from "./components/useQuestions";
 import {
   FeedDeleteButton,
@@ -14,14 +14,14 @@ import { MESSAGES } from "@constants/messages";
 
 export default function PostAnswerPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const subjectId = Number(id);
 
   // 피드 정보 (loader 데이터)
   const userInfo = useRouteLoaderData("post");
 
   // 질문리스트 패칭훅
   const { count, results, ref, error, isLoading, isFetchingNextPage } = useQuestions({
-    subjectId: id,
+    subjectId,
     itemPerPage: 6,
   });
 
@@ -30,13 +30,13 @@ export default function PostAnswerPage() {
     subjectHandler: { removeFeed },
     questionHandler,
     answerHandler,
-  } = useSubject(id);
+  } = useSubject(subjectId);
 
   async function handleDeleteSubject() {
     if (!confirm(MESSAGES.SUBJECT.CONFIRM)) return;
 
     try {
-      await removeFeed(id);
+      await removeFeed(subjectId);
       Notify(
         { type: "success", message: MESSAGES.SUBJECT.SUCCESS.DELETE },
         {

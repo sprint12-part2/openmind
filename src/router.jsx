@@ -29,17 +29,17 @@ export const router = createBrowserRouter([
       },
       {
         id: "post",
-        path: "/post",
+        path: "/post/:id",
         element: <PostDetailLayout />,
         loader: PostDetailLoader,
         hydrateFallbackElement: <PostPageHydrateFallback />,
         children: [
           {
-            path: ":id",
+            index: true,
             element: <PostDetailPage />,
           },
           {
-            path: ":id/answer",
+            path: "answer",
             element: (
               <ProtectedRoute>
                 <PostAnswerPage />
