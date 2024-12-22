@@ -6,10 +6,6 @@ const FeedContext = createContext();
 export const useFeed = () => useContext(FeedContext);
 
 export default function FeedContextProvider({ children }) {
-  const [visited, setVisited] = useState(() => {
-    const saved = localStorage.getItem("visited");
-    return saved ? JSON.parse(saved) : [];
-  });
   const [feeds, setFeeds] = useState(() => {
     const saved = localStorage.getItem("feeds");
     return saved ? JSON.parse(saved) : [];
@@ -19,10 +15,6 @@ export default function FeedContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("feeds", JSON.stringify(feeds));
   }, [feeds]);
-
-  useEffect(() => {
-    localStorage.setItem("visited", JSON.stringify(visited));
-  }, [visited]);
 
   const createFeed = useCallback(async (name) => {
     setIsLoading(true);
@@ -61,31 +53,12 @@ export default function FeedContextProvider({ children }) {
     [feeds],
   );
 
-  const saveVisited = useCallback(
-    (feedData) => {
-      if (visited.find((feed) => feed.id === feedData.id)) return;
-
-      setVisited((prev) => {
-        const filterd = prev.filter((item) => item.id !== feedData.id);
-        return [feedData, ...filterd].slice(0, 4);
-      });
-    },
-    [visited],
-  );
-
-  const clearVisited = useCallback(() => {
-    setVisited([]);
-  }, []);
-
   const ctxValue = {
     isLoading,
     feeds,
     createFeed,
     removeFeed,
     hasFeed,
-    visited,
-    saveVisited,
-    clearVisited,
   };
 
   return <FeedContext.Provider value={ctxValue}>{children}</FeedContext.Provider>;
