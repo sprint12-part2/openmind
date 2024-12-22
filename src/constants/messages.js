@@ -12,6 +12,7 @@ export const MESSAGES = {
       MAX_LENGTH: "이름은 12자 미만으로 입력해주세요.",
       EMPTY: "이름을 입력해주세요.",
     },
+    EMPTY: "생성한 피드가 없습니다.",
   },
   QUESTION: {
     CONFIRM: "정말 질문을 삭제할까요?",
