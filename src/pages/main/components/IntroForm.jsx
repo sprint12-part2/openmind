@@ -11,20 +11,18 @@ function IntroForm() {
 
   const { feeds } = useFeed();
 
-  console.log(feeds);
+  const handleMyFeedsClick = () => {
+    if (feeds.length === 0) {
+      Notify({ type: "info", message: MESSAGES.SUBJECT.EMPTY });
+    } else {
+      myFeedsModalRef.current?.open();
+    }
+  };
 
   return (
     <section className={styles.section}>
       <MainPageInputForm />
-      <MyFeedsButton
-        onClick={() => {
-          if (feeds.length === 0) {
-            Notify({ type: "info", message: MESSAGES.SUBJECT.EMPTY });
-          } else {
-            myFeedsModalRef.current?.open();
-          }
-        }}
-      />
+      <MyFeedsButton onClick={handleMyFeedsClick} />
       <MyFeeds ref={myFeedsModalRef} />
     </section>
   );
