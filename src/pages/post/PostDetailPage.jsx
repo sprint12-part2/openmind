@@ -14,13 +14,14 @@ import {
 
 export default function PostDetailPage() {
   const { id } = useParams();
+  const subjectId = Number(id);
 
   // 피드 정보 (loader 데이터)
   const userInfo = useRouteLoaderData("post");
 
   // 질문리스트 패칭훅
   const { count, results, ref, error, isLoading, isFetchingNextPage } = useQuestions({
-    subjectId: id,
+    subjectId,
     itemPerPage: 6,
   });
 
@@ -29,7 +30,7 @@ export default function PostDetailPage() {
     subjectHandler: { saveFeed },
     questionHandler,
     answerHandler,
-  } = useSubject(id);
+  } = useSubject(subjectId);
 
   // 피드 방문 로그 저장
   useEffect(() => {
