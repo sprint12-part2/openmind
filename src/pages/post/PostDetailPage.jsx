@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams, useRouteLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import useQuestions from "./components/useQuestions";
@@ -26,18 +25,7 @@ export default function PostDetailPage() {
   });
 
   // 질문, 답변 핸들링 훅
-  const {
-    subjectHandler: { saveFeed },
-    questionHandler,
-    answerHandler,
-  } = useSubject(subjectId);
-
-  // 피드 방문 로그 저장
-  useEffect(() => {
-    if (userInfo) {
-      saveFeed(userInfo);
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const { questionHandler, answerHandler } = useSubject(id);
 
   if (error) {
     return <Message>질문을 가져오는중에 문제가 생겼습니다.</Message>;
