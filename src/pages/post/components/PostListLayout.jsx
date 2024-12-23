@@ -5,10 +5,12 @@ import styles from "./PostListLayout.module.css";
 export default function PostListLayout() {
   return (
     <>
-      {/* 리나님, 피드 리스트페이지 레이아웃 설정하는곳 */}
-      <PostListHeader />
-
-      <Outlet />
+      <header className={styles.header}>
+        <PostListHeader />
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }

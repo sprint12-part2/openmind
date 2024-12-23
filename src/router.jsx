@@ -23,13 +23,13 @@ export const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "/list",
+        path: "list",
         element: <PostListLayout />,
         children: [{ index: true, element: <PostListPage /> }],
       },
       {
         id: "post",
-        path: "/post/:id",
+        path: "post/:id",
         element: <PostDetailLayout />,
         loader: PostDetailLoader,
         hydrateFallbackElement: <PostPageHydrateFallback />,
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/sample",
+        path: "sample",
         element: <SamplePage />,
       },
     ],
