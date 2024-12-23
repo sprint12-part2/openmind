@@ -8,7 +8,6 @@ import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 
 export default function PostDetailHeader() {
-  //const data = useLoaderData(); // 이렇게 쓰셔도 되고, 분해하셔도 되욤
   const { name, imageSource, createdAt } = useLoaderData();
 
   // 카카오톡 공유하기
@@ -47,7 +46,6 @@ export default function PostDetailHeader() {
           icon="kakao"
           iconColor="var(--color-black)"
           id="kakao-link-btn"
-          onClick={() => shareKakao(name)}
         ></ShareButton>
         <ShareButton
           color="#1877F2"
