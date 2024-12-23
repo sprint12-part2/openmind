@@ -8,7 +8,6 @@ import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 
 export default function PostDetailHeader() {
-  //const data = useLoaderData(); // 이렇게 쓰셔도 되고, 분해하셔도 되욤
   const { name, imageSource, createdAt } = useLoaderData();
 
   // 카카오톡 공유하기
