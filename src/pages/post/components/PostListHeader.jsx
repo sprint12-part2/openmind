@@ -26,19 +26,17 @@ export default function PostListHeader() {
   }
 
   return (
-    <div className={styles.header__container}>
-      <div className={styles.header__content}>
-        <div className={styles.header__logo}>
-          <Link to="/">
-            <img src={logo} alt="오픈마인드 로고" />
-          </Link>
-        </div>
-        <LinkButton onClick={handleClick} responsive={true}>
-          답변하러 가기
-          <Icon name="arrowRight" size={18}></Icon>
-        </LinkButton>
-        <MyFeeds ref={myFeedsModalRef} />
+    <div className={styles.header__content}>
+      <div className={styles.header__logo}>
+        <Link to="/">
+          <img src={logo} alt="오픈마인드 로고" />
+        </Link>
       </div>
+      <LinkButton onClick={handleClick} responsive={true}>
+        답변하러 가기
+        <Icon name="arrowRight" size={18}></Icon>
+      </LinkButton>
+      <MyFeeds ref={myFeedsModalRef} />
     </div>
   );
 }

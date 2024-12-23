@@ -1,5 +1,13 @@
-.container {
-  border: 10px solid red;
-  min-height: 100vh;
-  padding: 20px;
+.header {
+  font-size: var(--font-size-h1);
+  max-width: 100.4rem; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 3.2rem; /* 좌우 여백 */
+
+  @media (width < 1004px) {
+    padding: 0 5rem;
+  }
+  @media (width < 662px) {
+    padding: 1.2rem 3.2rem;
+  }
 }
