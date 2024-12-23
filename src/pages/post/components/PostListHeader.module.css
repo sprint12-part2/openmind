@@ -1,20 +1,3 @@
-.header__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--font-size-h1);
-  max-width: 100.4rem; /* 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
-  padding: 0 3.2rem; /* 좌우 여백 */
-  @media (width < 1004px) {
-    padding: 0 5rem;
-  }
-  @media (width < 662px) {
-    padding: 1.2rem 3.2rem;
-  }
-}
-
 .header__content {
   display: flex;
   justify-content: space-between;
@@ -30,5 +13,6 @@
 }
 
 .header__logo img {
-  width: 17rem;
+  width: auto;
+  height: 5.7rem;
 }
