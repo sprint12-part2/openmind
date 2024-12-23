@@ -3,7 +3,7 @@ import useAnswer from "./useAnswer";
 import useQuestion from "./useQuestion";
 
 export default function useSubject(subjectId) {
-  const { removeFeed, saveVisited } = useFeed();
+  const { removeFeed } = useFeed();
 
   const {
     create: createQuestion,
@@ -23,7 +23,6 @@ export default function useSubject(subjectId) {
   return {
     subjectHandler: {
       removeFeed,
-      saveFeed: saveVisited,
     },
 
     questionHandler: {

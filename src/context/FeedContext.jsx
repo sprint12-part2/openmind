@@ -6,10 +6,6 @@ const FeedContext = createContext();
 export const useFeed = () => useContext(FeedContext);
 
 export default function FeedContextProvider({ children }) {
-  const [visited, setVisited] = useState(() => {
-    const saved = localStorage.getItem("visited");
-    return saved ? JSON.parse(saved) : [];
-  });
   const [feeds, setFeeds] = useState(() => {
     const saved = localStorage.getItem("feeds");
     return saved ? JSON.parse(saved) : [];
@@ -19,10 +15,6 @@ export default function FeedContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("feeds", JSON.stringify(feeds));
   }, [feeds]);
-
-  useEffect(() => {
-    localStorage.setItem("visited", JSON.stringify(visited));
-  }, [visited]);
 
   const createFeed = useCallback(async (name) => {
     setIsLoading(true);
@@ -37,7 +29,7 @@ export default function FeedContextProvider({ children }) {
     async (feedId) => {
       setIsLoading(true);
 
-      await deleteSubject(Number(feedId));
+      await deleteSubject(feedId);
       //setFeeds((prev) => prev.filter((feed) => feed.id !== Number(feedId)));
 
       // setFeeds가 리랜더를 유발해서 protect router가 한번더 체크됨
@@ -47,7 +39,7 @@ export default function FeedContextProvider({ children }) {
       // 사용자쪽에서 앱을 새로고침하도록 유도
       // (앱이 다시 실행되면서 컨텍스트가 다시 실행되어, 초기값으로 로컬스토리지값을 슴)
 
-      const data = feeds.filter((feed) => feed.id !== Number(feedId));
+      const data = feeds.filter((feed) => feed.id !== feedId);
       localStorage.setItem("feeds", JSON.stringify(data));
       setIsLoading(false);
     },
@@ -56,26 +48,10 @@ export default function FeedContextProvider({ children }) {
 
   const hasFeed = useCallback(
     (feedId) => {
-      return feeds.find((feed) => feed.id === Number(feedId));
+      return feeds.find((feed) => feed.id === feedId);
     },
     [feeds],
   );
-
-  const saveVisited = useCallback(
-    (feedData) => {
-      if (visited.find((feed) => feed.id === feedData.id)) return;
-
-      setVisited((prev) => {
-        const filterd = prev.filter((item) => item.id !== feedData.id);
-        return [feedData, ...filterd].slice(0, 4);
-      });
-    },
-    [visited],
-  );
-
-  const clearVisited = useCallback(() => {
-    setVisited([]);
-  }, []);
 
   const ctxValue = {
     isLoading,
@@ -83,9 +59,6 @@ export default function FeedContextProvider({ children }) {
     createFeed,
     removeFeed,
     hasFeed,
-    visited,
-    saveVisited,
-    clearVisited,
   };
 
   return <FeedContext.Provider value={ctxValue}>{children}</FeedContext.Provider>;
