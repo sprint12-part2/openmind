@@ -37,11 +37,7 @@ export default function MainPageInputForm() {
       }
     } catch (e) {
       if (e.response) {
-        // console.log(e.response.status);
-        // console.log(e.response.data);
         Notify({ type: "error", message: MESSAGES.SUBJECT.ERROR.CREATE });
-      } else {
-        // console.log("리퀘스트가 실패했습니다");
       }
     }
     setName("");
