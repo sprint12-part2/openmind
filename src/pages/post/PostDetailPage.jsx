@@ -25,7 +25,7 @@ export default function PostDetailPage() {
   });
 
   // 질문, 답변 핸들링 훅
-  const { questionHandler, answerHandler } = useSubject(id);
+  const { questionHandler, answerHandler } = useSubject(subjectId);
 
   if (error) {
     return <Message>질문을 가져오는중에 문제가 생겼습니다.</Message>;
