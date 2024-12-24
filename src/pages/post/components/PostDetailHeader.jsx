@@ -15,8 +15,8 @@ export default function PostDetailHeader() {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(import.meta.env.VITE_KAKAO_KEY);
       console.log("Kakao SDK initialized:", window.Kakao.isInitialized());
-      shareKakao(name);
     }
+    shareKakao(name);
   }, [name]);
 
   return (
