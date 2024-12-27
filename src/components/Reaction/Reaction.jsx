@@ -18,12 +18,11 @@ import styles from "./Reaction.module.css";
  */
 
 export function Reaction({
-  count = 0,
   icon,
-  text,
   active = false,
   activeColor = "var(--color-blue)",
   disabled,
+  children,
   ...props
 }) {
   const buttonCss = clsx(styles.button, disabled && styles.disabled);
@@ -37,10 +36,7 @@ export function Reaction({
       {...props}
     >
       {icon && <Icon size={16} name={icon} className={styles.icon} />}
-      <div className={styles.label}>
-        <span className={styles.title}>{text}</span>
-        {count ? <span className={styles.count}>{count}</span> : ""}
-      </div>
+      <div className={styles.label}>{children}</div>
     </button>
   );
 }
