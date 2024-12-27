@@ -4,8 +4,22 @@ import styles from "./Reactions.module.css";
 export function Reactions({ like, dislike, onReaction }) {
   return (
     <footer className={styles.footer}>
-      <Reaction type="like" count={like} onClick={() => onReaction("like")} />
-      <Reaction type="dislike" count={dislike} onClick={() => onReaction("dislike")} />
+      <Reaction
+        text="좋아요"
+        icon="thumbsUp"
+        count={like}
+        active={like > 0}
+        activeColor="var(--color-blue)"
+        onClick={() => onReaction("like")}
+      />
+      <Reaction
+        text="싫어요"
+        icon="thumbsDown"
+        count={dislike}
+        active={dislike > 0}
+        activeColor="var(--color-black)"
+        onClick={() => onReaction("dislike")}
+      />
     </footer>
   );
 }
