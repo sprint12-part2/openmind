@@ -1,17 +1,28 @@
 .container {
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 1rem;
+  height: 4.6rem;
+  padding: 0 1.6rem;
+  border: 0.1rem solid var(--color-gray-400);
+  border-radius: var(--border-radius-md);
+}
+
+.container:has(.input:focus) {
+  border: 0.1rem solid var(--color-primary-400);
+}
+
+.container svg {
+  width: 2rem;
+  height: auto;
+  flex: 0 0 2rem;
+  color: var(--color-gray-400);
 }
 
 .input {
   width: 100%;
-  padding: 1.2rem 0 1.2rem 4rem;
-  border: 0.1rem solid var(--color-gray-400);
-  border-radius: var(--border-radius-md);
-  background: url("./images/PersonIcon.svg") no-repeat;
-  background-size: 2rem 2rem;
-  background-position: 1rem center;
+  height: 100%;
   color: var(--color-black);
   font-size: var(--font-size-md);
   outline: none;
@@ -21,8 +32,4 @@
   color: var(--color-gray-400);
   font-size: var(--font-size-md);
   line-height: 2.2rem;
-}
-
-.input:focus {
-  border: 0.1rem solid var(--color-primary-400);
 }
