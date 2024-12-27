@@ -1,16 +1,11 @@
 import { useParams, useRouteLoaderData } from "react-router-dom";
 import useQuestions from "./hooks/useQuestions";
 import useSubject from "./hooks/useSubject";
-import {
-  FeedDeleteButton,
-  FeedList,
-  FeedListHeader,
-  FeedCardList,
-  FeedCard,
-  Message,
-} from "@components/FeedCard";
+import { FeedList, FeedListHeader, FeedCardList, FeedCard } from "@components/FeedCard";
 import { Notify } from "@components/Toast";
 import { MESSAGES } from "@constants/messages";
+import { FeedDeleteButton } from "./components/FeedDeleteButton";
+import { Message } from "./components/Message";
 
 export default function PostAnswerPage() {
   const { id } = useParams();

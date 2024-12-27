@@ -8,8 +8,8 @@ import {
   FeedListHeader,
   FeedCardList,
   FeedCard,
-  Message,
 } from "@components/FeedCard";
+import { Message } from "./components/Message";
 
 export default function PostDetailPage() {
   const { id } = useParams();
