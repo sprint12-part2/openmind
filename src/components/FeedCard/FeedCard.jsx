@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { Question, Answer, Reactions } from "@components/FeedCard";
 import { Notify } from "@components/Toast";
 import { MoreMenu } from "@components/Dropdown";
@@ -18,7 +18,7 @@ export function FeedCard({
   isAnswerPending,
 }) {
   const { id: questionId, content, like, dislike, createdAt, answer } = question;
-  const answerRef = useRef(null);
+  const [isEdit, setIsEdit] = useState(false);
 
   async function handleCreateAnswer({ content }) {
     try {
@@ -102,11 +102,7 @@ export function FeedCard({
             <MoreMenu.Item icon="reject" onClick={handleRejectAnswer} disabled={answer?.isRejected}>
               거절하기
             </MoreMenu.Item>
-            <MoreMenu.Item
-              icon="edit"
-              onClick={() => answerRef.current.openEdit()}
-              disabled={!answer}
-            >
+            <MoreMenu.Item icon="edit" onClick={() => setIsEdit(true)} disabled={!answer}>
               수정하기
             </MoreMenu.Item>
             <MoreMenu.Item icon="close" onClick={handleRemoveAnswer} disabled={!answer}>
@@ -119,7 +115,6 @@ export function FeedCard({
         )}
       </Question>
       <Answer
-        ref={answerRef}
         mode={mode}
         questionId={questionId}
         user={feedOwner}
@@ -127,6 +122,8 @@ export function FeedCard({
         onCreateAnswer={handleCreateAnswer}
         onUpdateAnswer={handleUpdateAnswer}
         isPending={isAnswerPending}
+        isEdit={isEdit}
+        onCloseEdit={() => setIsEdit(false)}
       />
       <Reactions
         questionId={questionId}
