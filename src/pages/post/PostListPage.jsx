@@ -1,9 +1,8 @@
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSubjects } from "@service/Subject";
 import PostList from "./components/PostList";
-import { useItemPerPage } from "./components/useItemPerPage";
+import { useItemPerPage } from "./hooks/useItemPerPage";
 import { PostListLoading } from "./components/PostListLoading";
 import { PostListError } from "./components/PostListError";
 import PostListWrapper from "./components/PostListWrapper";

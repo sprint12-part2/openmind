@@ -1,7 +1,7 @@
 import { useParams, useRouteLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import useQuestions from "./components/useQuestions";
-import useSubject from "./components/useSubject";
+import useQuestions from "./hooks/useQuestions";
+import useSubject from "./hooks/useSubject";
 import {
   QuestionForm,
   FeedList,
