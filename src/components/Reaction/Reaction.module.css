@@ -51,15 +51,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-.active,
-.active.like {
-  color: var(--color-blue);
-}
-
-.active.dislike {
-  color: var(--color-black);
-}
-
 .button:disabled,
 .button.disabled {
   opacity: 0.2;
