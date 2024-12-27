@@ -10,7 +10,7 @@ export function Question({ status, createdAt, content, children }) {
         {children}
       </header>
       <div className={styles.question}>
-        <div className={styles.meta}>질문 · {fromNow(createdAt)}</div>
+        <div className={styles.meta}>질문 · {fromNow(createdAt, new Date())}</div>
         <h3 className={styles.title}>{content}</h3>
       </div>
     </>
