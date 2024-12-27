@@ -13,7 +13,7 @@ export function FeedCard({
   reactionQuestion,
   createAnswer,
   updateAnswer,
-  removeAnwer,
+  removeAnswer,
   rejectAnswer,
   isAnswerPending,
 }) {
@@ -65,7 +65,7 @@ export function FeedCard({
     if (!confirm(MESSAGES.ANSWER.CONFIRM)) return;
 
     try {
-      await removeAnwer({
+      await removeAnswer({
         questionId,
         answerId: answer?.id,
       });
