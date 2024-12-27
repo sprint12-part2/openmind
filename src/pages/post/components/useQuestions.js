@@ -22,8 +22,8 @@ export default function useQuestions({ subjectId, itemPerPage }) {
     }
   }, [fetchNextPage, inView, hasNextPage]);
 
-  const count = data?.pages[0].count;
-  const results = data?.pages.flatMap((page) => page.results);
+  const count = data?.pages[0]?.count ?? 0;
+  const results = data?.pages?.flatMap((page) => page?.results ?? []) ?? [];
 
   return { count, results, ref, error, isLoading, isFetchingNextPage };
 }
