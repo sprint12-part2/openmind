@@ -1,5 +1,5 @@
 import styles from "./InputField.module.css";
-import clsx from "clsx";
+import { Icon } from "@components/Icon";
 
 /**
  * `InputField` 컴포넌트는 사용자 입력을 받을 수 있는 기본적인 입력 필드를 제공합니다.
@@ -17,22 +17,11 @@ import clsx from "clsx";
  * @author 남기연 <getam101@naver.com>
  */
 
-export function InputField({
-  value,
-  onChange,
-  type = "text",
-  placeholder = "이름을 입력하세요",
-  className,
-  ...props
-}) {
+export function InputField({ icon, type = "text", placeholder = "이름을 입력하세요", ...props }) {
   return (
-    <input
-      value={value}
-      onChange={onChange}
-      type={type}
-      placeholder={placeholder}
-      className={clsx(styles.input, className)}
-      {...props}
-    />
+    <div className={styles.container}>
+      {icon && <Icon name={icon} />}
+      <input className={styles.input} type={type} placeholder={placeholder} {...props} />
+    </div>
   );
 }
