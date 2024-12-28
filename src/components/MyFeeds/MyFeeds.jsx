@@ -24,7 +24,7 @@ export const MyFeeds = forwardRef(function MyFeeds(_, ref) {
                   </div>
                   <div className={styles.info}>
                     <div className={styles.name}>{feed.name}</div>
-                    <div className={styles.date}>{fromNow(feed.createdAt)}</div>
+                    <div className={styles.date}>{fromNow(feed.createdAt, new Date())}</div>
                   </div>
                 </Link>
               </li>

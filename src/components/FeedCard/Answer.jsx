@@ -59,7 +59,7 @@ export const Answer = forwardRef(function Answer(
       <div className={styles.detail}>
         <div className={styles.meta}>
           <span className={styles.name}>{name}</span>
-          {createdAt && <span className={styles.date}>{fromNow(createdAt)}</span>}
+          {createdAt && <span className={styles.date}>{fromNow(createdAt, new Date())}</span>}
         </div>
         <div className={styles.content}>{renderAnswerContent()}</div>
       </div>
