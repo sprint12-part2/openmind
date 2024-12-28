@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Avatar, ShareButton } from "@components/ui";
 import { copyUrl, shareKakao, shareFacebook } from "@util/shareUtils";
 import { fromNow } from "@util/format";
-import { AnswerButton } from "@components/FeedCard";
+import { AnswerButton } from "./AnswerButton";
 import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 
