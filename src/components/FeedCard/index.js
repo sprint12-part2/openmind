@@ -7,6 +7,3 @@ export * from "./AnswerForm";
 export * from "./Question";
 export * from "./Reactions";
 export * from "./QuestionForm";
-export * from "./Message";
-export * from "./FeedDeleteButton";
-export * from "./AnswerButton";

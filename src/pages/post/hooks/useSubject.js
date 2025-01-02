@@ -15,7 +15,7 @@ export default function useSubject(subjectId) {
   const {
     create: createAnswer,
     update: updateAnswer,
-    remove: removeAnwer,
+    remove: removeAnswer,
     reject: rejectAnswer,
     isPending: isAnswerPending,
   } = useAnswer(subjectId);
@@ -34,7 +34,7 @@ export default function useSubject(subjectId) {
     answerHandler: {
       createAnswer,
       updateAnswer,
-      removeAnwer,
+      removeAnswer,
       rejectAnswer,
       isAnswerPending,
     },

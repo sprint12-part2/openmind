@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Avatar, ShareButton } from "@components/ui";
 import { copyUrl, shareKakao, shareFacebook } from "@util/shareUtils";
 import { fromNow } from "@util/format";
-import { AnswerButton } from "@components/FeedCard";
+import { AnswerButton } from "./AnswerButton";
 import styles from "./PostDetailHeader.module.css";
 import logo from "/src/assets/img/common/logo.svg";
 
@@ -32,7 +32,7 @@ export default function PostDetailHeader() {
       <div className={styles.title}>
         <h1>{name}</h1>
       </div>
-      <div className={styles.meta}>생성일 {fromNow(createdAt)}</div>
+      <div className={styles.meta}>생성일 {fromNow(createdAt, new Date())}</div>
       <AnswerButton />
       <div className={styles.sns}>
         <ShareButton

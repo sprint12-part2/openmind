@@ -45,7 +45,7 @@ export default function MainPageInputForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <InputField value={name} onChange={handleNameChange} />
+      <InputField icon="person" value={name} onChange={handleNameChange} />
       <LinkButton type="submit" color="secondary" disabled={isLoading}>
         {isLoading ? "로딩 중 ..." : "질문 받기"}
       </LinkButton>

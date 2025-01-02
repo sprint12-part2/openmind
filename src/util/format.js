@@ -5,13 +5,13 @@ import "dayjs/locale/ko";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
-export function fromNow(date) {
-  const now = dayjs();
+export function fromNow(date, now) {
+  const currentDate = dayjs(now);
   const formatDate = dayjs(date);
 
-  if (formatDate.isSame(now) || formatDate.isAfter(now)) {
+  if (formatDate.isSame(currentDate) || formatDate.isAfter(currentDate)) {
     return "방금전";
   }
 
-  return formatDate.fromNow();
+  return formatDate.from(currentDate);
 }
