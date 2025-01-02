@@ -45,7 +45,7 @@ export function FeedCard({
   }
 
   async function handleRejectAnswer() {
-    answerRef.current.closeEdit();
+    setIsEdit(false);
 
     try {
       await rejectAnswer({
